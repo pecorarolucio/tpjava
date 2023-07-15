@@ -21,7 +21,6 @@ public class Categoria {
 	
 	
 	public Categoria(int idCategoria, String nombreCategoria) {
-		super();
 		this.idCategoria = idCategoria;
 		this.nombreCategoria = nombreCategoria;
 	}

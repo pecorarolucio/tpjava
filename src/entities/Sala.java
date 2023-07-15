@@ -12,7 +12,6 @@ public class Sala {
 	
 	
 	public Sala(int idSala, int capacidadMaxima) {
-		super();
 		this.idSala = idSala;
 		this.capacidadMaxima = capacidadMaxima;
 	}
