@@ -23,6 +23,11 @@ public class Funcion {
 		this.sala = sala;
 		this.pelicula = pelicula;
 	}
+	
+	public Funcion() {
+	
+	}
+	
 	public LocalDate getFechaFuncion() {
 		return fechaFuncion;
 	}

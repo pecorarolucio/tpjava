@@ -52,9 +52,9 @@ public class menu {
 		case "update":
 			update();
 			break;
-		/*case "search":
+		case "search":
 			search();
-			break;*/
+			break;
 		case "delete":
 			delete();
 			break;
@@ -160,6 +160,15 @@ public class menu {
 				peliculaABMC.deletePelicula(p);
 			}
 		}
+	}
+	
+	private void search() {
+		String p;
+		System.out.println(peliculaABMC.getAll());
+		System.out.println("Ingrese nombre de pelicula a buscar funciones: ");
+		p=s.nextLine();
+		peliculaABMC.getFunciones(p);
+		
 	}
 	
 }
