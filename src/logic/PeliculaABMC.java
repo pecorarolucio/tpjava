@@ -32,5 +32,13 @@ public class PeliculaABMC {
 	public void deletePelicula(Pelicula p) {
 		dp.delete(p);
 	}
-
+	
+	public LinkedList<Pelicula> getAll(){
+		return dp.getAll();
+	}
+	
+	public LinkedList<Funcion> getFunciones(String p){
+		return dp.getFunciones(p);
+	}
 }
+
