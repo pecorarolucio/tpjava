@@ -15,7 +15,7 @@ public class menu {
 	PeliculaABMC peliculaABMC = new PeliculaABMC();
 	Pelicula p = new Pelicula();
 	Persona per = new Persona();
-	
+	ClienteABMC clienteABMC=new ClienteABMC();
 	public void start() {
 		s = new Scanner(System.in);
 		
@@ -32,17 +32,20 @@ public class menu {
 		int opc;
 		switch (command) {
 		case "list":
-			System.out.print("Que desea listar? (1-Categorias/2-Salas/3-Peliculas x Categoria): ");
+			System.out.print("Que desea listar? (1-Categorias/2-Salas/3-Peliculas x Categoria/4-Clientes): ");
 			opc=Integer.parseInt(s.nextLine());
 			if (opc == 1) {
 			System.out.println(categoriaABMC.getAll());
 			} else if (opc==2)  {System.out.println(salaABMC.getAll());
-			} else {
+			} else if (opc==3){
 				//Categoria cat = new Categoria();
 				System.out.print("Ingrese id de categoria: ");
 				c.setIdCategoria(Integer.parseInt(s.nextLine()));
 				//cat = categoriaABMC.searchCategoria(c);
 				System.out.print(peliculaABMC.getPeliculasxCategoria(categoriaABMC.searchCategoria(c)));
+			}
+			else {
+				System.out.println(clienteABMC.getAll());
 			}
 			
 			break;
@@ -71,12 +74,31 @@ public class menu {
 		System.out.println("add");
 		System.out.println("update");
 		System.out.println("delete");
+		System.out.println("search");
 		System.out.println();
 		System.out.print("comando: ");
 		return s.nextLine();
 	}
 	
-	
+	private void search() {
+		int op;
+		System.out.println("Que desea consultar? (1-Pelicula/2-Categoria/3-Sala)");
+		op=Integer.parseInt(s.nextLine());
+		if (op==1) {
+			System.out.println("Ingrese id de la pelicula");
+			p.setIdPelicula(Integer.parseInt(s.nextLine()));
+			System.out.println(peliculaABMC.searchPelicula(p));
+		} else if (op==2) {
+			System.out.println("Ingrese id de la categoria");
+			c.setIdCategoria(Integer.parseInt(s.nextLine()));
+			System.out.println(categoriaABMC.searchCategoria(c));
+		} else if (op==3) {
+			System.out.println("Ingrese id de la sala");
+			sala.setIdSala(Integer.parseInt(s.nextLine()));
+			System.out.println(salaABMC.searchSala(sala));
+		}
+		
+	}
 	private void add() {
 		int opc2;
 		System.out.print("Que desea añadir? (1-Categoria/2-Sala/3-Pelicula/4-Cliente): ");
@@ -97,8 +119,14 @@ public class menu {
 				peliculaABMC.addPelicula(p);
 			}
 			else {
-				System.out.print("Ingrese nombre del cliente: ");
-				
+				System.out.print("Nombre: ");
+				per.setNombre(s.nextLine());
+				System.out.print("Apellido: ");
+				per.setApellido(s.nextLine());
+				System.out.print("Mail: ");
+				per.setMail(s.nextLine());
+				System.out.print("Contraseña: ");
+				per.setContraseña(s.nextLine());
 			}
 	}
 	
@@ -162,13 +190,5 @@ public class menu {
 		}
 	}
 	
-	private void search() {
-		String p;
-		System.out.println(peliculaABMC.getAll());
-		System.out.println("Ingrese nombre de pelicula a buscar funciones: ");
-		p=s.nextLine();
-		peliculaABMC.getFunciones(p);
-		
-	}
-	
 }
+
