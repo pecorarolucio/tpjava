@@ -29,5 +29,9 @@ public class SalaABMC {
 	public void deleteSala(Sala sala) {
 		ds.delete(sala);
 	}
+
 	
+	public Sala searchSala(Sala s) {
+		return ds.search(s);
+	}
 }
