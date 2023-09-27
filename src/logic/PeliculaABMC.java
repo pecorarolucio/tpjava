@@ -40,5 +40,9 @@ public class PeliculaABMC {
 	public LinkedList<Funcion> getFunciones(String p){
 		return dp.getFunciones(p);
 	}
+	
+	public Pelicula searchPelicula(Pelicula p) {
+		return dp.search(p);
+	}
 }
 
