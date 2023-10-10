@@ -44,8 +44,13 @@ public class menu {
 				//cat = categoriaABMC.searchCategoria(c);
 				System.out.print(peliculaABMC.getPeliculasxCategoria(categoriaABMC.searchCategoria(c)));
 			}
-			else {
+			else if(opc==4) {
 				System.out.println(clienteABMC.getAll());
+			}
+			else {
+				System.out.println("Ingrese id de la pelicula a buscar sus funciones: ");
+				p.setIdPelicula(Integer.parseInt(s.nextLine()));
+				System.out.println(funcionABMC.getFunciones(p));
 			}
 			
 			break;
