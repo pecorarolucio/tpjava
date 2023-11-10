@@ -28,6 +28,13 @@ public class CategoriaABMC {
 	}
 	
 	public LinkedList<Categoria> getAll(){
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			throw new RuntimeException("No se pudo cargar el controlador JDBC", e);
+		}
 		return dc.getAll();
 			
 	}

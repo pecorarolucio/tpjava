@@ -41,14 +41,18 @@ public class Verificador extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	    String correo = request.getParameter("Loginnombre");
 	    String contraseña = request.getParameter("Contrasenia");
-	    
-	    System.out.print(correo);
-	    System.out.print(contraseña);
+
 
 	    if ((correo == null || correo.isEmpty() ) || (contraseña == null || contraseña.isEmpty())) {
 	        //response.getWriter().write("Completa todos los campos requeridos");
 	        //return;
 	    	 request.getRequestDispatcher("META-INF/ErrorLogin.jsp").forward(request, response);
+	    	 try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 	    }
 	    else {
 	    request.getRequestDispatcher("index.html").forward(request, response);

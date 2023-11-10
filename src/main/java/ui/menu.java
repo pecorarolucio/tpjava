@@ -1,8 +1,6 @@
 package ui;
 
 import java.util.Scanner;
-
-
 import entities.*;
 import logic.*;
 
@@ -14,7 +12,7 @@ public class menu {
 	Sala sala = new Sala();
 	PeliculaABMC peliculaABMC = new PeliculaABMC();
 	Pelicula p = new Pelicula();
-	Persona per = new Persona();
+
 	
 	public void start() {
 		s = new Scanner(System.in);

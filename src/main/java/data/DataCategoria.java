@@ -3,7 +3,6 @@ package data;
 import java.sql.*;
 import java.util.LinkedList;
 import entities.Categoria;
-import entities.Pelicula;
 
 
 
@@ -20,7 +19,7 @@ public class DataCategoria {
 			if(rs!=null) {
 				while(rs.next()) {
 					Categoria c= new Categoria();
-					c.setIdCategoria(rs.getInt("id"));
+					c.setIdCategoria(rs.getInt("idcategoria"));
 					c.setNombreCategoria(rs.getString("nombre"));
 					categorias.add(c);
 				}
@@ -29,7 +28,7 @@ public class DataCategoria {
 			e.printStackTrace();
 			
 		} finally {
-			try {
+			try {	
 				if(rs!=null) {rs.close();}
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
@@ -47,9 +46,8 @@ public class DataCategoria {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-					prepareStatement("insert into categoria(id,nombre) values(?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
-			stmt.setInt(1, c.getIdCategoria());
-			stmt.setString(2, c.getNombreCategoria());
+					prepareStatement("insert into categoria(nombre) values(?)",PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, c.getNombreCategoria());
 			stmt.executeUpdate();
 		
 			keyResultSet=stmt.getGeneratedKeys();
@@ -75,7 +73,7 @@ public class DataCategoria {
 		PreparedStatement stmt=null;
 		try {
 			
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("update categoria set nombre = ? where id=?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("update categoria set nombre = ? where idcategoria=?");
 			stmt.setString(1, cat.getNombreCategoria());
 			stmt.setInt(2, cat.getIdCategoria());
 			stmt.executeUpdate();
@@ -97,14 +95,14 @@ public class DataCategoria {
 		ResultSet rs=null;
 		Categoria cat=null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from categoria where id = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from categoria where idcategoria = ?");
 			stmt.setInt(1, c.getIdCategoria());
 			
 			rs = stmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
 				cat = new Categoria();
-				cat.setIdCategoria(rs.getInt("id"));
+				cat.setIdCategoria(rs.getInt("idcategoria"));
 				cat.setNombreCategoria(rs.getString("nombre"));
 				
 			}
@@ -128,7 +126,7 @@ public class DataCategoria {
 		PreparedStatement stmt =null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from categoria where id = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from categoria where idcategoria = ?");
 			stmt.setInt(1, cat.getIdCategoria());
 			stmt.executeUpdate();
 		} catch (SQLException e) {

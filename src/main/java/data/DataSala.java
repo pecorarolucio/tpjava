@@ -19,7 +19,7 @@ public class DataSala {
 			if(rs!=null) {
 				while(rs.next()) {
 					Sala s= new Sala();
-					s.setIdSala(rs.getInt("id"));
+					s.setIdSala(rs.getInt("idsala"));
 					s.setCapacidadMaxima(rs.getInt("capacidadMax"));
 					salas.add(s);
 				}
@@ -44,7 +44,7 @@ public class DataSala {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-					prepareStatement("insert into sala(id,capacidadMax) values(?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+					prepareStatement("insert into sala(idsala,capacidadMax) values(?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, s.getIdSala());
 			stmt.setInt(2, s.getCapacidadMaxima());
 			stmt.executeUpdate();
@@ -72,7 +72,7 @@ public class DataSala {
 		PreparedStatement stmt=null;
 		try {
 			
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("update sala set capacidadMax = ? where id=?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("update sala set capacidadMax = ? where idsala=?");
 			stmt.setInt(1, s.getCapacidadMaxima());
 			stmt.setInt(2, s.getIdSala());
 			stmt.executeUpdate();
@@ -94,14 +94,14 @@ public class DataSala {
 		ResultSet rs=null;
 		Sala sala=null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from sala where id = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from sala where idsala = ?");
 			stmt.setInt(1, s.getIdSala());
 			
 			rs = stmt.executeQuery();
 			
 			if(rs!=null && rs.next()) {
 				sala = new Sala();
-				sala.setIdSala(rs.getInt("id"));
+				sala.setIdSala(rs.getInt("idsala"));
 				sala.setCapacidadMaxima(rs.getInt("nombre"));
 				
 			}
@@ -125,7 +125,7 @@ public class DataSala {
 		PreparedStatement stmt =null;
 		
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from sala where id = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from sala where idsala = ?");
 			stmt.setInt(1, s.getIdSala());
 			stmt.executeUpdate();
 		} catch (SQLException e) {

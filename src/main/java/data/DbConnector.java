@@ -6,14 +6,15 @@ public class DbConnector {
 	
 	private static DbConnector instancia;
 	
+	//private String driver="com.mysql.cj.jdbc.Driver";
 	private String driver="com.mysql.cj.jdbc.Driver";
 	private String host="localhost";
 	private String port="3306";
-	private String user="franco";
-	private String password="armani";
-	private String db="cinemanagement2";
+	private String user="root";
+	private String password="Kamp123QQ%%123";
+	private String db="cinemanagement"; //tabla
 	private int conectados=0;
-	private Connection conn=null;
+	private Connection conn;
 	
 	private DbConnector() {
 		try {
@@ -30,22 +31,28 @@ public class DbConnector {
 		return instancia;
 	}
 	
-	public Connection getConn() {
-		try {
-			if(conn==null || conn.isClosed()) {
-				conn=DriverManager.getConnection("jdbc:mysql://"+host+":"+port+"/"+db, user, password);
-				conectados=0;
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		conectados++;
-		return conn;
+	public Connection getConn(){
+	    try {
+	        if (conn == null || conn.isClosed()) {
+	            conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + db, user, password);
+	            conectados++;
+	            System.out.println("Conexión establecida: " + conn);
+	            System.out.print("-----------------------------------------------");
+	            System.out.print(conn);
+	            System.out.print("-----------------------------------------------");
+	        }
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+
+	    return conn;
 	}
+
 	
 	public void releaseConn() {
-		conectados--;
+		
 		try {
+			conectados--;
 			if (conectados<=0) {
 				conn.close();
 			}
@@ -57,3 +64,4 @@ public class DbConnector {
 
 
 }
+
