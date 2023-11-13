@@ -37,9 +37,6 @@ public class DbConnector {
 	            conn = DriverManager.getConnection("jdbc:mysql://" + host + ":" + port + "/" + db, user, password);
 	            conectados++;
 	            System.out.println("Conexión establecida: " + conn);
-	            System.out.print("-----------------------------------------------");
-	            System.out.print(conn);
-	            System.out.print("-----------------------------------------------");
 	        }
 	    } catch (SQLException e) {
 	        e.printStackTrace();
