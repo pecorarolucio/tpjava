@@ -12,25 +12,27 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% CategoriaABMC categoriaABMC = new CategoriaABMC();
-LinkedList<entities.Categoria> listaCategoria = categoriaABMC.getAll(); %>
 
 <div class="row col-md-6">
-	<% for (entities.Categoria Cat : listaCategoria) { ;%>
+	<%	LinkedList<Categoria> categoria = (LinkedList<Categoria>) request.getAttribute("Categorias");
+		if  (!categoria.isEmpty() && categoria.size() >0) {%>
+	
+	<% for (Categoria Cat : categoria ) { ;%>
   <div class="col-sm-12">
     <div class="card">
       <div class="card-body">
         <h5 class="card-title"><%= Cat.getNombreCategoria() %></h5>
         <%
-        int parametro = Cat.getIdCategoria();
-        String url = "BuscaPelixCat?nombreVariable=" + parametro;
+        String url = "BuscaPelixCat?nombreVariable=" + Cat.getIdCategoria();
    		 %>
         <a href="<%=url%>" class="btn btn-primary">Elegir</a>
       </div>
     </div>
   </div>
-  <% } %>
-  
+  <% } } 
+	else { %>
+	<h1>No hay categorias ahora mismo</h1>
+	<%} %>  
 </div>
 
 </body>
