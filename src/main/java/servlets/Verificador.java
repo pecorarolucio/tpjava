@@ -7,7 +7,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
+import logic.*;
+import entities.*;
 /**
  * Servlet implementation class Verificador
  */
@@ -48,24 +49,31 @@ public class Verificador extends HttpServlet {
 		// TODO Auto-generated method stub
 		String correo = request.getParameter("Loginnombre");
 	    String contraseña = request.getParameter("Contrasenia");
-
-
-	    if ((correo == null || correo.isEmpty() ) || (contraseña == null || contraseña.isEmpty())) {
-	        //response.getWriter().write("Completa todos los campos requeridos");
-	        //return;
-	    	 request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
-	    	 try {
-				Class.forName("com.mysql.cj.jdbc.Driver");
-			} catch (ClassNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	    Persona p = new Persona();
+	    p.setMail(correo);
+	    p.setContraseña(contraseña);
+	    PersonaABMC pABMC = new PersonaABMC();
+	    if (pABMC.getOne(p) != null) {
+	    	 if ((correo == null || correo.isEmpty() ) || (contraseña == null || contraseña.isEmpty())) {
+	 	        //response.getWriter().write("Completa todos los campos requeridos");
+	 	        //return;
+	 	    	 
+	 	    	request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
+	 	    	 try {
+	 				Class.forName("com.mysql.cj.jdbc.Driver");
+	 			} catch (ClassNotFoundException e) {
+	 				// TODO Auto-generated catch block
+	 				e.printStackTrace();
+	 			}
+	 	    	 }
+	 	    else {
+	 	    request.getRequestDispatcher("index.html").forward(request, response);
+	 	    };
 	    }
 	    else {
-	    request.getRequestDispatcher("index.html").forward(request, response);
-	    }
+	    	request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
+	    };
 		//doGet(request, response);
-	}
 
 
-}
+	}};
