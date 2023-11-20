@@ -184,45 +184,7 @@ public class DataPelicula {
 		}
 	}
 	
-	public LinkedList<Reseña> getReseñas(String p){
-		PreparedStatement stmt=null;
-		ResultSet rs = null;
-		LinkedList<Reseña> reseñas = new LinkedList<>();
-		try {
-			stmt= DbConnector.getInstancia().getConn().prepareStatement(
-					"SELECT p.nombrePelicula, r.nrousuario, r.fecha, r.descripcion"+
-					"FROM pelicula p"+
-					"INNER JOIN reseña r ON p.idpelicula = r.idPelicula"+
-					"WHERE p.nombre = ?");
-			stmt.setString(1, p);
-			rs = stmt.executeQuery();
-			if(rs!=null) {
-				while (rs.next()) {
-					Reseña r = new Reseña();
-					Persona per = new Persona();
-					PersonaABMC pl = new PersonaABMC();
-					per.setId(rs.getInt("r.nrousuario"));
-					per.setNombre(pl.getById(per.getId()).getNombre());
-					r.setAutor(per);//SOLO RECUPERO EL NRO DE USUARIO Y NOMBRE DEL AUTOR DE LA RESEÑA
-					r.setDescripcion(rs.getString("r.descripcion"));
-					r.setFecha(rs.getDate("r.fecha").toLocalDate());
-					reseñas.add(r);
-				}
-			}
-		}
-		catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			try {
-				if(stmt!=null)stmt.close();
-				DbConnector.getInstancia().releaseConn();
-			}
-			catch(SQLException e) {
-				e.printStackTrace();
-			}
-		}
-		return reseñas;
-	}
+
 	
 	//NO ESTOY SEGURO SI ESTO VA ACA O HAY QUE HACER UN DATAFUNCION
 	public LinkedList<Funcion> getFunciones(String p){
