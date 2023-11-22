@@ -8,7 +8,7 @@
 </head>
 <body>
     <h2>Registro de Usuario</h2>
-    <form action="SignInServlet" method="post">
+    <form action="SignIn" method="post">
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br>
         

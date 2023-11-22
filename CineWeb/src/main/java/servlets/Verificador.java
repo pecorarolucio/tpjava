@@ -53,7 +53,8 @@ public class Verificador extends HttpServlet {
 	    p.setMail(correo);
 	    p.setContraseña(contraseña);
 	    PersonaABMC pABMC = new PersonaABMC();
-	    if (pABMC.getOne(p) != null) {
+	    Persona pers = pABMC.getOne(p);
+	    if (pers != null) {
 	    	 if ((correo == null || correo.isEmpty() ) || (contraseña == null || contraseña.isEmpty())) {
 	 	        //response.getWriter().write("Completa todos los campos requeridos");
 	 	        //return;
@@ -67,8 +68,8 @@ public class Verificador extends HttpServlet {
 	 			}
 	 	    	 }
 	 	    else {
-	 	    request.getSession().setAttribute("usuario", p);
-	 	    request.getRequestDispatcher("index.html").forward(request, response);
+	 	    request.getSession().setAttribute("usuario", pers);
+	 	    request.getRequestDispatcher("Index.jsp").forward(request, response);
 	 	    };
 	    }
 	    else {

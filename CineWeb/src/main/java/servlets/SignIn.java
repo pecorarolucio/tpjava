@@ -35,7 +35,7 @@ public class SignIn extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String correo = request.getParameter("mail");
+		String correo = request.getParameter("correo");
 		String password = request.getParameter("password");
 		String nombre = request.getParameter("nombre");
 		String apellido = request.getParameter("apellido");
@@ -46,6 +46,7 @@ public class SignIn extends HttpServlet {
 		p.setApellido(apellido);
 		p.setMail(correo);
 		p.setContraseña(password);
+		p.setTipo("Cliente");
 		
 		if (lp.findByMail(p) == null) {
 			if (correo.isEmpty() || password.isEmpty() || nombre.isEmpty() || apellido.isEmpty()) {

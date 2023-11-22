@@ -4,6 +4,8 @@
 <%@page import="java.util.LinkedList" %>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%HttpSession se = request.getSession();
+Persona p = (Persona) se.getAttribute("usuario"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -35,6 +37,13 @@
 	%>
 	<p>No se encontro la pelicula especificada</p>
 	<% } %>
+	<% if(p == null){%>
+	<a href="login.html" class="btn btn-primary">Inicies sesion para comprar la entrada</a>
+	<%}else{%>
+	<%String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula();%>
+	<a href="<%= url%>" class="btn btn-primary">comprar la entrada</a>
+	<%} %>
+	
 
 </body>
 </html>
