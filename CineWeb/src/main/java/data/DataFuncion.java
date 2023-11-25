@@ -1,5 +1,12 @@
 package data;
 
+import java.util.LinkedList;
+import java.sql.*;
+import entities.Categoria;
+import entities.Funcion;
+import entities.Pelicula;
+import entities.Sala;
+
 public class DataFuncion {
 
   public void add(Funcion f) {
@@ -34,8 +41,8 @@ public class DataFuncion {
 		LinkedList<Funcion> funciones = new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().prepareStatement(
-						"select f.horaInicio, f.horaFin, f.fecha, f.idSala, sal.capacidadmax, p.nombre, p.idCategoria, cat.nombre "+
-						"nombreCategoria "+
+						"select f.horaInicio, f.horaFin, f.fecha, f.idSala, sal.capacidadmax, p.nombre, p.idCategoria, cat.nombre, "+
+						"cat.nombre "+
 						"from funcion f "+
 						"inner join sala sal "+
 						"on sal.idSala = f.idSala "+
@@ -43,13 +50,13 @@ public class DataFuncion {
 						"on p.idPelicula = f.idPelicula "+
 						"inner join categoria cat "+
 						"on  p.idCategoria = cat.idCategoria  "+
-						"where p.idPelicula= ?"
+						"where p.idPelicula= ? and CURDATE()<=f.fecha" //EL CURDATE() ES PARA OBTENER LA FECHA ACTUAL, ASI OBTENGO LAS FUNCIONES DISPONIBLES 
 						);
 			stmt.setInt(1, p.getIdPelicula());
 			rs = stmt.executeQuery();
 			if(rs!=null) {
 				while (rs.next()){
-					Categoria c = new Categoria(rs.getInt("idCategoria"), rs.getString("nombreCategoria"));
+					Categoria c = new Categoria(rs.getInt("idCategoria"), rs.getString("nombre"));
 					p.setNombrePelicula(rs.getString("nombre"));
 					p.setCategoria(c);
 					Sala s = new Sala(rs.getInt("idSala"),rs.getInt("capacidadmax"));
@@ -91,5 +98,7 @@ public class DataFuncion {
 			}
 		}
 	}
+  
+  //FALTA EL UPDATE PERO PARA EL AD O CON LE TIEMPO RESTANTE LO PODEMOS HACER
 		
 }

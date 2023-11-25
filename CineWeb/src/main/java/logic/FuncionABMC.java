@@ -15,7 +15,7 @@ public class FuncionABMC {
 	}
 
 	public void addFuncion(Funcion f) {
-		dp.add(f);
+		df.add(f);
 	}
 	
 	public LinkedList<Funcion> getFunciones(Pelicula p) {

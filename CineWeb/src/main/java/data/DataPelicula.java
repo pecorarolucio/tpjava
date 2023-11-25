@@ -2,16 +2,11 @@ package data;
 
 import java.sql.*;
 import java.util.LinkedList;
-
 import entities.Categoria;
-import entities.Persona;
 import entities.Funcion;
 import entities.Pelicula;
-import entities.Reseña;
 import entities.Sala;
-
 import logic.CategoriaABMC;
-import logic.PersonaABMC;
 
 
 
@@ -27,12 +22,18 @@ public class DataPelicula {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where idpelicula = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			if (rs !=null) {
-				pel.setIdPelicula(id);
-				pel.setNombrePelicula(rs.getString("nombre"));
-				c = cl.getOne(rs.getInt("idcategoria"));
-				pel.setCategoria(c);
-			}
+			//if (rs !=null) {
+			//	pel.setIdPelicula(id);
+			//	pel.setNombrePelicula(rs.getString("nombre"));
+			//	c = cl.getOne(rs.getInt("idcategoria"));
+			//	pel.setCategoria(c);
+			//}
+			 if (rs.next()) { // Verifica si hay al menos una fila en el ResultSet
+	                pel.setIdPelicula(id);
+	                pel.setNombrePelicula(rs.getString("nombre"));
+	                c = cl.getOne(rs.getInt("idcategoria"));
+	                pel.setCategoria(c);
+	            }
 			
 		} catch(SQLException e) {
 			e.printStackTrace();

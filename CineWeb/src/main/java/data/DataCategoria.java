@@ -17,10 +17,14 @@ public class DataCategoria {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("Select * from categoria where idcategoria = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			if (rs!=null) {
-				cat.setIdCategoria(id);
-				cat.setNombreCategoria(rs.getString("nombre"));
-			}
+		//	if (rs!=null) {
+		//		cat.setIdCategoria(id);
+		//		cat.setNombreCategoria(rs.getString("nombre"));
+		//	}
+			 if (rs != null && rs.next()) {
+		            cat.setIdCategoria(id);
+		            cat.setNombreCategoria(rs.getString("nombre"));
+		        }
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {

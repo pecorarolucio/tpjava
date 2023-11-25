@@ -1,11 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import data.DataFuncion;
+import entities.*;
 
 /**
  * Servlet implementation class ListaFunciones
@@ -27,7 +31,15 @@ public class ListaFunciones extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		DataFuncion dtFunc = new DataFuncion();
+		Pelicula pel = new Pelicula();
 		int idPelicula = Integer.parseInt(request.getParameter("IdPelicula"));
+		pel.setIdPelicula(idPelicula);
+		LinkedList<Funcion> listafunciones = dtFunc.getFunciones(pel);
+		request.setAttribute("funciones", listafunciones);
+		request.getRequestDispatcher("ListadeFuncionesxPelicula.jsp").forward(request, response);
+		
+		
 	}
 
 	/**

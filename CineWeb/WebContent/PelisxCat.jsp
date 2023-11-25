@@ -29,7 +29,7 @@
 	if ( !peliculas.isEmpty() && peliculas.size() > 0) {
 	for (Pelicula pel : peliculas) {%>
 		<h1><%= pel.getNombrePelicula() %></h1>
-		<a href="DetallePelicula.jsp?id=<%=pel.getIdPelicula() %>">Ver funciones</a>
+		<a href="DetallePelicula?id=<%=pel.getIdPelicula() %>">Ver funciones</a>
 	<% }}
 	else { %>
 		<p>No hay peliculas disponibles </p>

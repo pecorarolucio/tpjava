@@ -110,15 +110,20 @@ public class DataPersona {
 		ResultSet rs = null;
 		Persona per = null;
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("select nombre from usuario where id = ?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("select nombre from usuario where nrousuario = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			
-			if (rs!=null) {
-				per = new Persona();
-				per.setId(id);
-				per.setNombre(rs.getString("nombre"));
-			}
+		//	if (rs!=null) {
+		//		per = new Persona();
+		//		per.setId(id);
+		//		per.setNombre(rs.getString("nombre"));
+		//	}
+			if (rs.next()) { // Verificar si hay alguna fila en el ResultSet
+	            per = new Persona();
+	            per.setId(id);
+	            per.setNombre(rs.getString("nombre"));
+	        }
 		} catch(SQLException e) {
 			e.printStackTrace();
 		} finally {

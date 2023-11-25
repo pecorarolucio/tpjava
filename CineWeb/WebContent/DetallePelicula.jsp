@@ -20,7 +20,7 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	%>
 	<h1>Detalles pelicula</h1>
 	<p>Titulo: <%= pel.getNombrePelicula() %></p>
-	<p>Categoria: <%= pel.getCategoria().getNombreCategoria()%></p>
+	<p>Categoria: <%=pel.getCategoria().getNombreCategoria() %></p> <%--pel.getCategoria().getNombreCategoria() --%>
 	
 	<h2>Reseñas:</h2>
 	<ul>
@@ -32,17 +32,17 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	</li>
 		<% } %>
 	</ul>
+	<% if(p == null){%>
+	<a href="login.html" class="btn btn-primary">Inicies sesion para comprar la entrada</a>
+	<%}else{%>
+	<%String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula();%>
+	<a href="<%=url%>" class="btn btn-primary">comprar la entrada</a>
+	<%} %>
 	<%
 	} else {
 	%>
 	<p>No se encontro la pelicula especificada</p>
 	<% } %>
-	<% if(p == null){%>
-	<a href="login.html" class="btn btn-primary">Inicies sesion para comprar la entrada</a>
-	<%}else{%>
-	<%String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula();%>
-	<a href="<%= url%>" class="btn btn-primary">comprar la entrada</a>
-	<%} %>
 	
 
 </body>
