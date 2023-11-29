@@ -9,6 +9,7 @@ import entities.Pelicula;
 public class FuncionABMC {
 	
 	private DataFuncion df;
+	private EntradaABMC el;
 	
 	public FuncionABMC() {
 		df = new DataFuncion();
@@ -25,4 +26,9 @@ public class FuncionABMC {
 	public void deleteFuncion(Funcion f) {
 		df.delete(f);
 	}
+	
+	public boolean isFull(Funcion f) {
+		return el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima();
+	}
+	
 }
