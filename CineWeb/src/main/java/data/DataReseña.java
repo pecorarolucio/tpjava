@@ -1,5 +1,6 @@
 package data;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -64,4 +65,111 @@ public class DataReseña {
 		}
 		return reseñas;
 	}
+	
+	public LinkedList<Reseña> getReseñasFromUser(Persona p){
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		LinkedList<Reseña> reseñas = new LinkedList<>();
+		try {
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("Select r.codigo, r.descripcion, r.fecha, r.IDPelicula, pel.nombre from reseña r"
+					+ "inner join pelicula pel on r.IDPelicula = pel.idpelicula where nrousuario = ?");
+			stmt.setInt(1, p.getId());
+			rs = stmt.executeQuery();
+			if(rs!=null) {
+				while(rs.next()) {
+					Reseña r = new Reseña();
+					r.setCodigo(rs.getInt("r.codigo"));
+					r.setDescripcion(rs.getString("r.descripcion"));
+					r.setFecha(rs.getDate("r.fecha").toLocalDate());
+					Pelicula pel = new Pelicula();
+					pel.setIdPelicula(rs.getInt("r.IDPelicula"));
+					pel.setNombrePelicula(rs.getString("pel.nombre"));
+					r.setPelicula(pel);
+					r.setAutor(p);
+					reseñas.add(r);
+				}
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs!=null) rs.close();
+				if(stmt!=null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return reseñas;
+	}
+	
+	public void addReseña(Reseña r) {
+		PreparedStatement stmt = null;
+		ResultSet KeyResultSet = null;
+		try {
+			stmt= DbConnector.getInstancia().getConn().prepareStatement("Insert into reseña(descripcion, fecha, IDPelicula, nrousuario) values (?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+			stmt.setString(1, r.getDescripcion());
+			stmt.setDate(2, Date.valueOf(r.getFecha()));
+			stmt.setInt(3, r.getPelicula().getIdPelicula());
+			stmt.setInt(4, r.getAutor().getId());
+			stmt.executeUpdate();
+			KeyResultSet = stmt.getGeneratedKeys();
+			if(KeyResultSet!=null && KeyResultSet.next()) {
+				r.setCodigo(KeyResultSet.getInt(1));
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(KeyResultSet!=null) KeyResultSet.close();
+				if(stmt!=null) stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void deleteReseña(Reseña r) {
+		PreparedStatement stmt =null;
+		
+		try {
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("delete from reseña where codigo = ?");
+			stmt.setInt(1, r.getCodigo());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void updateReseña(Reseña r) {
+		PreparedStatement stmt=null;
+		try {
+			
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("update reseña set descripcion = ? where codigo=?");
+			stmt.setString(1, r.getDescripcion());
+			stmt.setInt(2, r.getCodigo());
+			stmt.executeUpdate();
+			
+		}  catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 }
