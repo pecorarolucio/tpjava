@@ -27,6 +27,10 @@ public class FuncionABMC {
 		df.delete(f);
 	}
 	
+	public Funcion getOne(Funcion f) {
+		return df.findOne(f);
+	}
+	
 	public boolean isFull(Funcion f) {
 		return el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima();
 	}

@@ -16,6 +16,7 @@ public class Entrada {
 	}
 	
 	public Entrada() {
+		this.precio=2500;
 	};
 	
 	public int getCodEntrada() {

@@ -21,8 +21,8 @@
 		<h1>HoraFin: </h1><span><%=f.getHoraFin() %></span>
 		<h1>Sala: </h1><span><%=f.getSala().getIdSala() %></span>
 		<h1>Capacidad Maxima: </h1><span><%=f.getSala().getCapacidadMaxima() %></span>
-		<%String url= "#"; %>
-		<a href="<%=url%>>" class="btn btn-lg btn-danger " >Comprar Boleto</a>
+		<%String url= "ComprarEntrada?fecha="+f.getFechaFuncion()+"&hora="+f.getHoraInicio()+"&idSala="+f.getSala().getIdSala(); %>
+		<a href="<%=url%>" class="btn btn-lg btn-danger " >Comprar Boleto</a>
 	<%} } %>
 </body>
 </html>

@@ -33,10 +33,10 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 		<% } %>
 	</ul>
 	<% if(p == null){%>
-	<a href="login.html" class="btn btn-primary">Inicies sesion para comprar la entrada</a>
+	<a href="login.html" class="btn btn-primary">Inicie sesion para comprar la entrada</a>
 	<%}else{%>
 	<%String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula();%>
-	<a href="<%=url%>" class="btn btn-primary">comprar la entrada</a>
+	<a href="<%=url%>" class="btn btn-primary">Comprar entrada</a>
 	<%} %>
 	<%
 	} else {
