@@ -42,6 +42,7 @@ if (p != null && "Admin".equals(p.getTipo())) {
           <% if(p == null){ %>
           <li class="nav-item"><a href="login.html" class="nav-link">Iniciar sesion</a></li>
           <%}else { %>
+          <li class="nav-item"><a href="MisReseñas" class="nav-link">Mis reseñas</a></li>
           <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesion</a></li>
           <%} %>
         </ul>
