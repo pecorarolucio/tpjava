@@ -23,12 +23,21 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	<p>Categoria: <%=pel.getCategoria().getNombreCategoria() %></p> <%--pel.getCategoria().getNombreCategoria() --%>
 	
 	<h2>Reseñas:</h2>
+	<% if (reseñas.isEmpty()){ %>
+	<p>No hay reseñas aún</p>
+	<% } %>
 	<ul>
 	<% for (Reseña reseña : reseñas) {
 		Persona Autor = reseña.getAutor(); %>
 	<li><p><%= Autor.getNombre() %></p>
 		<p><%= reseña.getFecha() %></p>
 		<p><%= reseña.getDescripcion() %></p>
+		<%if(p.getTipo()=="Admin"){ %>
+			<form method="post" action="BorrarReseña">
+			<input type="hidden" name="idReseña" value="<%reseña.getCodigo(); %>" >
+			<input type="submit" value="Borrar Reseña">
+			</form>
+			<% } %>
 	</li>
 		<% } %>
 	</ul>
