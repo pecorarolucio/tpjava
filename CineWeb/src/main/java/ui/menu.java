@@ -165,7 +165,7 @@ public class menu {
 		System.out.println(peliculaABMC.getAll());
 		System.out.println("Ingrese nombre de pelicula a buscar funciones: ");
 		p=s.nextLine();
-		peliculaABMC.getFunciones(p);
+		//peliculaABMC.getFunciones(p);
 		
 	}
 	

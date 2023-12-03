@@ -188,7 +188,7 @@ public class DataPelicula {
 
 	
 	//NO ESTOY SEGURO SI ESTO VA ACA O HAY QUE HACER UN DATAFUNCION
-	public LinkedList<Funcion> getFunciones(String p){
+	/*public LinkedList<Funcion> getFunciones(Pelicula p){
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		LinkedList<Funcion> funciones = new LinkedList<>();
@@ -197,8 +197,8 @@ public class DataPelicula {
 						"SELECT f.horaInicio, f.horaFin, f.fecha, f.idSala"+
 						"FROM funcion f " +
 						"INNER JOIN pelicula p ON f.idPelicula = p.idpelicula "+
-						"AND p.nombre = ?");
-			stmt.setString(1, p);
+						"WHERE p.idpelicula=?");
+			stmt.setInt(1, p.getIdPelicula());
 			rs = stmt.executeQuery();
 			if(rs!=null) {
 				while (rs.next()){
@@ -209,6 +209,7 @@ public class DataPelicula {
 					f.setFechaFuncion(rs.getDate("f.fecha").toLocalDate());
 					s.setIdSala(rs.getInt("f.idSala"));
 					f.setSala(s); //LA SALA SOLO TIENE CARGADA UNA ID PARA MOSTRAR
+					f.setPelicula(p);
 					funciones.add(f);
 				}
 			}
@@ -223,6 +224,6 @@ public class DataPelicula {
 			}
 		}
 		return funciones;
-	}
+	}*/
 
 }

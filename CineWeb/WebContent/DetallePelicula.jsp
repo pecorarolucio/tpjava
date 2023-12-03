@@ -15,7 +15,7 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 <body>
 	<%
 		Pelicula pel = (Pelicula) request.getAttribute("pelicula");
-		LinkedList<Reseña> reseñas = (LinkedList<Reseña>) request.getAttribute("reseñas");
+		LinkedList<Reseña> reseñas = (LinkedList<Reseña>) request.getAttribute("reseñas"); //No se si esto funciona, cuando se setea reseñas?
 		if (pel != null){
 	%>
 	<h1>Detalles pelicula</h1>
@@ -38,6 +38,13 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	<%String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula();%>
 	<a href="<%=url%>" class="btn btn-primary">Comprar entrada</a>
 	<%} %>
+	<h1>Realizar reseña</h1>
+	<form action="PublicarReseña" method="Post">
+		<input type="hidden" name="idPelicula" value="<%=pel.getIdPelicula() %>">
+	     <label for="descripcion">Descripción:</label>
+	     <textarea name="descripcion" id="descripcion" rows="4" cols="50"></textarea>
+	     <input type="submit" value="Publicar Reseña">
+    </form>
 	<%
 	} else {
 	%>

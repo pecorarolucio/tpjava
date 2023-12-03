@@ -9,6 +9,7 @@ public class PeliculaABMC {
 	
 	private DataPelicula dp;
 	private ReseñaABMC rl;
+	private FuncionABMC fl;
 
 	
 	public PeliculaABMC () {
@@ -48,8 +49,8 @@ public class PeliculaABMC {
 		return dp.getAll();
 	}
 	
-	public LinkedList<Funcion> getFunciones(String p){
-		return dp.getFunciones(p);
+	public LinkedList<Funcion> getFunciones(Pelicula p){
+		return fl.getFunciones(p);
 	}
 }
 
