@@ -37,7 +37,7 @@ public class MisReseñas extends HttpServlet {
 			ReseñaABMC rl = new ReseñaABMC();
 			LinkedList<Reseña> reseñas = rl.getByUser(p);
 			request.setAttribute("reseñas", reseñas);
-			request.getRequestDispatcher("/MisReseñas.jsp");
+			request.getRequestDispatcher("/MisReseñas.jsp").forward(request, response);
 		} else {
 			response.sendError(404, "Usuario no encontrado");
 		}
