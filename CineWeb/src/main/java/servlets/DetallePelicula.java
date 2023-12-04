@@ -44,8 +44,9 @@ public class DetallePelicula extends HttpServlet {
 		if (idParam != null && !idParam.isEmpty()) {
 			try {
 				int idPelicula = Integer.parseInt(idParam);
-				Pelicula pel = pl.getOne(idPelicula);		
-				PersonaABMC p = new PersonaABMC();
+				Pelicula pel = new Pelicula();
+				pel.setIdPelicula(idPelicula);
+				pl.searchPelicula(pel);	
 				LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
 				for (Reseña r: reseñas) {
 					r.getAutor().setNombre(p.getById(r.getAutor().getId()).getNombre());
