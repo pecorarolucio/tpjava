@@ -32,12 +32,12 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	<li><p><%= Autor.getNombre() %></p>
 		<p><%= reseña.getFecha() %></p>
 		<p><%= reseña.getDescripcion() %></p>
-		<%if(p.getTipo()=="Admin"){ %>
+		<%if(p!= null && p.getTipo().equals("Admin")){ %>
 			<form method="post" action="BorrarReseña">
-			<input type="hidden" name="idReseña" value="<%reseña.getCodigo(); %>" >
+			<input type="hidden" name="idReseña" value="<%=reseña.getCodigo()%>" >
 			<input type="submit" value="Borrar Reseña">
 			</form>
-			<% } %>
+			<% }%>
 	</li>
 		<% } %>
 	</ul>
