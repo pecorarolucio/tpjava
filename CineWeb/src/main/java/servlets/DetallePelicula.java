@@ -46,11 +46,12 @@ public class DetallePelicula extends HttpServlet {
 				int idPelicula = Integer.parseInt(idParam);
 				Pelicula pel = new Pelicula();
 				pel.setIdPelicula(idPelicula);
-				pl.searchPelicula(pel);	
+				pel = pl.getOne(pel);
+				//pl.searchPelicula(pel);	
 				LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
-				for (Reseña r: reseñas) {
-					r.getAutor().setNombre(p.getById(r.getAutor().getId()).getNombre());
-				};
+				//for (Reseña r: reseñas) {
+				//	r.getAutor().setNombre(p.getById(r.getAutor().getId()).getNombre());
+				//};
 				
 				System.out.print(pel.getIdPelicula());
 				request.setAttribute("pelicula", pel);

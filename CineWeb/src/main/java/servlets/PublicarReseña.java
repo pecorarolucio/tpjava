@@ -44,7 +44,10 @@ public class PublicarReseña extends HttpServlet {
 		if (p!=null) {
 			int idPelicula = Integer.parseInt(request.getParameter("idPelicula"));
 			PeliculaABMC pl = new PeliculaABMC();
-			Pelicula pel = pl.getOne(idPelicula);
+			
+			Pelicula pel = new Pelicula();
+			pel.setIdPelicula(idPelicula);
+			pel = pl.getOne(pel);
 			if (pel!=null) {
 				Reseña r = new Reseña();
 				r.setAutor(p);

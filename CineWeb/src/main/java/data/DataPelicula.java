@@ -12,12 +12,13 @@ import logic.CategoriaABMC;
 
 public class DataPelicula {
 	
-	public Pelicula findOne(int id) {
+	public Pelicula findOne(Pelicula p) {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		Pelicula pel = new Pelicula();
 		Categoria c = new Categoria();
 		CategoriaABMC cl = new CategoriaABMC();
+		Integer id = p.getIdPelicula();
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where idpelicula = ?");
 			stmt.setInt(1, id);

@@ -21,8 +21,8 @@ public class PeliculaABMC {
 		return dp.getAll();
 	}*/
 	
-	public Pelicula getOne(int id) {
-		return dp.findOne(id);
+	public Pelicula getOne(Pelicula p) {
+		return dp.findOne(p);
 	}
 	
 	public LinkedList<Reseña> getReseñas(Pelicula p){
