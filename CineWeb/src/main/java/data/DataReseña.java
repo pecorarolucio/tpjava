@@ -24,7 +24,7 @@ public class DataReseña {
 					+ "FROM pelicula p \r\n"
 					+ "INNER JOIN reseña r ON p.idpelicula = r.idPelicula \r\n"
 					+ "inner join usuario us on us.nrousuario = r.nrousuario\r\n"
-					+ "WHERE p.idpelicula = 3;");
+					+ "WHERE p.idpelicula = ?;");
 			stmt.setInt(1, p.getIdPelicula());
 			rs = stmt.executeQuery();
 			if(rs!=null) {
