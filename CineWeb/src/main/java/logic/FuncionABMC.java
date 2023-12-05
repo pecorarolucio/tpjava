@@ -33,7 +33,6 @@ public class FuncionABMC {
 	}
 	
 	public boolean isFull(Funcion f) {
-		System.out.print(f.getSala().getCapacidadMaxima());
 		return el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima();
 		
 	}
