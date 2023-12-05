@@ -96,7 +96,7 @@ public class DataEntrada {
 		LinkedList<Entrada> entradas = new LinkedList<>();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("Select codentrada, nroUsuario, precio from entrada"
-					+ "where fecha = ? and HoraInicio = ? and IDSala = ?");
+					+ " where fecha = ? and HoraInicio = ? and IDSala = ?");
 			stmt.setDate(1, Date.valueOf(f.getFechaFuncion()));
 			stmt.setTime(2, Time.valueOf(f.getHoraInicio()));
 			stmt.setInt(3, f.getSala().getIdSala());
@@ -133,7 +133,7 @@ public class DataEntrada {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into entrada(precio, fecha, HoraInicio, IDSala, nroUsuario) values(?,?,?,?,?", PreparedStatement.RETURN_GENERATED_KEYS );
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("insert into entrada(precio, fecha, HoraInicio, IDSala, nroUsuario) values(?,?,?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS );
 			stmt.setInt(1, ent.getPrecio());
 			stmt.setDate(2, Date.valueOf(ent.getFuncion().getFechaFuncion()));
 			stmt.setTime(3, Time.valueOf(ent.getFuncion().getHoraInicio()));

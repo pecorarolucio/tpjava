@@ -49,7 +49,7 @@ DROP TABLE IF EXISTS `entrada`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entrada` (
-  `codentrada` int unsigned NOT NULL,
+  `codentrada` int unsigned NOT NULL AUTO_INCREMENT,
   `precio` int unsigned NOT NULL,
   `fecha` date NOT NULL,
   `HoraInicio` time NOT NULL,
@@ -60,7 +60,7 @@ CREATE TABLE `entrada` (
   KEY `fk_entrada_usuario_idx` (`nroUsuario`),
   CONSTRAINT `Ent_Func` FOREIGN KEY (`fecha`, `HoraInicio`, `IDSala`) REFERENCES `funcion` (`fecha`, `HoraInicio`, `IDSala`),
   CONSTRAINT `fk_entrada_usuario` FOREIGN KEY (`nroUsuario`) REFERENCES `usuario` (`nrousuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,6 +69,7 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
+INSERT INTO `entrada` VALUES (1,2500,'2024-12-27','09:00:00',1,1);
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,6 +158,7 @@ CREATE TABLE `reseña` (
 
 LOCK TABLES `reseña` WRITE;
 /*!40000 ALTER TABLE `reseña` DISABLE KEYS */;
+INSERT INTO `reseña` VALUES (1,'Es una buena pelicula','2024-12-25',1,5);
 /*!40000 ALTER TABLE `reseña` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -222,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-05 12:02:44
+-- Dump completed on 2023-12-05 17:11:50

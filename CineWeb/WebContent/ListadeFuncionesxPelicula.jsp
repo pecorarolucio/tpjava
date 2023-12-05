@@ -12,6 +12,31 @@
 <title>Insert title here</title>
 </head>
 <body>
+	<%String estado =(String) request.getAttribute("resultado");
+		if (estado != null){%>
+			<%if(estado == "exito"){ %>
+			<div class="container mt-4">
+				<!-- Aquí se muestra la notificación -->
+    			<div class="alert alert-success alert-dismissible fade show" role="alert">
+    			EXITOS EXITOS EXITOS.
+     			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      			<span aria-hidden="true">&times;</span>
+      			</button>
+    			</div>
+ 			 </div>
+			<%}else{ %>
+			<div class="container mt-4">
+				<!-- Aquí se muestra la notificación -->
+    			<div class="alert alert-success alert-dismissible fade show" role="alert">
+    			FALLOS FALLOS FALLOS.
+     			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      			<span aria-hidden="true">&times;</span>
+      			</button>
+    			</div>
+ 			 </div>
+			<%} %>
+		<%} %>
+
 
 	<%if(funciones == null) {%>
 	<p>No hay funciones disponible en este momento</p>

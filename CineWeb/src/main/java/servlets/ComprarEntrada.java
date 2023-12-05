@@ -52,6 +52,7 @@ public class ComprarEntrada extends HttpServlet {
 			f.setHoraInicio(horaInicio);
 			f.setSala(s);
 			f = fl.getOne(f);
+			String resultado = "exito";
 			if (!fl.isFull(f)) {
 				EntradaABMC el = new EntradaABMC();
 				Entrada e = new Entrada();
@@ -59,11 +60,16 @@ public class ComprarEntrada extends HttpServlet {
 				e.setPersona(per);
 				el.add(e);
 				//AGREGAR QUE REDIRIJA A UNA PAGINA DE EXITO
+				request.setAttribute("EstadoCompra", resultado);
+				request.getRequestDispatcher("EXITO.jsp").forward(request, response);
 			} else {
+				resultado = "fallido";
 				//AGREGAR QUE REDIRIJA A UNA PAGINA DE ERROR DE SALA LLENA
+				request.setAttribute("EstadoCompra", resultado);
+				request.getRequestDispatcher("SALALLENA.jsp").forward(request, response);
 			}
 		} else {
-			response.sendRedirect(request.getContextPath() + "login.html");
+			response.sendRedirect(request.getContextPath() + "/login.html");
 		}
 	}
 

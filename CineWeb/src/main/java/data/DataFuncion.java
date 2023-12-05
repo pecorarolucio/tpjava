@@ -104,7 +104,7 @@ public class DataFuncion {
 	  PreparedStatement stmt=null;
 	  ResultSet rs = null;
 	  try {
-		  stmt=DbConnector.getInstancia().getConn().prepareStatement("select * from funcion where fecha = ? and HoraInicio = ? and IDSala = ?");
+		  stmt=DbConnector.getInstancia().getConn().prepareStatement("select * from funcion inner join sala s on s.idsala = funcion.IDSala where fecha = ? and HoraInicio = ? and funcion.IDSala = ?");
 		  stmt.setDate(1, Date.valueOf(f.getFechaFuncion()));
 		  stmt.setTime(2, Time.valueOf(f.getHoraInicio()));
 		  stmt.setInt(3, f.getSala().getIdSala());
@@ -114,7 +114,8 @@ public class DataFuncion {
 			  fun.setHoraInicio(rs.getTime("HoraInicio").toLocalTime());
 			  fun.setHoraFin(rs.getTime("HoraFin").toLocalTime());
 			  Sala s = new Sala();
-			  s.setIdSala(rs.getInt("IDSala"));
+			  s.setIdSala(rs.getInt("s.idsala"));
+			  s.setCapacidadMaxima(rs.getInt("s.capacidadmax"));
 			  fun.setSala(s);
 			  Pelicula p = new Pelicula();
 			  p.setIdPelicula(rs.getInt("IDPelicula"));

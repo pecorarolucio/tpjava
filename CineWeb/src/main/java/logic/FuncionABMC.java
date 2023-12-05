@@ -13,6 +13,7 @@ public class FuncionABMC {
 	
 	public FuncionABMC() {
 		df = new DataFuncion();
+		el = new EntradaABMC();
 	}
 
 	public void addFuncion(Funcion f) {
@@ -32,7 +33,9 @@ public class FuncionABMC {
 	}
 	
 	public boolean isFull(Funcion f) {
+		System.out.print(f.getSala().getCapacidadMaxima());
 		return el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima();
+		
 	}
 	
 }
