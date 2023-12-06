@@ -23,7 +23,7 @@
       <div class="card-body">
         <h5 class="card-title"><%= Cat.getNombreCategoria() %></h5>
         <%
-        String url = "BuscaPelixCat?nombreVariable=" + Cat.getIdCategoria();
+        String url = "BuscaPelixCat?idcategoria=" + Cat.getIdCategoria();
    		 %>
         <a href="<%=url%>" class="btn btn-primary">Elegir</a>
       </div>

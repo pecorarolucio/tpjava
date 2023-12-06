@@ -1,6 +1,6 @@
 COSAS PENDIENTES
 
-- Cartelera (Peliculas que no tengan funciones futuras)
+- ~~Cartelera (Peliculas que no tengan funciones futuras)~~
 - ~~Entrada (Todo)~~
 - ~~Compra de entrada~~ (Solo falta redirijir en caso de exito o fallo si la sala esta llena)
 - OPCIONAL PARA AD: MOSTRAR IMAGEN

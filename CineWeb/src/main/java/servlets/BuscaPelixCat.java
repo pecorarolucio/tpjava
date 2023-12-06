@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import logic.PeliculaABMC;
 import logic.CategoriaABMC;
+import logic.FuncionABMC;
 import entities.Categoria;
 import entities.Pelicula;
 
@@ -36,11 +37,19 @@ public class BuscaPelixCat extends HttpServlet {
 		// TODO Auto-generated method stub
 		PeliculaABMC PelABMC = new PeliculaABMC();
 		CategoriaABMC CatABMC = new CategoriaABMC();
+		FuncionABMC funABMC = new FuncionABMC();
 		Categoria cat = new Categoria();
-		int valorVariable = Integer.parseInt(request.getParameter("nombreVariable"));
-		System.out.println("Datos recibidos: " + valorVariable);
-		cat.setIdCategoria(valorVariable);
+		int idcategoria = Integer.parseInt(request.getParameter("idcategoria"));
+		System.out.println("Datos recibidos: " + idcategoria);
+		cat.setIdCategoria(idcategoria);
 		LinkedList<Pelicula> listaPelisxCategoria =PelABMC.getPeliculasxCategoria(CatABMC.searchCategoria(cat));
+		//REMUEVO LAS PELICULAS QUE NO TENGAN FUNCIONES FUTURAS, NO SE SI SERIA MEJOR QUE EN EL JSP SE VERIFIQUE SI TIENE FUNCIONES Y SINO QUE NO LO MUESTRE
+		for (Pelicula p:listaPelisxCategoria) {
+			if(funABMC.getFunciones(p).size() == 0) {
+				listaPelisxCategoria.remove(p);
+			}
+			
+		};
 		request.setAttribute("peliculas", listaPelisxCategoria);
 		request.getRequestDispatcher("PelisxCat.jsp").forward(request, response);
 	}
