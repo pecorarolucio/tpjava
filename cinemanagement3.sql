@@ -60,7 +60,7 @@ CREATE TABLE `entrada` (
   KEY `fk_entrada_usuario_idx` (`nroUsuario`),
   CONSTRAINT `Ent_Func` FOREIGN KEY (`fecha`, `HoraInicio`, `IDSala`) REFERENCES `funcion` (`fecha`, `HoraInicio`, `IDSala`),
   CONSTRAINT `fk_entrada_usuario` FOREIGN KEY (`nroUsuario`) REFERENCES `usuario` (`nrousuario`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -69,7 +69,7 @@ CREATE TABLE `entrada` (
 
 LOCK TABLES `entrada` WRITE;
 /*!40000 ALTER TABLE `entrada` DISABLE KEYS */;
-INSERT INTO `entrada` VALUES (1,2500,'2024-12-27','09:00:00',1,1);
+INSERT INTO `entrada` VALUES (1,2500,'2024-12-27','09:00:00',1,1),(2,2500,'2024-12-27','09:00:00',1,1);
 /*!40000 ALTER TABLE `entrada` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -118,7 +118,7 @@ CREATE TABLE `pelicula` (
   PRIMARY KEY (`idpelicula`),
   KEY `idcategoria_idx` (`idcategoria`),
   CONSTRAINT `idcategoria` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`idcategoria`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -127,7 +127,7 @@ CREATE TABLE `pelicula` (
 
 LOCK TABLES `pelicula` WRITE;
 /*!40000 ALTER TABLE `pelicula` DISABLE KEYS */;
-INSERT INTO `pelicula` VALUES (1,1,'La noche de ciencia ficcion'),(2,2,'Pura Comedia'),(3,3,'Accion Turbo'),(4,4,'Ace Ventura'),(5,5,'Animation Toon'),(6,6,'La noche de terror 1');
+INSERT INTO `pelicula` VALUES (1,1,'La noche de ciencia ficcion'),(2,2,'Pura Comedia'),(3,3,'Accion Turbo'),(4,4,'Ace Ventura'),(5,5,'Animation Toon'),(6,6,'La noche de terror 1'),(7,1,'CIENCIA CIENCIA FICTION');
 /*!40000 ALTER TABLE `pelicula` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,7 +139,7 @@ DROP TABLE IF EXISTS `reseña`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `reseña` (
-  `codigo` int unsigned NOT NULL,
+  `codigo` int unsigned NOT NULL AUTO_INCREMENT,
   `descripcion` text NOT NULL,
   `fecha` date NOT NULL,
   `IDPelicula` int unsigned NOT NULL,
@@ -149,7 +149,7 @@ CREATE TABLE `reseña` (
   KEY `nrousuario_idx` (`nrousuario`),
   CONSTRAINT `ID_Pelicula` FOREIGN KEY (`IDPelicula`) REFERENCES `pelicula` (`idpelicula`),
   CONSTRAINT `nrousuario` FOREIGN KEY (`nrousuario`) REFERENCES `usuario` (`nrousuario`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -158,7 +158,7 @@ CREATE TABLE `reseña` (
 
 LOCK TABLES `reseña` WRITE;
 /*!40000 ALTER TABLE `reseña` DISABLE KEYS */;
-INSERT INTO `reseña` VALUES (1,'Es una buena pelicula','2024-12-25',1,5);
+INSERT INTO `reseña` VALUES (1,'Es una buena pelicula','2024-12-25',1,5),(2,'No lo disfrute','2024-12-24',1,1),(3,'hola','2023-12-06',1,1);
 /*!40000 ALTER TABLE `reseña` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -224,4 +224,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-05 17:11:50
+-- Dump completed on 2023-12-06 17:19:43

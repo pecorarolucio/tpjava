@@ -60,7 +60,7 @@ public class PublicarReseña extends HttpServlet {
 				response.sendError(404, "Pelicula no encontrada");
 			}
 		} else {
-			response.sendRedirect(request.getContextPath()+"login.html");
+			response.sendRedirect(request.getContextPath()+"/login.html");
 		}
 		
 	}
