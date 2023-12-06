@@ -75,7 +75,7 @@ public class DataReseña {
 		LinkedList<Reseña> reseñas = new LinkedList<>();
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("Select r.codigo, r.descripcion, r.fecha, r.IDPelicula, pel.nombre from reseña r"
-					+ "inner join pelicula pel on r.IDPelicula = pel.idpelicula where nrousuario = ?");
+					+ " inner join pelicula pel on r.IDPelicula = pel.idpelicula where nrousuario = ?");
 			stmt.setInt(1, p.getId());
 			rs = stmt.executeQuery();
 			if(rs!=null) {

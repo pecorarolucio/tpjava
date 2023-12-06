@@ -31,6 +31,11 @@ public class ListaFunciones extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
+		Persona p = (Persona) request.getSession().getAttribute("usuario");
+		if(p == null) {
+			request.getRequestDispatcher("Index.jsp").forward(request, response);
+		}
+		else {
 		DataFuncion dtFunc = new DataFuncion();
 		Pelicula pel = new Pelicula();
 		int idPelicula = Integer.parseInt(request.getParameter("IdPelicula"));
@@ -38,8 +43,7 @@ public class ListaFunciones extends HttpServlet {
 		LinkedList<Funcion> listafunciones = dtFunc.getFunciones(pel);
 		request.setAttribute("funciones", listafunciones);
 		request.getRequestDispatcher("ListadeFuncionesxPelicula.jsp").forward(request, response);
-		
-		
+		}
 	}
 
 	/**
