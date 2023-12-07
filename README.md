@@ -1,5 +1,5 @@
 COSAS PENDIENTES
-
+- Arreglar el sigIn (no registra a un nuevo cliente)
 - ~~Cartelera (Peliculas que no tengan funciones futuras)~~
 - ~~Entrada (Todo)~~
 - ~~Compra de entrada~~ (Solo falta redirijir en caso de exito o fallo si la sala esta llena)
