@@ -17,7 +17,7 @@
   <!-- Login -->
   <div class="row justify-content-center align-items-center m-0 vh-100">
     <div class="col-10 col-sm-6 col-md-7 col-lg-6 col-xl-4 formulario text-center formulario p-5  ">
-      <form method="post" action="Verificador">
+      <form method="post" action="SignIn">
         <div class="mb-3 form-group">
         <label for="" class= "form-label">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required><br>
