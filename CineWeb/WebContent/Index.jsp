@@ -35,14 +35,14 @@ if (p != null && "Admin".equals(p.getTipo())) {
         <ul class="navbar-nav">
           <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
           <%if (mostrarReporteResenas){%>
-          <li class="nav-item"><a href="#Reportreseña" class="nav-link">Reporte de reseñas</a></li>
+          <li class="nav-item"><a href="#ReportreseÃ±a" class="nav-link">Reporte de reseÃ±as</a></li>
           <% };%>
           <li class="nav-item"><a href="BuscaCategorias" class="nav-link">Cartelera </a></li>
-          <li class="nav-item"><a href="#Cancelar tickets" class="nav-link">Arrepentirse</a></li>
+          <li class="nav-item"><a href="CancelarTickets.jsp" class="nav-link">Arrepentirse</a></li>
           <% if(p == null){ %>
           <li class="nav-item"><a href="login.html" class="nav-link">Iniciar sesion</a></li>
           <%}else { %>
-          <li class="nav-item"><a href="MisReseñas" class="nav-link">Mis reseñas</a></li>
+          <li class="nav-item"><a href="MisReseÃ±as" class="nav-link">Mis reseÃ±as</a></li>
           <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesion</a></li>
           <%} %>
         </ul>

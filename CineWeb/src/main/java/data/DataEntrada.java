@@ -53,13 +53,13 @@ public class DataEntrada {
 	public LinkedList<Entrada> findFromUser(int nroUsuario) {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
-		LinkedList<Entrada> entradas = new LinkedList<>();
+		//LinkedList<Entrada> entradas = new LinkedList<>();
+		LinkedList<Entrada> entradas = new LinkedList<Entrada>();
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("Select codentrada, IDSala, fecha, HoraInicio, precio"
-					+ "from entrada where nroUsuario = ?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("select * from entrada where nrousuario = ?");
+			stmt.setInt(1, nroUsuario);
 			rs = stmt.executeQuery();
-			if (rs!=null) {
-				while (rs.next()) {
+			if (rs!=null && rs.next()) {
 					Persona p = new Persona();
 					p.setId(nroUsuario);
 					Sala s = new Sala();
@@ -74,7 +74,6 @@ public class DataEntrada {
 					f.setSala(s);
 					ent.setFuncion(f);
 					entradas.add(ent);
-				}
 			}
 		} catch(SQLException e) {
 			e.printStackTrace();

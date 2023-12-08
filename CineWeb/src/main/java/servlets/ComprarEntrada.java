@@ -37,10 +37,8 @@ public class ComprarEntrada extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		HttpSession session = request.getSession();
-		Persona per = (Persona)  session.getAttribute("usuario");
-		if (per!=null) {
+		Persona p = (Persona)request.getSession().getAttribute("usuario");	
+		if (p!=null) {
 			LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
 			LocalTime horaInicio = LocalTime.parse(request.getParameter("hora"));
 			int idSala = Integer.parseInt(request.getParameter("idSala"));
@@ -57,11 +55,12 @@ public class ComprarEntrada extends HttpServlet {
 				EntradaABMC el = new EntradaABMC();
 				Entrada e = new Entrada();
 				e.setFuncion(f);
-				e.setPersona(per);
+				e.setPersona(p);
 				el.add(e);
 				//AGREGAR QUE REDIRIJA A UNA PAGINA DE EXITO
-				request.setAttribute("EstadoCompra", resultado);
-				request.getRequestDispatcher("EXITO.jsp").forward(request, response);
+				//request.setAttribute("EstadoCompra", resultado);
+				//request.getRequestDispatcher("EXITO.jsp").forward(request, response);
+				response.sendRedirect("Index.jsp");
 			} else {
 				resultado = "fallido";
 				//AGREGAR QUE REDIRIJA A UNA PAGINA DE ERROR DE SALA LLENA
@@ -71,14 +70,14 @@ public class ComprarEntrada extends HttpServlet {
 		} else {
 			response.sendRedirect(request.getContextPath() + "/login.html");
 		}
+		// TODO Auto-generated method stub
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		doGet(request, response);
+		
 	}
 
 }
