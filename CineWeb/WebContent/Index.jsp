@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ page import="entities.Persona"%>
 
 <%
@@ -37,7 +37,7 @@ if (p != null && "Admin".equals(p.getTipo())) {
           <% if (p != null && "Admin".equals(p.getTipo())){%>
           <li class="nav-item"><a href="#Reportreseña" class="nav-link">Reporte de reseñas</a></li>
           <li class="nav-item"><a href="#SalaCRUD" class="nav-link">Salas</a></li>
-          <li class="nav-item"><a href="#PeliculaCRUD" class="nav-link">Peliculas</a></li>
+          <li class="nav-item"><a href="MenuPelicula" class="nav-link">Peliculas</a></li>
           <li class="nav-item"><a href="#FuncionCRUD" class="nav-link">Funciones</a></li>
           <%} else if (p!= null){%>
           <li class="nav-item"><a href="CancelarTickets.jsp" class="nav-link">Arrepentirse</a></li>

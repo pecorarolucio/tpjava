@@ -29,6 +29,7 @@
 	if ( !peliculas.isEmpty() && peliculas.size() > 0) {
 	for (Pelicula pel : peliculas) {%>
 		<h1><%= pel.getNombrePelicula() %></h1>
+		<p><%= pel.getPortada() %></p>
 		<a href="DetallePelicula?id=<%=pel.getIdPelicula() %>">Ver funciones</a>
 	<% }}
 	else { %>

@@ -20,7 +20,8 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	%>
 	<h1>Detalles pelicula</h1>
 	<p>Titulo: <%= pel.getNombrePelicula() %></p>
-	<p>Categoria: <%=pel.getCategoria().getNombreCategoria() %></p> <%--pel.getCategoria().getNombreCategoria() --%>
+	<p>Categoria: <%=pel.getCategoria().getNombreCategoria() %></p>
+	<p><%=pel.getPortada() %></p> <%--pel.getCategoria().getNombreCategoria() --%>
 	
 	<h2>Reseñas:</h2>
 	<% if (reseñas.isEmpty()){ %>
@@ -35,7 +36,7 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 		<%if(p!= null && p.getTipo().equals("Admin")){ %>
 			<form method="post" action="BorrarReseña">
 			<input type="hidden" name="idReseña" value="<%=reseña.getCodigo()%>" >
-			<input type="submit" value="Borrar Reseña">
+			<button type="submit"  value="Borrar Reseña">Borrar</button>
 			</form>
 			<% }%>
 	</li>
