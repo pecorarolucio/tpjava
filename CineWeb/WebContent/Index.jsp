@@ -1,15 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+    pageEncoding="UTF-8"%>
 <%@ page import="entities.Persona"%>
 
 <%
 HttpSession se = request.getSession();
 Persona p = (Persona) se.getAttribute("usuario");
-boolean mostrarReporteResenas = false;
-
-if (p != null && "Admin".equals(p.getTipo())) {
-    mostrarReporteResenas = true;
-}
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +31,8 @@ if (p != null && "Admin".equals(p.getTipo())) {
           <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
           <% if (p != null && "Admin".equals(p.getTipo())){%>
           <li class="nav-item"><a href="#Reportreseña" class="nav-link">Reporte de reseñas</a></li>
-          <li class="nav-item"><a href="#SalaCRUD" class="nav-link">Salas</a></li>
+          <li class="nav-item"><a href="MenuSala" class="nav-link">Salas</a></li>
+         
           <li class="nav-item"><a href="#PeliculaCRUD" class="nav-link">Peliculas</a></li>
           <li class="nav-item"><a href="#FuncionCRUD" class="nav-link">Funciones</a></li>
           <%} else if (p!= null){%>
