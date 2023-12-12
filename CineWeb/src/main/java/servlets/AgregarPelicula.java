@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Categoria;
 import entities.Pelicula;
+import logic.CategoriaABMC;
 import logic.PeliculaABMC;
 
 /**
- * Servlet implementation class BorrarPelicula
+ * Servlet implementation class AgregarPelicula
  */
-@WebServlet("/Admin/Peliculas/BorrarPelicula")
-public class BorrarPelicula extends HttpServlet {
+@WebServlet({ "/Admin/Peliculas/AgregarPelicula" })
+public class AgregarPelicula extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public BorrarPelicula() {
+    public AgregarPelicula() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +34,16 @@ public class BorrarPelicula extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Pelicula p = new Pelicula();
-		p.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
+		Categoria c = new Categoria();
+		CategoriaABMC cl = new CategoriaABMC();
 		PeliculaABMC pl = new PeliculaABMC();
-		pl.deletePelicula(p);
-		LinkedList<Pelicula> pelis = pl.getAll();
-		request.setAttribute("peliculas", pelis);
+		p.setNombrePelicula(request.getParameter("nombre"));
+		c = cl.getOne(Integer.parseInt(request.getParameter("idCategoria")));
+		p.setCategoria(c);
+		p.setPortada(request.getParameter("portada"));
+		pl.addPelicula(p);
+		LinkedList<Pelicula> peliculas = pl.getAll();
+		request.setAttribute("peliculas", peliculas);
 		request.getRequestDispatcher("MenuPeliculas.jsp").forward(request, response);
 	}
 

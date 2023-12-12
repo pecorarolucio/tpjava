@@ -32,7 +32,7 @@
 			<hr>
 			<div class="container text-left">
 
-				<a href="<%=request.getContextPath()%>/AgregarPelicula" class="btn btn-success">Agregar Pelicula</a>
+				<a href="GetCategorias" class="btn btn-success">Agregar Pelicula</a>
 			</div>
 			<br>
 			<table class="table table-bordered">
@@ -53,8 +53,14 @@
             		<td><%=p.getCategoria().getNombreCategoria() %></td>
             		<td><%=p.getPortada()%></td>          	
             		<td>
-            			<a href="<%=request.getContextPath()%>/EditarPelicula" class="btn btn-dark">Editar</a>
-            			<a href="<%=request.getContextPath()%>/BorrarPelicula" class="btn btn-danger">Borrar</a>
+            			<form action="EditarPelicula" method="get" >
+	            			<input type="hidden" name="idPelicula" value="<%= p.getIdPelicula() %>" >
+	            			<button type="submit" class="btn btn-dark">Editar</button>
+	            		</form>
+	            		<form action="BorrarPelicula" method="post">
+	            		<input type="hidden" name="idPelicula" value="<%=p.getIdPelicula() %>">
+            			<button type="submit" class="btn btn-danger">Borrar</button>
+            			</form>
             		</td>	
 					</tr>
 						<%} %>

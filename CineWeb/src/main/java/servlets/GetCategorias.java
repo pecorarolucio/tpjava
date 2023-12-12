@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import entities.Pelicula;
-import logic.PeliculaABMC;
+import entities.Categoria;
+import logic.CategoriaABMC;
 
 /**
- * Servlet implementation class MenuPelicula
+ * Servlet implementation class GetCategorias
  */
-@WebServlet({ "/Admin/Peliculas/MenuPelicula" })
-public class MenuPelicula extends HttpServlet {
+@WebServlet("/Admin/Peliculas/GetCategorias")
+public class GetCategorias extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuPelicula() {
+    public GetCategorias() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,12 +31,11 @@ public class MenuPelicula extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		LinkedList<Pelicula> peliculas = new LinkedList<>();
-		PeliculaABMC pl = new PeliculaABMC();
-		peliculas = pl.getAll();
-		System.out.println(peliculas);
-		request.setAttribute("peliculas", peliculas);
-		request.getRequestDispatcher("/Admin/Peliculas/MenuPeliculas.jsp").forward(request, response);
+		LinkedList<Categoria> categorias = new LinkedList<>();
+		CategoriaABMC cl = new CategoriaABMC();
+		categorias = cl.getAll();
+		request.setAttribute("categorias", categorias);
+		request.getRequestDispatcher("agregarPelicula.jsp").forward(request, response);
 	}
 
 }

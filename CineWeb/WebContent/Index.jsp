@@ -32,7 +32,7 @@ Persona p = (Persona) se.getAttribute("usuario");
           <% if (p != null && "Admin".equals(p.getTipo())){%>
           <li class="nav-item"><a href="#Reportreseña" class="nav-link">Reporte de reseñas</a></li>
           <li class="nav-item"><a href="MenuSala" class="nav-link">Salas</a></li>
-         
+          <li class="nav-item"><a href="Admin/menuAdmin.jsp" class="nav-link">Admin</a></li>
           <li class="nav-item"><a href="MenuPelicula" class="nav-link">Peliculas</a></li>
           <li class="nav-item"><a href="#FuncionCRUD" class="nav-link">Funciones</a></li>
           <%} else if (p!= null){%>

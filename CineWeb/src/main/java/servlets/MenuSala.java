@@ -17,7 +17,7 @@ import logic.SalaABMC;
 /**
  * Servlet implementation class Sala
  */
-@WebServlet({ "/MenuSala", "/menuSala", "/menusala", "/Menusala" })
+@WebServlet("/Admin/Salas/MenuSala")
 public class MenuSala extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -33,13 +33,11 @@ public class MenuSala extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String opc = null;
-		opc = request.getParameter("option");
+		String opc = request.getParameter("option");
 		SalaABMC miSala = new SalaABMC();
-		Sala s = new Sala();
 		LinkedList<Sala> salas =miSala.getAll();
 		request.setAttribute("salas", salas);
-		request.getRequestDispatcher("MenuSalas.jsp").forward(request, response);
+		request.getRequestDispatcher("/Admin/Salas/MenuSalas.jsp").forward(request, response);
 		
 		
 		/*switch (opc) {
