@@ -4,13 +4,15 @@ public class Pelicula {
 	private int idPelicula;
 	private String nombrePelicula;
 	private Categoria categoria;
+	private String portada;
 	
 
 	
-	public Pelicula(int idPelicula, String nombrePelicula, Categoria categoria) {
+	public Pelicula(int idPelicula, String nombrePelicula, Categoria categoria, String portada) {
 		this.idPelicula = idPelicula;
 		this.nombrePelicula = nombrePelicula;
 		this.categoria = categoria;
+		this.portada = portada;
 	}
 	
 	public Pelicula() {
@@ -42,8 +44,11 @@ public class Pelicula {
 		this.nombrePelicula = nombrePelicula;
 	}
 	
+	public String getPortada() {
+		return this.portada;
+	}
 	
-	
-	
-	
+	public void setPortada(String portada) {
+		this.portada=portada;
+	}
 }

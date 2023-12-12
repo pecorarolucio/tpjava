@@ -34,6 +34,7 @@ public class DataPelicula {
 	                pel.setNombrePelicula(rs.getString("nombre"));
 	                c = cl.getOne(rs.getInt("idcategoria"));
 	                pel.setCategoria(c);
+	                pel.setPortada(rs.getString("portada"));
 	            }
 			
 		} catch(SQLException e) {
@@ -62,6 +63,7 @@ public class DataPelicula {
 					Pelicula p= new Pelicula();
 					p.setIdPelicula(rs.getInt("idPelicula"));
 					p.setNombrePelicula(rs.getString("nombre"));
+					p.setPortada(rs.getString("portada"));
 					peliculas.add(p);
 				}
 			}
@@ -87,7 +89,7 @@ public class DataPelicula {
 		Pelicula p = null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement(
-				   "select p.idpelicula, p.nombre "
+				   "select p.idpelicula, p.nombre, p.portada "
 				 + "from pelicula p "
 				 + "inner join categoria c "
 				 + "on c.idcategoria = p.idCategoria "
@@ -99,7 +101,7 @@ public class DataPelicula {
 			
 			if(rs!=null) {
 				while(rs.next()) {
-					p = new Pelicula(rs.getInt("idpelicula"),rs.getString("nombre"),c);
+					p = new Pelicula(rs.getInt("p.idpelicula"),rs.getString("p.nombre"), c, rs.getString("p.portada"));
 					peliculas.add(p);
 				}
 			}
@@ -123,9 +125,10 @@ public class DataPelicula {
 		ResultSet keyResultSet=null;
 		try {
 			stmt=DbConnector.getInstancia().getConn().
-					prepareStatement("insert into pelicula(idCategoria,nombre) values(?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
+					prepareStatement("insert into pelicula(idCategoria,nombre, portada) values(?,?,?)",PreparedStatement.RETURN_GENERATED_KEYS);
 			stmt.setInt(1, p.getCategoria().getIdCategoria());
 			stmt.setString(2, p.getNombrePelicula());
+			stmt.setString(3, p.getPortada());
 			stmt.executeUpdate();
 		
 			keyResultSet=stmt.getGeneratedKeys();
@@ -148,10 +151,11 @@ public class DataPelicula {
 	public void update(Pelicula p) {
 		PreparedStatement stmt=null;
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("update pelicula set idcategoria=?, nombre=? where idpelicula=?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("update pelicula set idcategoria=?, nombre=?, portada=? where idpelicula=?");
 			stmt.setInt(1, p.getCategoria().getIdCategoria());
 			stmt.setString(2, p.getNombrePelicula());
-			stmt.setInt(3, p.getIdPelicula());
+			stmt.setString(3, p.getPortada());
+			stmt.setInt(4, p.getIdPelicula());
 			stmt.executeUpdate();
 			
 		}  catch (SQLException e) {

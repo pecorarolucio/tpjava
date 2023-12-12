@@ -9,5 +9,5 @@ COSAS PENDIENTES
 - Para discutir: compras de multiples entradas
 - Hacer una lista compleja mas (para AD)
 - ~~Boton de "mis reseñas" para que un usuario pueda ver todas las reseñas que hizo, con la opcion de borrarlas~~
-- Front para agregar funciones y peliculas si el usuario es admin
+- Front para agregar funciones y peliculas si el usuario es admin (Borrado y editado de peliculas done)
 - Estilos basicos para las paginas

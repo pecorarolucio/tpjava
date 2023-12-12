@@ -1,29 +1,29 @@
 <%@page import="java.util.LinkedList"%>
-<%@page import="entities.Reseña"%>
+<%@page import="entities.ReseÃ±a"%>
 <%@page import="entities.Pelicula" %>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="ISO-8859-1">
-<title>Mis Reseñas</title>
+<meta charset="UTF-8">
+<title>Mis ReseÃ±as</title>
 </head>
 <body>
-	<% LinkedList<Reseña> reseñas = (LinkedList<Reseña>) request.getAttribute("reseñas"); %>
-	<h1>Mis reseñas</h1>
-	<%if (reseñas.isEmpty()){ %>
-	<p><strong>No has realizado ninguna reseña</strong></p>
+	<% LinkedList<ReseÃ±a> reseÃ±as = (LinkedList<ReseÃ±a>) request.getAttribute("reseÃ±as"); %>
+	<h1>Mis reseÃ±as</h1>
+	<%if (reseÃ±as.isEmpty()){ %>
+	<p><strong>No has realizado ninguna reseÃ±a</strong></p>
 	<% } else { %>
 		<ul>
-		<%for (Reseña reseña: reseñas){ %>
+		<%for (ReseÃ±a reseÃ±a: reseÃ±as){ %>
 	
-		<li><p><%= reseña.getPelicula().getNombrePelicula() %></p>
-			<p><%= reseña.getFecha() %></p>
-			<p><%= reseña.getDescripcion() %></p>
-			<form method="post" action="BorrarReseña">
-			<input type="hidden" name="idReseña" value="<%reseña.getCodigo(); %>" >
-			<input type="submit" value="Borrar Reseña">
+		<li><p><%= reseÃ±a.getPelicula().getNombrePelicula() %></p>
+			<p><%= reseÃ±a.getFecha() %></p>
+			<p><%= reseÃ±a.getDescripcion() %></p>
+			<form method="post" action="BorrarReseÃ±a">
+			<input type="hidden" name="idReseÃ±a" value="<%=reseÃ±a.getCodigo()%>" >
+			<input type="submit" value="Borrar ReseÃ±a">
 			</form>
 		</li>
 		<% } 
