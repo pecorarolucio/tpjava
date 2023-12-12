@@ -33,32 +33,28 @@ public class MenuSala extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String opc = null;
+		opc = request.getParameter("option");
 		SalaABMC miSala = new SalaABMC();
-		
+		Sala s = new Sala();
 		LinkedList<Sala> salas =miSala.getAll();
 		request.setAttribute("salas", salas);
 		request.getRequestDispatcher("MenuSalas.jsp").forward(request, response);
-		/*
-		switch (accion) {
-			case "listar":
-				salas = miSala.getAll();
-				request.setAttribute("Salas", salas);
-				request.getRequestDispatcher("MenuSalas.jsp").forward(request, response);
-				break;
-			
+		
+		
+		/*switch (opc) {
 			case "add": 
-				/* capacidad = Integer.parseInt(request.getParameter("capacidad"));
+				int capacidad = Integer.parseInt(request.getParameter("capacidad"));
 				s.setCapacidadMaxima(capacidad);
 				miSala.addSala(s);
 				request.setAttribute("sala", s);
 				request.getRequestDispatcher("agregarSala.jsp").forward(request, response);
+			break;
 			default:
 				throw new AssertionError();
-				*/
-		
-		}
+		}*/
 
-	
+	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
