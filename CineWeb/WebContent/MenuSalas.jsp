@@ -11,7 +11,7 @@
 <body>
 <%
 	LinkedList<Sala> salas = (LinkedList<Sala>) request.getAttribute("salas");
-	
+	if (!salas.isEmpty() && salas.size()>0) {
 	%>
 <h1>Salas</h1>
 	<table border="1">
@@ -39,7 +39,10 @@
             			</form>
             		</td>
             	</tr>
-            	<% } %>
+            	<% } } 
+				else { %>
+				<h1>No hay salas ahora mismo</h1>
+				<%} %> 
             </tbody>
 	</table>
 </body>

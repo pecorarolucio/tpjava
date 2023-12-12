@@ -34,7 +34,7 @@ public class MenuSala extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		SalaABMC miSala = new SalaABMC();
-		Sala s = new Sala();
+		
 		LinkedList<Sala> salas =miSala.getAll();
 		request.setAttribute("salas", salas);
 		request.getRequestDispatcher("MenuSalas.jsp").forward(request, response);
