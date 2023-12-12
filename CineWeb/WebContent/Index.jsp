@@ -33,6 +33,7 @@ if (p != null && "Admin".equals(p.getTipo())) {
       </button>
       <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
         <ul class="navbar-nav">
+          <li class="nav-item"><a href="MenuPelicula/Testing" class="nav-link">test</a></li> 
           <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
           <% if (p != null && "Admin".equals(p.getTipo())){%>
           <li class="nav-item"><a href="#Reportreseña" class="nav-link">Reporte de reseñas</a></li>

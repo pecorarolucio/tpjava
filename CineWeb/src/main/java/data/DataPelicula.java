@@ -57,13 +57,17 @@ public class DataPelicula {
 		LinkedList<Pelicula> peliculas = new LinkedList<>();
 		try {
 			stmt= DbConnector.getInstancia().getConn().createStatement();
-			rs= stmt.executeQuery("select idpelicula, nombre from pelicula");
+			rs= stmt.executeQuery("select p.idpelicula, p.idcategoria, p.nombre, p.portada, c.nombre from pelicula p inner join categoria c on p.idcategoria=c.idcategoria");
 			if(rs!=null) {
 				while(rs.next()) {
+					Categoria c = new Categoria();
 					Pelicula p= new Pelicula();
-					p.setIdPelicula(rs.getInt("idPelicula"));
-					p.setNombrePelicula(rs.getString("nombre"));
-					p.setPortada(rs.getString("portada"));
+					p.setIdPelicula(rs.getInt("p.idPelicula"));
+					p.setNombrePelicula(rs.getString("p.nombre"));
+					c.setIdCategoria(rs.getInt("p.idcategoria"));
+					c.setNombreCategoria((rs.getString("c.nombre")));
+					p.setCategoria(c);
+					p.setPortada(rs.getString("p.portada"));
 					peliculas.add(p);
 				}
 			}

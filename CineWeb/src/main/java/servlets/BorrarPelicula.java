@@ -33,6 +33,7 @@ public class BorrarPelicula extends HttpServlet {
 		p.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
 		PeliculaABMC pl = new PeliculaABMC();
 		pl.deletePelicula(p);
+		response.sendRedirect("MenuPelicula.jsp");
 	}
 
 }

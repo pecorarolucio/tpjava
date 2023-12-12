@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,7 +15,7 @@ import logic.PeliculaABMC;
 /**
  * Servlet implementation class EditarPelicula
  */
-@WebServlet({ "/EditarPelicula", "/editarPelicula", "/Editarpelicula" })
+@WebServlet("/MenuPelicula/EditarPelicula")
 public class EditarPelicula extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -49,7 +51,10 @@ public class EditarPelicula extends HttpServlet {
 		pel.setPortada(request.getParameter("portada"));
 		//TODO: PODER ACTUALIZAR LA CATEGORIA
 		pl.updatePelicula(pel);
-		response.sendRedirect("MenuPeliculas.jsp");
+		LinkedList<Pelicula> peliculas = new LinkedList<>();
+		peliculas = pl.getAll();
+		request.setAttribute("peliculas", peliculas);
+		request.getRequestDispatcher("../MenuPelicula.jsp").forward(request, response);
 	}
 
 }
