@@ -12,7 +12,7 @@ import logic.CategoriaABMC;
 
 public class DataPelicula {
 	
-	public Pelicula findOne(Pelicula p) {
+	public Pelicula findOne(Pelicula p) throws SQLException  {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		Pelicula pel = new Pelicula();
@@ -20,7 +20,7 @@ public class DataPelicula {
 		CategoriaABMC cl = new CategoriaABMC();
 		Integer id = p.getIdPelicula();
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula where idpelicula = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula p inner join categoria c where idpelicula = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			//if (rs !=null) {
@@ -31,27 +31,29 @@ public class DataPelicula {
 			//}
 			 if (rs.next()) { // Verifica si hay al menos una fila en el ResultSet
 	                pel.setIdPelicula(id);
-	                pel.setNombrePelicula(rs.getString("nombre"));
-	                c = cl.getOne(rs.getInt("idcategoria"));
+	                pel.setNombrePelicula(rs.getString("p.nombre"));
+	                pel.setPortada(rs.getString("p.portada"));
+	                c.setIdCategoria(rs.getInt("c.idcategoria"));
+	                c.setNombreCategoria(rs.getString("c.nombre"));
 	                pel.setCategoria(c);
-	                pel.setPortada(rs.getString("portada"));
+	                
 	            }
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
+			throw new SQLException("Hubo un error en la base de datos", e);
+		}  finally {
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return pel;
 	}
 	
-	public LinkedList<Pelicula>getAll(){
+	public LinkedList<Pelicula>getAll() throws SQLException{
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Pelicula> peliculas = new LinkedList<>();
@@ -71,8 +73,8 @@ public class DataPelicula {
 					peliculas.add(p);
 				}
 			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		} catch (SQLException e)  {
+			throw new SQLException("Hubo un error en la base de datos", e);
 			
 		} finally {
 			try {
@@ -80,13 +82,13 @@ public class DataPelicula {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return peliculas;
 		}
 	
-	public LinkedList<Pelicula> getPeliculasxCategoria(Categoria c){
+	public LinkedList<Pelicula> getPeliculasxCategoria(Categoria c) throws SQLException{
 		PreparedStatement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Pelicula> peliculas= new LinkedList<>();
@@ -110,7 +112,7 @@ public class DataPelicula {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 			
 		} finally {
 			try {
@@ -118,13 +120,13 @@ public class DataPelicula {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return peliculas;
 		}
 
-	public void add(Pelicula p) {
+	public void add(Pelicula p) throws SQLException{
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
@@ -140,19 +142,19 @@ public class DataPelicula {
                 p.setIdPelicula(keyResultSet.getInt(1));
             }  		
 		}  catch (SQLException e) {
-            e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw new SQLException("Hubo un error en la base de datos", e);
             }
 		}
     }
 
-	public void update(Pelicula p) {
+	public void update(Pelicula p) throws SQLException{
 		PreparedStatement stmt=null;
 		try {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("update pelicula set idcategoria=?, nombre=?, portada=? where idpelicula=?");
@@ -163,19 +165,19 @@ public class DataPelicula {
 			stmt.executeUpdate();
 			
 		}  catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		}finally {
 			try {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
 
 	
-	public void delete (Pelicula p) {
+	public void delete (Pelicula p) throws SQLException {
 		PreparedStatement stmt =null;
 		
 		try {
@@ -183,13 +185,13 @@ public class DataPelicula {
 			stmt.setInt(1, p.getIdPelicula());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}

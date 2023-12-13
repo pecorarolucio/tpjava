@@ -1,13 +1,18 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+import java.util.LinkedList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.Pelicula;
 import entities.Reseña;
+import logic.PeliculaABMC;
 import logic.ReseñaABMC;
 
 /**
@@ -31,8 +36,23 @@ public class BorrarReseña extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Reseña r = new Reseña();
 		ReseñaABMC rl = new ReseñaABMC();
+		PeliculaABMC pl = new PeliculaABMC();
 		r.setCodigo(Integer.parseInt(request.getParameter("idReseña")));
 		rl.deleteReseña(r);
+		Pelicula pel = new Pelicula();
+		pel.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
+		try {
+			pel=pl.getOne(pel);
+			System.out.println(pel);
+			LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
+			System.out.println(reseñas);
+			request.setAttribute("pelicula", pel);
+			request.setAttribute("reseñas", reseñas);
+			request.getRequestDispatcher("DetallePelicula.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
+		}
 	}
 
 }

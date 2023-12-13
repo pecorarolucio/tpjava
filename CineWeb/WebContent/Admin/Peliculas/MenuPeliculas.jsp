@@ -33,7 +33,9 @@
 			<div class="container text-left">
 
 				<a href="GetCategorias" class="btn btn-success">Agregar Pelicula</a>
-			</div>
+
+				<button class="btn btn-dark" onclick="volver()">Volver</button>
+				</div>
 			<br>
 			<table class="table table-bordered">
 				<thead>
@@ -70,3 +72,9 @@
 	</div>
 </body>
 </html>
+
+	<script>
+function volver() {
+    history.back();
+}
+</script>

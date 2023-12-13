@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -34,10 +35,15 @@ public class BorrarPelicula extends HttpServlet {
 		Pelicula p = new Pelicula();
 		p.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
 		PeliculaABMC pl = new PeliculaABMC();
-		pl.deletePelicula(p);
-		LinkedList<Pelicula> pelis = pl.getAll();
-		request.setAttribute("peliculas", pelis);
-		request.getRequestDispatcher("MenuPeliculas.jsp").forward(request, response);
+		try {
+			pl.deletePelicula(p);
+			LinkedList<Pelicula> pelis = pl.getAll();
+			request.setAttribute("peliculas", pelis);
+			request.getRequestDispatcher("MenuPeliculas.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("Error.jsp").forward(request, response);
+		}
 	}
 
 }

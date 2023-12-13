@@ -26,4 +26,12 @@
         <br>
         <input type="hidden" name="idPelicula" value="${editPel.idPelicula}">
         <input type="submit" value="Guardar Cambios">
+        <button type="button" onclick="volver()">Volver</button>
     </form>
+    
+	<script>
+function volver() {
+    history.back();
+}
+</script>
+    

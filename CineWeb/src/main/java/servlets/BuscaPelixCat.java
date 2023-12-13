@@ -2,6 +2,7 @@ package servlets;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -41,17 +42,22 @@ public class BuscaPelixCat extends HttpServlet {
 		Categoria cat = new Categoria();
 		int idcategoria = Integer.parseInt(request.getParameter("idcategoria"));
 		System.out.println("Datos recibidos: " + idcategoria);
-		cat.setIdCategoria(idcategoria);
-		LinkedList<Pelicula> listaPelisxCategoria =PelABMC.getPeliculasxCategoria(CatABMC.searchCategoria(cat));
-		//REMUEVO LAS PELICULAS QUE NO TENGAN FUNCIONES FUTURAS, NO SE SI SERIA MEJOR QUE EN EL JSP SE VERIFIQUE SI TIENE FUNCIONES Y SINO QUE NO LO MUESTRE
-		for (Pelicula p:listaPelisxCategoria) {
-			if(funABMC.getFunciones(p).size() == 0) {
-				listaPelisxCategoria.remove(p);
-			}
-			
-		};
-		request.setAttribute("peliculas", listaPelisxCategoria);
-		request.getRequestDispatcher("PelisxCat.jsp").forward(request, response);
+		try {
+			cat.setIdCategoria(idcategoria);
+			LinkedList<Pelicula> listaPelisxCategoria =PelABMC.getPeliculasxCategoria(CatABMC.searchCategoria(cat));
+			//REMUEVO LAS PELICULAS QUE NO TENGAN FUNCIONES FUTURAS, NO SE SI SERIA MEJOR QUE EN EL JSP SE VERIFIQUE SI TIENE FUNCIONES Y SINO QUE NO LO MUESTRE
+			for (Pelicula p:listaPelisxCategoria) {
+				if(funABMC.getFunciones(p).size() == 0) {
+					listaPelisxCategoria.remove(p);
+				}
+				
+			};
+			request.setAttribute("peliculas", listaPelisxCategoria);
+			request.getRequestDispatcher("PelisxCat.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("Error.jsp").forward(request, response);
+		}
 	}
 
 	/**

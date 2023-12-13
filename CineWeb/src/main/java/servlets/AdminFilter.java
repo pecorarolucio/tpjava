@@ -52,10 +52,10 @@ public class AdminFilter extends HttpFilter implements Filter {
         	if ("Admin".equals(userClass)) {
         		chain.doFilter(request, response);
         	} else {
-        		httpResponse.sendRedirect(httpRequest.getContextPath()+"Unauthorized.jsp");
+        		httpResponse.sendRedirect(httpRequest.getContextPath()+"/Unauthorized.jsp");
         	}
         } else {
-        	httpResponse.sendRedirect(httpRequest.getContextPath()+"login.html");
+        	httpResponse.sendRedirect(httpRequest.getContextPath()+"/login.html");
         }
         
 	}

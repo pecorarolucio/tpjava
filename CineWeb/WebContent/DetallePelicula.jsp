@@ -36,6 +36,7 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 		<%if(p!= null && p.getTipo().equals("Admin")){ %>
 			<form method="post" action="BorrarReseña">
 			<input type="hidden" name="idReseña" value="<%=reseña.getCodigo()%>" >
+			<input type="hidden" name="idPelicula" value="<%=pel.getIdPelicula()%>" >
 			<button type="submit"  value="Borrar Reseña">Borrar</button>
 			</form>
 			<% }%>

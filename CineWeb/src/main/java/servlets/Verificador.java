@@ -69,7 +69,7 @@ public class Verificador extends HttpServlet {
 	 	    	 }
 	 	    else {
 	 	    request.getSession().setAttribute("usuario", pers);
-	 	    request.getRequestDispatcher("Index.jsp").forward(request, response);
+	 		request.getRequestDispatcher("Index.jsp").forward(request, response);
 	 	    };
 	    }
 	    else {

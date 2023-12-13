@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -37,14 +38,19 @@ public class AgregarPelicula extends HttpServlet {
 		Categoria c = new Categoria();
 		CategoriaABMC cl = new CategoriaABMC();
 		PeliculaABMC pl = new PeliculaABMC();
-		p.setNombrePelicula(request.getParameter("nombre"));
-		c = cl.getOne(Integer.parseInt(request.getParameter("idCategoria")));
-		p.setCategoria(c);
-		p.setPortada(request.getParameter("portada"));
-		pl.addPelicula(p);
-		LinkedList<Pelicula> peliculas = pl.getAll();
-		request.setAttribute("peliculas", peliculas);
-		request.getRequestDispatcher("MenuPeliculas.jsp").forward(request, response);
-	}
+		try {
+			p.setNombrePelicula(request.getParameter("nombre"));
+			c = cl.getOne(Integer.parseInt(request.getParameter("idCategoria")));
+			p.setCategoria(c);
+			p.setPortada(request.getParameter("portada"));
+			pl.addPelicula(p);
+			LinkedList<Pelicula> peliculas = pl.getAll();
+			request.setAttribute("peliculas", peliculas);
+			request.getRequestDispatcher("MenuPeliculas.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("Error.jsp").forward(request, response);
+		}
 
+	}
 }

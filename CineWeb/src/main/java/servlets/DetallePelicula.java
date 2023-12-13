@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -46,17 +47,18 @@ public class DetallePelicula extends HttpServlet {
 				int idPelicula = Integer.parseInt(idParam);
 				Pelicula pel = new Pelicula();
 				pel.setIdPelicula(idPelicula);
-				pel = pl.getOne(pel);
-				//pl.searchPelicula(pel);	
-				LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
-				//for (Reseña r: reseñas) {
-				//	r.getAutor().setNombre(p.getById(r.getAutor().getId()).getNombre());
-				//};
-				
-				System.out.print(pel.getIdPelicula());
-				request.setAttribute("pelicula", pel);
-				request.setAttribute("reseñas", reseñas);
-				request.getRequestDispatcher("/DetallePelicula.jsp").forward(request, response);
+				try {
+					pel = pl.getOne(pel);	
+					LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
+					System.out.println(reseñas);
+					System.out.print(pel.getIdPelicula());
+					request.setAttribute("pelicula", pel);
+					request.setAttribute("reseñas", reseñas);
+					request.getRequestDispatcher("/DetallePelicula.jsp").forward(request, response);
+				} catch(SQLException e) {
+					request.setAttribute("error", e);
+					request.getRequestDispatcher("Error.jsp").forward(request, response);
+				}
 			} catch(NumberFormatException e) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "id invalido");
 			}

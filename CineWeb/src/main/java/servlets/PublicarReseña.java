@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,17 +49,26 @@ public class PublicarReseña extends HttpServlet {
 			
 			Pelicula pel = new Pelicula();
 			pel.setIdPelicula(idPelicula);
-			pel = pl.getOne(pel);
-			if (pel!=null) {
-				Reseña r = new Reseña();
-				r.setAutor(p);
-				r.setFecha(LocalDate.now());
-				r.setPelicula(pel);
-				r.setDescripcion(request.getParameter("descripcion"));
-				ReseñaABMC rl = new ReseñaABMC();
-				rl.addReseña(r);
-			} else {
-				response.sendError(404, "Pelicula no encontrada");
+			try {
+				pel = pl.getOne(pel);
+				if (pel!=null) {
+					Reseña r = new Reseña();
+					r.setAutor(p);
+					r.setFecha(LocalDate.now());
+					r.setPelicula(pel);
+					r.setDescripcion(request.getParameter("descripcion"));
+					ReseñaABMC rl = new ReseñaABMC();
+					rl.addReseña(r);
+					LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
+					request.setAttribute("pelicula", pel);
+					request.setAttribute("reseñas", reseñas);
+					request.getRequestDispatcher("DetallePelicula.jsp").forward(request, response);
+				} else {
+					response.sendError(404, "Pelicula no encontrada");
+				}
+			} catch(SQLException e) {
+				request.setAttribute("error", e);
+				request.getRequestDispatcher("Error.jsp").forward(request, response);
 			}
 		} else {
 			response.sendRedirect(request.getContextPath()+"/login.html");

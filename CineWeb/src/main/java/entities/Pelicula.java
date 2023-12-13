@@ -45,7 +45,7 @@ public class Pelicula {
 	}
 	
 	public String getPortada() {
-		return this.portada;
+		return portada;
 	}
 	
 	public void setPortada(String portada) {

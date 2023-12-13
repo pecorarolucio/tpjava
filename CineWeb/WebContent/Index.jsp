@@ -43,7 +43,7 @@ Persona p = (Persona) se.getAttribute("usuario");
           <li class="nav-item"><a href="BuscaCategorias" class="nav-link">Cartelera </a></li>
           <li class="nav-item"><a href="login.html" class="nav-link">Iniciar sesion</a></li>
           <%}else { %>
-          <li class="nav-item"><a href="login.html" class="nav-link">Cerrar Sesion</a></li>
+          <li class="nav-item"><a href="/SignOut" class="nav-link">Cerrar Sesion</a></li>
           <%} %>
         </ul>
       </div>
