@@ -27,6 +27,10 @@ public class SalaABMC {
 		ds.update(sala);
 	}
 	
+	public Sala searchSala(Sala sala) throws SQLException {
+		return ds.search(sala);
+	}
+	
 	public void deleteSala(Sala sala) throws SQLException {
 		ds.delete(sala);
 	}

@@ -70,7 +70,7 @@ public class Persona {
 		this.tipo = tipo;
 	}
 
-	@Override
+	
 	public String toString() {
 		return "Persona [id=" + id + ", nombre=" + nombre + ", apellido=" + apellido + ", mail=" + mail
 				+ ", contraseña=" + contraseña + ", tipo=" + tipo + "]";

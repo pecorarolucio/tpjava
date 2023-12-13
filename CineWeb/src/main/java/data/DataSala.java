@@ -6,9 +6,13 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.LinkedList;
 
+import entities.Categoria;
+import entities.Pelicula;
 import entities.Sala;
+import logic.CategoriaABMC;
 
 public class DataSala {
+	
 	public LinkedList<Sala> getAll() throws SQLException {
 		Statement stmt=null;
 		ResultSet rs=null;
@@ -102,7 +106,7 @@ public class DataSala {
 			if(rs!=null && rs.next()) {
 				sala = new Sala();
 				sala.setIdSala(rs.getInt("idsala"));
-				sala.setCapacidadMaxima(rs.getInt("nombre"));
+				sala.setCapacidadMaxima(rs.getInt("capacidadmax"));
 				
 			}
 		} catch (SQLException e) {

@@ -24,7 +24,7 @@ public class Sala {
 	public void setCapacidadMaxima(int capacidadMaxima) {
 		this.capacidadMaxima = capacidadMaxima;
 	}
-	@Override
+	
 	public String toString() {
 		return "Sala [id=" + id + ", capacidadMaxima=" + capacidadMaxima + "]";
 	}

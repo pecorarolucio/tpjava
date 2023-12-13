@@ -32,7 +32,9 @@
 			<hr>
 			<div class="container text-left">
 
-				<a href="<%=request.getContextPath()%>/AgregarSala" class="btn btn-success">Agregar Sala</a>
+				<a href="agregarSala.jsp" class="btn btn-success">Agregar Sala</a>
+				
+				<button class="btn btn-dark" onclick="volver()">Volver</button>
 			</div>
 			<br>
 			<table class="table table-bordered">
@@ -49,8 +51,14 @@
             		<td><%=sal.getIdSala()%></td>
             		<td><%=sal.getCapacidadMaxima()%></td>            	
             		<td>
-            			<a href="<%=request.getContextPath()%>/EditarSala" class="btn btn-dark">Editar</a>
-            			<a href="<%=request.getContextPath()%>/BorrarSala" class="btn btn-danger">Borrar</a>
+            			<form action="EditarSala" method="get" >
+	            			<input type="hidden" name="idSala" value="<%= sal.getIdSala() %>" >
+	            			<button type="submit" class="btn btn-dark">Editar</button>
+	            		</form>
+	            		<form action="BorrarSala" method="post">
+	            		<input type="hidden" name="idSala" value="<%=sal.getIdSala() %>">
+            			<button type="submit" class="btn btn-danger">Borrar</button>
+            			</form>
             		</td>	
 					</tr>
 						<%} %>
@@ -60,3 +68,9 @@
 	</div>
 </body>
 </html>
+
+<script>
+function volver() {
+    history.back();
+}
+</script>
