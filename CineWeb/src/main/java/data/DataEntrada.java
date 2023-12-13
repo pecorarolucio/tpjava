@@ -14,7 +14,7 @@ import entities.Sala;
 
 public class DataEntrada {
 
-	public Entrada findOne(int cod) {
+	public Entrada findOne(int cod) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Entrada ent = new Entrada();
@@ -37,20 +37,20 @@ public class DataEntrada {
 		            ent.setFuncion(f);
 		        }
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return ent;
 	}
 	
-	public LinkedList<Entrada> findFromUser(int nroUsuario) {
+	public LinkedList<Entrada> findFromUser(int nroUsuario) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		//LinkedList<Entrada> entradas = new LinkedList<>();
@@ -76,20 +76,20 @@ public class DataEntrada {
 					entradas.add(ent);
 			}
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if (rs!=null)rs.close();
 				if (stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return entradas;
 	}
 	
-	public LinkedList<Entrada> findFromFuncion(Funcion f){
+	public LinkedList<Entrada> findFromFuncion(Funcion f) throws SQLException{
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		LinkedList<Entrada> entradas = new LinkedList<>();
@@ -115,20 +115,20 @@ public class DataEntrada {
 				}
 			}
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if (rs!=null) rs.close();
 				if (stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return entradas;
 	}
 	
-	public void add(Entrada ent) {
+	public void add(Entrada ent) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet keyResultSet = null;
 		try {
@@ -145,19 +145,19 @@ public class DataEntrada {
 				ent.setCodEntrada(keyResultSet.getInt(1));
 			}
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(keyResultSet!=null) keyResultSet.close();
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
 	
-	public void delete (Entrada ent) {
+	public void delete (Entrada ent) throws SQLException {
 		PreparedStatement stmt =null;
 		
 		try {
@@ -165,13 +165,13 @@ public class DataEntrada {
 			stmt.setInt(1, ent.getCodEntrada());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}

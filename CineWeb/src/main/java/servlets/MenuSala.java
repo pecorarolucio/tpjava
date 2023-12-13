@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -35,9 +36,14 @@ public class MenuSala extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String opc = request.getParameter("option");
 		SalaABMC miSala = new SalaABMC();
-		LinkedList<Sala> salas =miSala.getAll();
-		request.setAttribute("salas", salas);
-		request.getRequestDispatcher("/Admin/Salas/MenuSalas.jsp").forward(request, response);
+		try {
+			LinkedList<Sala> salas =miSala.getAll();
+			request.setAttribute("salas", salas);
+			request.getRequestDispatcher("/Admin/Salas/MenuSalas.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
+		}
 		
 		
 		/*switch (opc) {

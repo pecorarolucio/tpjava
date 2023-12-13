@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -33,9 +34,14 @@ public class GetCategorias extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		LinkedList<Categoria> categorias = new LinkedList<>();
 		CategoriaABMC cl = new CategoriaABMC();
-		categorias = cl.getAll();
-		request.setAttribute("categorias", categorias);
-		request.getRequestDispatcher("agregarPelicula.jsp").forward(request, response);
+		try {
+			categorias = cl.getAll();
+			request.setAttribute("categorias", categorias);
+			request.getRequestDispatcher("agregarPelicula.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
+		}
 	}
 
 }

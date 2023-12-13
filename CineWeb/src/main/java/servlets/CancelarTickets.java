@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -41,14 +43,21 @@ public class CancelarTickets extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		int codigoEntrada = Integer.parseInt(request.getParameter("entradaId"));
 		EntradaABMC miE = new EntradaABMC();
-		Entrada e = new Entrada();
-		e = miE.findOne(codigoEntrada);
-		if (e!=null) {
-			miE.delete(e);
-			//HABRIA QUE MOSTRAR UN MENSAJE DE QUE SE ELIMINO CORRECTAMENTE
-			response.sendRedirect("Index.jsp");
-		} else {
-			//MOSTRAR MENSAJE DE QUE NO EXISTE ESA ENTRADA
+		Entrada ent = new Entrada();
+		try {
+			ent = miE.findOne(codigoEntrada);
+			if(ent!=null) {
+				miE.delete(ent);
+				//HABRIA QUE MOSTRAR UN MENSAJE DE QUE SE ELIMINO CORRECTAMENTE
+				response.sendRedirect("Index.jsp");
+			}
+		} catch(SQLException e) {
+			if (ent==null) { //NOTA: NO SE SI CUANDO ENTRADA ES NULL SQL ME DA UNA EXCEPTION O VALOR COMUN, HAY QUE CAMBIAR ESTO
+				//MOSTRAR MENSAJE NO EXISTE ENTRADA"
+			} else {
+				request.setAttribute("error", e);
+				request.getRequestDispatcher("/Error.jsp");
+			}
 		}
 	
 	}

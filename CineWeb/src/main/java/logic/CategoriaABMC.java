@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 //import java.util.Scanner;
 
@@ -27,35 +28,29 @@ public class CategoriaABMC {
 		dc = new DataCategoria();
 	}
 	
-	public LinkedList<Categoria> getAll(){
-		try {
-			Class.forName("com.mysql.cj.jdbc.Driver");
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			throw new RuntimeException("No se pudo cargar el controlador JDBC", e);
-		}
+	public LinkedList<Categoria> getAll() throws SQLException {
+		
 		return dc.getAll();
 			
 	}
 	
 
-	public void addCategoria (Categoria c) {
+	public void addCategoria (Categoria c) throws SQLException {
 		dc.add(c);
 	}
 
-	public void updateCategoria(Categoria c) {
+	public void updateCategoria(Categoria c)throws SQLException {
 		dc.update(c);
 	}
-	public Categoria searchCategoria(Categoria c) {
+	public Categoria searchCategoria(Categoria c)throws SQLException {
 		return dc.search(c);
 	}
 
-	public void deleteCategoria(Categoria c) {
+	public void deleteCategoria(Categoria c)throws SQLException {
 		dc.delete(c);
 	}
 	
-	public Categoria getOne(int id) {
+	public Categoria getOne(int id)throws SQLException {
 		return dc.findOne(id);
 	}
 	

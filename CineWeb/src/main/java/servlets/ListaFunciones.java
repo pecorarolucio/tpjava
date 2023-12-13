@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -40,9 +41,14 @@ public class ListaFunciones extends HttpServlet {
 		Pelicula pel = new Pelicula();
 		int idPelicula = Integer.parseInt(request.getParameter("IdPelicula"));
 		pel.setIdPelicula(idPelicula);
-		LinkedList<Funcion> listafunciones = dtFunc.getFunciones(pel);
-		request.setAttribute("funciones", listafunciones);
-		request.getRequestDispatcher("ListadeFuncionesxPelicula.jsp").forward(request, response);
+		try {
+			LinkedList<Funcion> listafunciones = dtFunc.getFunciones(pel);
+			request.setAttribute("funciones", listafunciones);
+			request.getRequestDispatcher("ListadeFuncionesxPelicula.jsp").forward(request, response);
+		}	catch(SQLException e) {
+				request.setAttribute("error", e);
+				request.getRequestDispatcher("/Error.jsp");
+			}
 		}
 	}
 

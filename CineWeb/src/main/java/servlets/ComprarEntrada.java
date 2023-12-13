@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -37,38 +38,43 @@ public class ComprarEntrada extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Persona p = (Persona)request.getSession().getAttribute("usuario");	
-		if (p!=null) {
-			LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
-			LocalTime horaInicio = LocalTime.parse(request.getParameter("hora"));
-			int idSala = Integer.parseInt(request.getParameter("idSala"));
-			Sala s = new Sala();
-			s.setIdSala(idSala);
-			FuncionABMC fl = new FuncionABMC();
-			Funcion f = new Funcion();
-			f.setFechaFuncion(fecha);
-			f.setHoraInicio(horaInicio);
-			f.setSala(s);
-			f = fl.getOne(f);
-			String resultado = "exito";
-			if (!fl.isFull(f)) {
-				EntradaABMC el = new EntradaABMC();
-				Entrada e = new Entrada();
-				e.setFuncion(f);
-				e.setPersona(p);
-				el.add(e);
-				//AGREGAR QUE REDIRIJA A UNA PAGINA DE EXITO
-				//request.setAttribute("EstadoCompra", resultado);
-				//request.getRequestDispatcher("EXITO.jsp").forward(request, response);
-				response.sendRedirect("Index.jsp");
+		try {
+			Persona p = (Persona)request.getSession().getAttribute("usuario");	
+			if (p!=null) {
+				LocalDate fecha = LocalDate.parse(request.getParameter("fecha"));
+				LocalTime horaInicio = LocalTime.parse(request.getParameter("hora"));
+				int idSala = Integer.parseInt(request.getParameter("idSala"));
+				Sala s = new Sala();
+				s.setIdSala(idSala);
+				FuncionABMC fl = new FuncionABMC();
+				Funcion f = new Funcion();
+				f.setFechaFuncion(fecha);
+				f.setHoraInicio(horaInicio);
+				f.setSala(s);
+				f = fl.getOne(f);
+				String resultado = "exito";
+				if (!fl.isFull(f)) {
+					EntradaABMC el = new EntradaABMC();
+					Entrada e = new Entrada();
+					e.setFuncion(f);
+					e.setPersona(p);
+					el.add(e);
+					//AGREGAR QUE REDIRIJA A UNA PAGINA DE EXITO
+					//request.setAttribute("EstadoCompra", resultado);
+					//request.getRequestDispatcher("EXITO.jsp").forward(request, response);
+					response.sendRedirect("Index.jsp");
+				} else {
+					resultado = "fallido";
+					//AGREGAR QUE REDIRIJA A UNA PAGINA DE ERROR DE SALA LLENA
+					request.setAttribute("EstadoCompra", resultado);
+					request.getRequestDispatcher("SALALLENA.jsp").forward(request, response);
+				}
 			} else {
-				resultado = "fallido";
-				//AGREGAR QUE REDIRIJA A UNA PAGINA DE ERROR DE SALA LLENA
-				request.setAttribute("EstadoCompra", resultado);
-				request.getRequestDispatcher("SALALLENA.jsp").forward(request, response);
+				response.sendRedirect(request.getContextPath() + "/login.html");
 			}
-		} else {
-			response.sendRedirect(request.getContextPath() + "/login.html");
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
 		}
 		// TODO Auto-generated method stub
 	}

@@ -14,7 +14,7 @@ public class DataReseña {
 
 	
 	
-	public LinkedList<Reseña> getReseñas(Pelicula p){
+	public LinkedList<Reseña> getReseñas(Pelicula p) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		LinkedList<Reseña> reseñas = new LinkedList<>();
@@ -45,31 +45,31 @@ public class DataReseña {
 			}
 		}
 		catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 		//	try {
 		//		if(stmt!=null)stmt.close();
 		//		DbConnector.getInstancia().releaseConn();
 		//	}
 		//	catch(SQLException e) {
-		//		e.printStackTrace();
+		//		throw new SQLException("Hubo un error en la base de datos", e);
 		//	}
 			try {
 			    if (rs != null) rs.close(); // Cerrar ResultSet
 			} catch (SQLException e) {
-			    e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 			try {
 			    if (stmt != null) stmt.close(); // Cerrar PreparedStatement
 			    DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-			    e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return reseñas;
 	}
 	
-	public LinkedList<Reseña> getReseñasFromUser(Persona p){
+	public LinkedList<Reseña> getReseñasFromUser(Persona p) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		LinkedList<Reseña> reseñas = new LinkedList<>();
@@ -94,20 +94,20 @@ public class DataReseña {
 			}
 			
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return reseñas;
 	}
 	
-	public void addReseña(Reseña r) {
+	public void addReseña(Reseña r) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet KeyResultSet = null;
 		try {
@@ -122,19 +122,19 @@ public class DataReseña {
 				r.setCodigo(KeyResultSet.getInt(1));
 			}
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(KeyResultSet!=null) KeyResultSet.close();
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
 	
-	public void deleteReseña(Reseña r) {
+	public void deleteReseña(Reseña r) throws SQLException {
 		PreparedStatement stmt =null;
 		
 		try {
@@ -142,18 +142,18 @@ public class DataReseña {
 			stmt.setInt(1, r.getCodigo());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
 	
-	public void updateReseña(Reseña r) {
+	public void updateReseña(Reseña r) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			
@@ -163,13 +163,13 @@ public class DataReseña {
 			stmt.executeUpdate();
 			
 		}  catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		}finally {
 			try {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}

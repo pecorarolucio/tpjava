@@ -225,13 +225,13 @@ public class DataPelicula {
 				}
 			}
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return funciones;

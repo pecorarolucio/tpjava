@@ -2,6 +2,8 @@ package servlets;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,10 +34,15 @@ public class BuscaCategorias extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		CategoriaABMC categoriaABMC = new CategoriaABMC();
-		LinkedList<Categoria> listaCategoria = categoriaABMC.getAll(); 
-		request.setAttribute("Categorias", listaCategoria);
-		
-		request.getRequestDispatcher("ListaCategoria.jsp").forward(request, response);
+		try {
+			LinkedList<Categoria> listaCategoria = categoriaABMC.getAll(); 
+			request.setAttribute("Categorias", listaCategoria);
+			
+			request.getRequestDispatcher("ListaCategoria.jsp").forward(request, response);
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
+		}
 	}
 
 	/**

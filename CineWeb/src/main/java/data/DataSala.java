@@ -9,7 +9,7 @@ import java.util.LinkedList;
 import entities.Sala;
 
 public class DataSala {
-	public LinkedList<Sala> getAll(){
+	public LinkedList<Sala> getAll() throws SQLException {
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Sala> salas= new LinkedList<>();
@@ -25,7 +25,7 @@ public class DataSala {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 			
 		} finally {
 			try {
@@ -33,13 +33,13 @@ public class DataSala {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return salas;
 		}
 		
-	public void add(Sala s) {
+	public void add(Sala s) throws SQLException {
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
@@ -54,21 +54,21 @@ public class DataSala {
                 s.setIdSala(keyResultSet.getInt(1));
             }  		
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw new SQLException("Hubo un error en la base de datos", e);
             }
 		}
 	}
 	
 	
 	
-	public void update (Sala s) {
+	public void update (Sala s) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			
@@ -78,18 +78,18 @@ public class DataSala {
 			stmt.executeUpdate();
 			
 		}  catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		}finally {
 			try {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
 
-	public Sala search(Sala s){ 
+	public Sala search(Sala s) throws SQLException { 
 		PreparedStatement stmt =null;
 		ResultSet rs=null;
 		Sala sala=null;
@@ -106,14 +106,14 @@ public class DataSala {
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(rs!=null)rs.close();
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return sala;
@@ -121,7 +121,7 @@ public class DataSala {
 	}
 	
 
-	public void delete (Sala s){
+	public void delete (Sala s) throws SQLException {
 		PreparedStatement stmt =null;
 		
 		try {
@@ -129,13 +129,13 @@ public class DataSala {
 			stmt.setInt(1, s.getIdSala());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}

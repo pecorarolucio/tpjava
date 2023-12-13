@@ -37,11 +37,11 @@ public class BorrarReseña extends HttpServlet {
 		Reseña r = new Reseña();
 		ReseñaABMC rl = new ReseñaABMC();
 		PeliculaABMC pl = new PeliculaABMC();
-		r.setCodigo(Integer.parseInt(request.getParameter("idReseña")));
-		rl.deleteReseña(r);
 		Pelicula pel = new Pelicula();
-		pel.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
 		try {
+			pel.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
+			r.setCodigo(Integer.parseInt(request.getParameter("idReseña")));
+			rl.deleteReseña(r);
 			pel=pl.getOne(pel);
 			System.out.println(pel);
 			LinkedList<Reseña> reseñas = rl.getByPelicula(pel);

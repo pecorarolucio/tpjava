@@ -1,5 +1,6 @@
 package logic;
 
+import java.sql.SQLException;
 import java.util.LinkedList;
 //import java.util.Scanner;
 
@@ -13,20 +14,20 @@ public class SalaABMC {
 		ds = new DataSala();
 	}
 
-	public LinkedList<Sala> getAll() {
+	public LinkedList<Sala> getAll()  throws SQLException {
 		return ds.getAll();
 		
 	}
 
-	public void addSala(Sala sala) {
+	public void addSala(Sala sala) throws SQLException {
 		ds.add(sala);
 	}
 	
-	public void updateSala(Sala sala) {
+	public void updateSala(Sala sala) throws SQLException {
 		ds.update(sala);
 	}
 	
-	public void deleteSala(Sala sala) {
+	public void deleteSala(Sala sala) throws SQLException {
 		ds.delete(sala);
 	}
 	

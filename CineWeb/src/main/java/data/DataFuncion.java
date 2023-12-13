@@ -9,7 +9,7 @@ import entities.Sala;
 
 public class DataFuncion {
 
-  public void add(Funcion f) {
+  public void add(Funcion f) throws SQLException {
 		PreparedStatement stmt= null;
 		ResultSet ResultSet=null;
 		try {
@@ -22,19 +22,19 @@ public class DataFuncion {
 			stmt.setInt(4, f.getPelicula().getIdPelicula());
 		
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
             try {
                 if(ResultSet!=null)ResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw new SQLException("Hubo un error en la base de datos", e);
             }
 		  }
     }
 
-  public LinkedList<Funcion> getFunciones(Pelicula p){
+  public LinkedList<Funcion> getFunciones(Pelicula p) throws SQLException {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
 		Funcion f = null;
@@ -65,19 +65,19 @@ public class DataFuncion {
 					funciones.add(f);
 				}
 			}
-		} catch(SQLException e) {
-			e.printStackTrace();
+		} catch(SQLException e)  {
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return funciones;
 	}
-  public void delete (Funcion f) {
+  public void delete (Funcion f) throws SQLException {
 		PreparedStatement stmt =null;
 		
 		try {
@@ -88,18 +88,18 @@ public class DataFuncion {
 			stmt.executeUpdate();
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
   
-  public Funcion findOne(Funcion f) {
+  public Funcion findOne(Funcion f) throws SQLException {
 	  Funcion fun = new Funcion();
 	  PreparedStatement stmt=null;
 	  ResultSet rs = null;
@@ -122,14 +122,14 @@ public class DataFuncion {
 			  fun.setPelicula(p);
 		  }
 	  } catch(SQLException e) {
-		  e.printStackTrace();
+		  throw new SQLException("Hubo un error en la base de datos", e);
 	  } finally {
 		  try {
 			  if(stmt!=null) stmt.close();
 			  if(rs!=null) rs.close();
 			  DbConnector.getInstancia().releaseConn();
 		  } catch(SQLException e) {
-			  e.printStackTrace();
+			  throw new SQLException("Hubo un error en la base de datos", e);
 		  }
 	  }
 	  return fun;

@@ -2,6 +2,8 @@ package servlets;
 
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -53,28 +55,33 @@ public class Verificador extends HttpServlet {
 	    p.setMail(correo);
 	    p.setContraseña(contraseña);
 	    PersonaABMC pABMC = new PersonaABMC();
-	    Persona pers = pABMC.getOne(p);
-	    if (pers != null) {
-	    	 if ((correo == null || correo.isEmpty() ) || (contraseña == null || contraseña.isEmpty())) {
-	 	        //response.getWriter().write("Completa todos los campos requeridos");
-	 	        //return;
-	 	    	 
-	 	    	request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
-	 	    	 try {
-	 				Class.forName("com.mysql.cj.jdbc.Driver");
-	 			} catch (ClassNotFoundException e) {
-	 				// TODO Auto-generated catch block
-	 				e.printStackTrace();
-	 			}
-	 	    	 }
-	 	    else {
-	 	    request.getSession().setAttribute("usuario", pers);
-	 		request.getRequestDispatcher("Index.jsp").forward(request, response);
-	 	    };
-	    }
-	    else {
-	    	request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
-	    };
+	    try {
+		    Persona pers = pABMC.getOne(p);
+		    if (pers != null) {
+		    	 if ((correo == null || correo.isEmpty() ) || (contraseña == null || contraseña.isEmpty())) {
+		 	        //response.getWriter().write("Completa todos los campos requeridos");
+		 	        //return;
+		 	    	 
+		 	    	request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
+		 	    	 try {
+		 				Class.forName("com.mysql.cj.jdbc.Driver");
+		 			} catch (ClassNotFoundException e) {
+		 				// TODO Auto-generated catch block
+		 				e.printStackTrace();
+		 			}
+		 	    	 }
+		 	    else {
+		 	    request.getSession().setAttribute("usuario", pers);
+		 		request.getRequestDispatcher("Index.jsp").forward(request, response);
+		 	    };
+		    }
+		    else {
+		    	request.getRequestDispatcher("ErrorLogin.jsp").forward(request, response);
+		    }
+	    } catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
+		}
 		//doGet(request, response);
 
 

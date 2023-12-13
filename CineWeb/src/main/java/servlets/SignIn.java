@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -47,15 +49,19 @@ public class SignIn extends HttpServlet {
 		p.setMail(correo);
 		p.setContraseña(password);
 		p.setTipo("Cliente");
-		
-		if (lp.findByMail(p) == null) {
-			if (correo.isEmpty() || password.isEmpty() || nombre.isEmpty() || apellido.isEmpty()) {
-				response.getWriter().write("{\"error\": \"Todos los campos son requeridos\"}");
+		try {
+			if (lp.findByMail(p) == null) {
+				if (correo.isEmpty() || password.isEmpty() || nombre.isEmpty() || apellido.isEmpty()) {
+					response.getWriter().write("{\"error\": \"Todos los campos son requeridos\"}");
+				}
+				lp.addPersona(p);
+				response.sendRedirect("login.html");
+			} else {
+				response.getWriter().write("{\"error\" \"Ya existe una cuenta registrada a ese mail\"}");
 			}
-			lp.addPersona(p);
-			response.sendRedirect("login.html");
-		} else {
-			response.getWriter().write("{\"error\" \"Ya existe una cuenta registrada a ese mail\"}");
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.getRequestDispatcher("/Error.jsp");
 		}
 		
 	}

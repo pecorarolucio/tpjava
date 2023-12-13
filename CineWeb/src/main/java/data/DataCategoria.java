@@ -9,7 +9,7 @@ import entities.Categoria;
 
 public class DataCategoria {
 	
-	public Categoria findOne(int id) {
+	public Categoria findOne(int id) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
 		Categoria cat = new Categoria();
@@ -26,20 +26,20 @@ public class DataCategoria {
 		            cat.setNombreCategoria(rs.getString("nombre"));
 		        }
 		} catch(SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(rs!=null) rs.close();
 				if(stmt!=null) stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch(SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return cat;
 	}
 	
-	public LinkedList<Categoria> getAll(){
+	public LinkedList<Categoria> getAll() throws SQLException {
 		Statement stmt=null;
 		ResultSet rs=null;
 		LinkedList<Categoria> categorias= new LinkedList<>();
@@ -55,7 +55,7 @@ public class DataCategoria {
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 			
 		} finally {
 			try {	
@@ -63,7 +63,7 @@ public class DataCategoria {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return categorias;
@@ -71,7 +71,7 @@ public class DataCategoria {
 		
 	
 	
-	public void add(Categoria c) {
+	public void add(Categoria c) throws SQLException {
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
@@ -85,21 +85,21 @@ public class DataCategoria {
                 c.setIdCategoria(keyResultSet.getInt(1));
             }  		
 		}  catch (SQLException e) {
-            e.printStackTrace();
+            throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();
                 DbConnector.getInstancia().releaseConn();
             } catch (SQLException e) {
-            	e.printStackTrace();
+            	throw new SQLException("Hubo un error en la base de datos", e);
             }
 		}
 	}
 	
 	
 	
-	public void update (Categoria cat) {
+	public void update (Categoria cat) throws SQLException {
 		PreparedStatement stmt=null;
 		try {
 			
@@ -109,18 +109,18 @@ public class DataCategoria {
 			stmt.executeUpdate();
 			
 		}  catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		}finally {
 			try {
 				if(stmt!=null) {stmt.close();}
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
 
-	public Categoria search(Categoria c){ 
+	public Categoria search(Categoria c ) throws SQLException { 
 		PreparedStatement stmt =null;
 		ResultSet rs=null;
 		Categoria cat=null;
@@ -137,14 +137,14 @@ public class DataCategoria {
 				
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(rs!=null)rs.close();
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 		return cat;
@@ -152,7 +152,7 @@ public class DataCategoria {
 	}
 	
 
-	public void delete (Categoria cat) {
+	public void delete (Categoria cat) throws SQLException {
 		PreparedStatement stmt =null;
 		
 		try {
@@ -160,13 +160,13 @@ public class DataCategoria {
 			stmt.setInt(1, cat.getIdCategoria());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
-			e.printStackTrace();
+			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
 				if(stmt!=null)stmt.close();
 				DbConnector.getInstancia().releaseConn();
 			} catch (SQLException e) {
-				e.printStackTrace();
+				throw new SQLException("Hubo un error en la base de datos", e);
 			}
 		}
 	}
