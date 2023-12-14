@@ -11,7 +11,7 @@ public class DbConnector {
 	private String host="localhost";
 	private String port="3306";
 	private String user="root";
-	private String password="pecoraro123";
+	private String password="Kamp123QQ%%123";
 	private String db="cinemanagement"; //tabla
 	private int conectados=0;
 	private Connection conn;

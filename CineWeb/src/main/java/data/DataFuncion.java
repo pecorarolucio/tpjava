@@ -12,15 +12,22 @@ public class DataFuncion {
   public void add(Funcion f) throws SQLException {
 		PreparedStatement stmt= null;
 		ResultSet ResultSet=null;
+		System.out.println();
+		System.out.println("Fecha de función: " + f.getFechaFuncion());
+		System.out.println("Hora de inicio: " + f.getHoraInicio());
+		System.out.println("Hora de fin: " + f.getHoraFin());
+		System.out.println("Sala: " + f.getSala());
+		System.out.println("Película: " + f.getPelicula());
 		try {
 			stmt=DbConnector.getInstancia().getConn().
 					prepareStatement("insert into funcion (fecha, HoraInicio, HoraFin, IDSala, IDPelicula) values(?,?,?,?,?)");
 			stmt.setDate(1, Date.valueOf(f.getFechaFuncion())); //SOLUCION TEMPORAL, NO SE SI ES CORRECTO PARA TRANSFORMAR LOCALDATE A DATE DE SQL
 			stmt.setTime(2, Time.valueOf(f.getHoraInicio()));
 			stmt.setTime(3, Time.valueOf(f.getHoraFin()));
-			stmt.setInt(3, f.getSala().getIdSala());
-			stmt.setInt(4, f.getPelicula().getIdPelicula());
-		
+			stmt.setInt(4, f.getSala().getIdSala());
+			stmt.setInt(5, f.getPelicula().getIdPelicula());
+			stmt.executeUpdate();
+			
 		}  catch (SQLException e) {
             throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
