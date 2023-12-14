@@ -54,7 +54,7 @@
             		<td><%=p.getNombrePelicula()%></td>
             		<td><%=p.getCategoria().getNombreCategoria() %></td>
             		<%String imagen = p.getPortada();%> 
-            		<td><img src="../../<%=imagen%>" alt="portada"></td>          	
+            		<td><img src="../../<%=imagen%>" alt="portada" style="width: 100px; height: 100px;"></td>          	
             		<td>
             			<form action="EditarPelicula" method="get" >
 	            			<input type="hidden" name="idPelicula" value="<%= p.getIdPelicula() %>" >
