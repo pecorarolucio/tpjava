@@ -37,5 +37,8 @@ public class FuncionABMC {
 		return el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima();
 		
 	}
+	public void update(Funcion f) throws SQLException {
+		df.update(f);
+	}
 	
 }

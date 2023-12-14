@@ -74,8 +74,8 @@
 </body>
 </html>
 
-	<script>
-function volver() {
-    history.back();
-}
-</script>
+<script>
+        function volver() {
+            window.location.href = '../../Index.jsp';
+        }
+    </script>

@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Editar funcion</title>
 </head>
 <body>
 <%LinkedList<Sala> salas = (LinkedList<Sala>) request.getAttribute("salas"); %>
@@ -41,7 +41,7 @@
 </html>
 
 <script>
-function volver() {
-    history.back();
-}
-</script>
+        function volver() {
+            window.location.href = 'MostrarFunciones';
+        }
+    </script>

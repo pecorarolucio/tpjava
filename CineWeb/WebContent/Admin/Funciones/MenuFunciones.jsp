@@ -67,3 +67,9 @@
 	</div>
 </body>
 </html>
+
+<script>
+        function volver() {
+            window.location.href = '../../Index.jsp';
+        }
+    </script>

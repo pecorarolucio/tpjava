@@ -16,7 +16,7 @@ import logic.*;
 /**
  * Servlet implementation class AgregarFuncion
  */
-@WebServlet("/AgregarFuncion")
+@WebServlet("/Admin/Funciones/AgregarFuncion")
 public class AgregarFuncion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

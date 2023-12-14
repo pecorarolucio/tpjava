@@ -14,7 +14,7 @@ import logic.*;
 /**
  * Servlet implementation class GetSala
  */
-@WebServlet("/GetSala")
+@WebServlet("/Admin/Funciones/GetSala")
 public class GetSala extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

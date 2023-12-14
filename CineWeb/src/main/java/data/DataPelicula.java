@@ -185,6 +185,9 @@ public class DataPelicula {
 			stmt.setInt(1, p.getIdPelicula());
 			stmt.executeUpdate();
 		} catch (SQLException e) {
+			if(e.getSQLState().equals("23000")) {
+				throw new SQLException("La pelicula aun tiene funciones", e.getMessage());
+			}
 			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {

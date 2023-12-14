@@ -142,6 +142,31 @@ public class DataFuncion {
 	  return fun;
   }
   
+  public void update(Funcion f) throws SQLException {
+	  PreparedStatement stmt=null;
+	  try {
+		  stmt=DbConnector.getInstancia().getConn().prepareStatement("update funcion set fecha = ?, HoraInicio = ?, HoraFin = ?, IDSala = ?, IDPelicula = ? where fecha = ? and HoraInicio = ? and IDSala = ?");
+		  stmt.setDate(1, Date.valueOf(f.getFechaFuncion()));
+		  stmt.setTime(2, Time.valueOf(f.getHoraInicio()));
+		  stmt.setTime(3, Time.valueOf(f.getHoraFin()));
+		  stmt.setInt(4, f.getSala().getIdSala());
+		  stmt.setInt(5, f.getPelicula().getIdPelicula());
+		  stmt.setDate(6, Date.valueOf(f.getFechaFuncion()));
+		  stmt.setTime(7, Time.valueOf(f.getHoraInicio()));
+		  stmt.setInt(8, f.getSala().getIdSala());
+		  stmt.executeUpdate();
+	  } catch(SQLException e) {
+		  throw new SQLException("Hubo un error en la base de datos", e);
+	  } finally {
+		  try {
+			  if(stmt!=null) stmt.close();
+			  DbConnector.getInstancia().releaseConn();
+		  } catch(SQLException e) {
+			  throw new SQLException("Hubo un error en la base de datos", e);
+		  }
+	  }
+  }
+  
   //FALTA EL UPDATE PERO PARA EL AD O CON LE TIEMPO RESTANTE LO PODEMOS HACER
 		
 }

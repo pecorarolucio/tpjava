@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class MenuFunciones
  */
-@WebServlet("/MenuFunciones")
+@WebServlet("/Admin/Funciones/MenuFunciones")
 public class MenuFunciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

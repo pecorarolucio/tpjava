@@ -1,3 +1,5 @@
+<%@page isErrorPage="true" import="java.io.*" %>
+<%@page import="entities.Persona"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -7,8 +9,11 @@
     <title>Error</title>
 </head>
 <body>
-<%String error = request.getParameter("error"); %>
+<%Persona p = (Persona)session.getAttribute("usuario"); %>
     <h2>Error</h2>
-    <p><%=error %></p>
+    <p>${requestScope.error}</p>
+    <% if (p != null && "Admin".equals(p.getTipo())){%>
+    <p>${requestScope.causa}</p>
+    <% } %>
 </body>
 </html>

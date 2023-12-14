@@ -37,12 +37,11 @@ public class BorrarPelicula extends HttpServlet {
 		PeliculaABMC pl = new PeliculaABMC();
 		try {
 			pl.deletePelicula(p);
-			LinkedList<Pelicula> pelis = pl.getAll();
-			request.setAttribute("peliculas", pelis);
-			request.getRequestDispatcher("MenuPeliculas.jsp").forward(request, response);
+			response.sendRedirect("MenuPelicula");
 		} catch(SQLException e) {
-			request.setAttribute("error", e);
-			request.getRequestDispatcher("Error.jsp").forward(request, response);
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 	}
 

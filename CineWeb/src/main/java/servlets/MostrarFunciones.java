@@ -12,7 +12,7 @@ import java.util.LinkedList;
 /**
  * Servlet implementation class MostrarFunciones
  */
-@WebServlet("/MostrarFunciones")
+@WebServlet("/Admin/Funciones/MostrarFunciones")
 public class MostrarFunciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

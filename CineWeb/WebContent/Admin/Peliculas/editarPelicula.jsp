@@ -13,12 +13,12 @@
 	LinkedList<Categoria> categorias = (LinkedList<Categoria>) request.getAttribute("categorias"); %>
 <body>
     <h1>Editar Película</h1>
-    <form action="EditarPelicula" method="post">
+    <form action="EditarPelicula" method="post" enctype="multipart/form-data">
         <label>Nombre:</label>
         <input type="text" name="nombre" value="<%=editPel.getNombrePelicula()%>">
         <br>
-        <label>URL de la portada:</label>
-        <input type="text" name="portada" value="<%=editPel.getPortada()%>">
+        <label for="portada">Portada:</label>
+        <input type="file" name="portada" id="portada" value="../../<%=editPel.getPortada()%>" accept="image/*">
         <label for="idCategoria">Categoría:</label>
         <select id="idCategoria" name="idCategoria" required>
             <% for (Categoria categoria: categorias) { %>
@@ -31,9 +31,9 @@
         <button type="button" onclick="volver()">Volver</button>
     </form>
     
-	<script>
-function volver() {
-    history.back();
-}
-</script>
+    <script>
+        function volver() {
+            window.location.href = 'MenuPelicula';
+        }
+    </script>
     

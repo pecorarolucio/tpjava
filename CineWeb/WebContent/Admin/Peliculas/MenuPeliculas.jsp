@@ -54,9 +54,9 @@
             		<td><%=p.getNombrePelicula()%></td>
             		<td><%=p.getCategoria().getNombreCategoria() %></td>
             		<%String imagen = p.getPortada();%> 
-            		<td><img src="/CineWeb<%=imagen%>" alt="portada"></td>          	
+            		<td><img src="../../<%=imagen%>" alt="portada"></td>          	
             		<td>
-            			<form action="EditarPelicula" method="get" enctype="multipart/form-data" >
+            			<form action="EditarPelicula" method="get" >
 	            			<input type="hidden" name="idPelicula" value="<%= p.getIdPelicula() %>" >
 	            			<button type="submit" class="btn btn-dark">Editar</button>
 	            		</form>
@@ -74,8 +74,8 @@
 </body>
 </html>
 
-	<script>
-function volver() {
-    history.back();
-}
-</script>
+<script>
+        function volver() {
+            window.location.href = '../../Index.jsp';
+        }
+    </script>

@@ -17,7 +17,7 @@ import logic.SalaABMC;
 /**
  * Servlet implementation class SaveFuncion
  */
-@WebServlet("/SaveFuncion")
+@WebServlet("/Admin/Funciones/SaveFuncion")
 public class SaveFuncion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

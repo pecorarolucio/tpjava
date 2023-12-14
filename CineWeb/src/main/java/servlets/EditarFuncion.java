@@ -18,7 +18,7 @@ import logic.*;
 /**
  * Servlet implementation class EditarFuncion
  */
-@WebServlet("/EditarFuncion")
+@WebServlet("/Admin/Funciones/EditarFuncion")
 public class EditarFuncion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -61,8 +61,7 @@ public class EditarFuncion extends HttpServlet {
 		try {
 			fl.deleteFuncion(fAntiguo);
 			fl.addFuncion(f);
-			request.setAttribute("peliculas", pf.getAll());
-			request.getRequestDispatcher("/Admin/Funciones/MenuFunciones.jsp").forward(request, response);
+			response.sendRedirect("MenuFunciones");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			request.setAttribute("error", e);

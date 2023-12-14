@@ -86,3 +86,9 @@
 	</div>
 </body>
 </html>
+
+<script>
+        function volver() {
+            window.location.href = 'MenuFunciones';
+        }
+    </script>
