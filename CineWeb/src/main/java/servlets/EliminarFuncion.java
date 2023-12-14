@@ -2,29 +2,27 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-
-
 import logic.*;
 import entities.*;
 /**
- * Servlet implementation class CancelarTickets
+ * Servlet implementation class EliminarFuncion
  */
-@WebServlet("/CancelarTickets")
-public class CancelarTickets extends HttpServlet {
+@WebServlet("/EliminarFuncion")
+public class EliminarFuncion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CancelarTickets() {
+    public EliminarFuncion() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -41,27 +39,23 @@ public class CancelarTickets extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		int codigoEntrada = Integer.parseInt(request.getParameter("entradaId"));
-		EntradaABMC miE = new EntradaABMC();
-		Entrada ent = new Entrada();
+		// TODO Auto-generated method stub
+		FuncionABMC fl = new FuncionABMC();
+		Funcion f = new Funcion();
+		PeliculaABMC pf = new PeliculaABMC();
+		f.setFechaFuncion(LocalDate.parse(request.getParameter("Fecha")));
+		f.setHoraInicio(LocalTime.parse(request.getParameter("HoraInicio")));
+		f.setSala(new Sala());
+		f.getSala().setIdSala(Integer.parseInt(request.getParameter("IDSala")));
+		
 		try {
-			ent = miE.findOne(codigoEntrada);
-			if(ent!=null) {
-				miE.delete(ent);
-				String mensaje = "Has comprado la entrada correctamente";
-				request.setAttribute("mensaje",mensaje);
-				request.getRequestDispatcher("/Index.jsp").forward(request, response);
-				//response.sendRedirect("Index.jsp");
-			}
-		} catch(SQLException e) {
-			if (ent==null) { //NOTA: NO SE SI CUANDO ENTRADA ES NULL SQL ME DA UNA EXCEPTION O VALOR COMUN, HAY QUE CAMBIAR ESTO
-				//MOSTRAR MENSAJE NO EXISTE ENTRADA"
-			} else {
-				request.setAttribute("error", e);
-				request.getRequestDispatcher("/Error.jsp");
-			}
+			fl.deleteFuncion(f);
+			request.setAttribute("peliculas", pf.getAll());
+			request.getRequestDispatcher("/Admin/Funciones/MenuFunciones.jsp").forward(request, response);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-	
 	}
-	
+
 }

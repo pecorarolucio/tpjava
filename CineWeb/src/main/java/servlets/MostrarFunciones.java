@@ -1,31 +1,25 @@
 package servlets;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.LinkedList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import entities.Categoria;
-import entities.Sala;
-import logic.CategoriaABMC;
-import logic.SalaABMC;
-
+import logic.*;
+import entities.*;
+import java.util.LinkedList;
 /**
- * Servlet implementation class Sala
+ * Servlet implementation class MostrarFunciones
  */
-@WebServlet("/Admin/Salas/MenuSala")
-public class MenuSala extends HttpServlet {
+@WebServlet("/MostrarFunciones")
+public class MostrarFunciones extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MenuSala() {
+    public MostrarFunciones() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,30 +28,22 @@ public class MenuSala extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String opc = request.getParameter("option");
-		SalaABMC miSala = new SalaABMC();
+		// TODO Auto-generated method stub
+		int idPelicula = Integer.parseInt(request.getParameter("idPelicula"));
+		Pelicula p= new Pelicula();
+		FuncionABMC fl = new FuncionABMC();
+		p.setIdPelicula(idPelicula);
 		try {
-			LinkedList<Sala> salas =miSala.getAll();
-			request.setAttribute("salas", salas);
-			request.getRequestDispatcher("/Admin/Salas/MenuSalas.jsp").forward(request, response);
-		} catch(SQLException e) {
+			LinkedList<Funcion> Listafunciones = fl.getFunciones(p);
+			request.setAttribute("funciones", Listafunciones);
+			request.setAttribute("pelicula", p);
+			request.getRequestDispatcher("/Admin/Funciones/ListaFunciones.jsp").forward(request, response);
+		} catch (Exception e) {
+			// TODO: handle exception
 			request.setAttribute("error", e);
-			request.getRequestDispatcher("/Error.jsp");
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 		
-		
-		/*switch (opc) {
-			case "add": 
-				int capacidad = Integer.parseInt(request.getParameter("capacidad"));
-				s.setCapacidadMaxima(capacidad);
-				miSala.addSala(s);
-				request.setAttribute("sala", s);
-				request.getRequestDispatcher("agregarSala.jsp").forward(request, response);
-			break;
-			default:
-				throw new AssertionError();
-		}*/
-
 	}
 
 	/**
