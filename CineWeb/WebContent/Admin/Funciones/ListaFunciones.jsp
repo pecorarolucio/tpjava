@@ -61,10 +61,11 @@
             		<td><%=f.getSala().getIdSala()%></td>  
             		<td><%=f.getPelicula().getIdPelicula()%></td>        	
             		<td>
-            			<form action="EditarFuncion" method="get" >
+            			<form action="SaveFuncion" method="get" >
 	            			<input type="hidden" name="Fecha" value="<%= f.getFechaFuncion() %>" >
-	            			<input type="hidden" name="HoraInicio" value="<%= f.getHoraInicio() %>" >
-	            			<input type="hidden" name="ObjectSala" value="<%= f.getSala()%>" >
+	            			<input type="hidden" name="HoraInicio" value="<%=f.getHoraInicio() %>" >
+	            			<input type="hidden" name="IDSala" value="<%=f.getSala().getIdSala()%>" >
+	            			<input type="hidden" name="idPelicula" value="<%=p.getIdPelicula() %>" >
 	            			<button type="submit" class="btn btn-dark">Editar</button>
 	            		</form>
 	            		<form action="EliminarFuncion" method="post" >
