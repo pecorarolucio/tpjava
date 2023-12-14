@@ -34,6 +34,14 @@
         <br>
 		
         <input type="submit" value="Editar Funcion">
+        
+        <button type="button" onclick="volver()">Volver</button>
     </form>
 </body>
 </html>
+
+<script>
+function volver() {
+    history.back();
+}
+</script>

@@ -13,7 +13,7 @@
         <label for="nombre">Nombre</label>
         <input type="text" id="nombre" name="nombre" required>
         <br>
-
+		 <br>
         <input type="submit" value="Agregar Categoria">
     </form>
 </body>

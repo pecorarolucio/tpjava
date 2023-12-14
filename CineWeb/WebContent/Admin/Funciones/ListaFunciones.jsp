@@ -39,6 +39,7 @@
 	            			<input type="hidden" name="idPelicula" value="<%=p.getIdPelicula() %>" >
 	            			<button type="submit" class="btn btn-success">Agregar Funcion</button>
 	            </form>
+	            <br>
 				<button class="btn btn-dark" onclick="volver()">Volver</button>
 			</div>
 			<br>
@@ -49,7 +50,8 @@
 						<th>HoraInicio</th>
 						<th>HoraFin</th>
                   		<th>IDSala</th>
-                  		<th>IDPelicula</th> <!-- LO AGREGO PARA VERIFICAR QUE LA PELI SEA LA CORECTA, LUEGO LO ELIMINAMOS -->
+                  		<th>IDPelicula</th>
+                  		<th>Acciones</th> <!-- LO AGREGO PARA VERIFICAR QUE LA PELI SEA LA CORECTA, LUEGO LO ELIMINAMOS -->
 					</tr>
 				</thead>
 				<tbody>
@@ -68,11 +70,12 @@
 	            			<input type="hidden" name="idPelicula" value="<%=p.getIdPelicula() %>" >
 	            			<button type="submit" class="btn btn-dark">Editar</button>
 	            		</form>
+	            		<br> 													
 	            		<form action="EliminarFuncion" method="post" >
 	            			<input type="hidden" name="Fecha" value="<%= f.getFechaFuncion() %>" >
 	            			<input type="hidden" name="HoraInicio" value="<%= f.getHoraInicio() %>" >
 	            			<input type="hidden" name="IDSala" value="<%= f.getSala().getIdSala()%>" >
-	            			<button type="submit" class="btn btn-dark">Eliminar Funcion</button>
+	            			<button type="submit" class="btn btn-danger">Eliminar Funcion</button>
 	            		</form>
             		</td>	
 					</tr>

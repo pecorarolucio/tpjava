@@ -14,15 +14,15 @@
 
     <form action="AgregarFuncion" method="post">
         <label for="fecha">Fecha:</label>
-        <input type="text" id="fecha" name="fecha" placeholder="YY/MM/DD" required>
+        <input type="text" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required>
         <br>
 
         <label for="Hora_Inicio">Hora_Inicio:</label>
-        <input type="text" id="Hora_Inicio" name="Hora_Inicio" placeholder="HH/MM/SS" required>
+        <input type="text" id="Hora_Inicio" name="Hora_Inicio" placeholder="HH:MM:SS" required>
         <br>
 		
 		<label for="Hora_Fin">Hora_Fin:</label>
-        <input type="text" id="Hora_Fin" name="Hora_Fin" placeholder="HH/MM/SS" required>
+        <input type="text" id="Hora_Fin" name="Hora_Fin" placeholder="HH:MM:SS" required>
         <br>
 		
         <label for="idSala">Sala:</label>
@@ -35,7 +35,7 @@
         <br>
         
 		<input type="hidden" name="idPelicula" value="<%= request.getAttribute("idpeli") %>" >
-		
+		 <br>
         <input type="submit" value="Agregar Funcion">
     </form>
 </body>
