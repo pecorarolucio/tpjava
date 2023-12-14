@@ -23,6 +23,7 @@
 			<p><%= reseña.getDescripcion() %></p>
 			<form method="post" action="BorrarReseña">
 			<input type="hidden" name="idReseña" value="<%=reseña.getCodigo()%>" >
+			<input type="hidden" name="idPelicula" value="<%=reseña.getPelicula().getIdPelicula()%>" >
 			<input type="submit" value="Borrar Reseña">
 			</form>
 		</li>

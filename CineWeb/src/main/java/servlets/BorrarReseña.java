@@ -39,13 +39,14 @@ public class BorrarReseña extends HttpServlet {
 		PeliculaABMC pl = new PeliculaABMC();
 		Pelicula pel = new Pelicula();
 		try {
+			System.out.println("-------------------------------");
+			System.out.println(request.getParameter("idReseña"));
+			System.out.println("-------------------------------");
 			pel.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
 			r.setCodigo(Integer.parseInt(request.getParameter("idReseña")));
 			rl.deleteReseña(r);
 			pel=pl.getOne(pel);
-			System.out.println(pel);
 			LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
-			System.out.println(reseñas);
 			request.setAttribute("pelicula", pel);
 			request.setAttribute("reseñas", reseñas);
 			request.getRequestDispatcher("DetallePelicula.jsp").forward(request, response);
