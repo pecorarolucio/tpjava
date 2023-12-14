@@ -40,7 +40,8 @@ public class MenuPelicula extends HttpServlet {
 			request.setAttribute("peliculas", peliculas);
 			request.getRequestDispatcher("/Admin/Peliculas/MenuPeliculas.jsp").forward(request, response);
 		} catch(SQLException e) {
-			request.setAttribute("error", e);
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 	}

@@ -59,7 +59,8 @@ public class AgregarFuncion extends HttpServlet {
 			request.getRequestDispatcher("/Admin/Funciones/MenuFunciones.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			request.setAttribute("error", e);
+			request.setAttribute("error", "Hubo un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 		

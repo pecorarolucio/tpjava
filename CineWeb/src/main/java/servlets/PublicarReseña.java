@@ -68,7 +68,7 @@ public class PublicarReseña extends HttpServlet {
 				}
 			} catch(SQLException e) {
 				request.setAttribute("error", e);
-				request.getRequestDispatcher("Error.jsp").forward(request, response);
+				request.getRequestDispatcher("/Error.jsp").forward(request, response);
 			}
 		} else {
 			response.sendRedirect(request.getContextPath()+"/login.html");

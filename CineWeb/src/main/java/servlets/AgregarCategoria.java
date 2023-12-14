@@ -52,7 +52,8 @@ public class AgregarCategoria extends HttpServlet {
 			request.setAttribute("mensaje",mensaje);
 			request.getRequestDispatcher("MenuCategorias.jsp").forward(request, response);
 		} catch (SQLException e) {
-			request.setAttribute("error", e);
+			request.setAttribute("error", "Hubo un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 		

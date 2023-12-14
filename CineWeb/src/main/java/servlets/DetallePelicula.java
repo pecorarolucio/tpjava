@@ -56,7 +56,8 @@ public class DetallePelicula extends HttpServlet {
 					request.setAttribute("reseñas", reseñas);
 					request.getRequestDispatcher("/DetallePelicula.jsp").forward(request, response);
 				} catch(SQLException e) {
-					request.setAttribute("error", e);
+					request.setAttribute("error", "Se ha producido un error en la base de datos");
+					request.setAttribute("causa", e.toString());
 					request.getRequestDispatcher("Error.jsp").forward(request, response);
 				}
 			} catch(NumberFormatException e) {

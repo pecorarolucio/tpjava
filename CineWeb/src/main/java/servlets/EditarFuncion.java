@@ -64,7 +64,8 @@ public class EditarFuncion extends HttpServlet {
 			response.sendRedirect("MenuFunciones");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			request.setAttribute("error", e);
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 		

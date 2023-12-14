@@ -54,7 +54,8 @@ public class EliminarFuncion extends HttpServlet {
 			request.getRequestDispatcher("/Admin/Funciones/MenuFunciones.jsp").forward(request, response);
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 		}
 	}
 
