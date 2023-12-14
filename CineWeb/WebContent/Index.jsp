@@ -35,9 +35,11 @@ Persona p = (Persona) se.getAttribute("usuario");
           <li class="nav-item"><a href="Admin/Categorias/MenuCategoria" class="nav-link">Categorias</a></li>
           <li class="nav-item"><a href="Admin/Peliculas/MenuPelicula" class="nav-link">Peliculas</a></li>
           <li class="nav-item"><a href="Admin/Funciones/MenuFunciones" class="nav-link">Funciones</a></li>
+		  <li class="nav-item"><a href="Cliente/Profile" class="nav-link">Mi perfil</a></li>
           <%} else if (p!= null){%>
           <li class="nav-item"><a href="CancelarTickets.jsp" class="nav-link">Arrepentirse</a></li>
           <li class="nav-item"><a href="MisReseñas" class="nav-link">Mis reseñas</a></li>
+          <li class="nav-item"><a href="Cliente/Profile" class="nav-link">Mi perfil</a></li>
           <%} %>
           <% if(p == null){ %>
           <li class="nav-item"><a href="BuscaCategorias" class="nav-link">Cartelera </a></li>
