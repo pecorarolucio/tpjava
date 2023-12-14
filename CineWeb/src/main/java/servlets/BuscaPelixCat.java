@@ -3,6 +3,7 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -46,12 +47,19 @@ public class BuscaPelixCat extends HttpServlet {
 			cat.setIdCategoria(idcategoria);
 			LinkedList<Pelicula> listaPelisxCategoria =PelABMC.getPeliculasxCategoria(CatABMC.searchCategoria(cat));
 			//REMUEVO LAS PELICULAS QUE NO TENGAN FUNCIONES FUTURAS, NO SE SI SERIA MEJOR QUE EN EL JSP SE VERIFIQUE SI TIENE FUNCIONES Y SINO QUE NO LO MUESTRE
-			for (Pelicula p:listaPelisxCategoria) {
-				if(funABMC.getFunciones(p).size() == 0) {
-					listaPelisxCategoria.remove(p);
-				}
+			//for (Pelicula p:listaPelisxCategoria) {
+			//	if(funABMC.getFunciones(p).size() == 0) {
+			//		listaPelisxCategoria.remove(p);
+			//	}
 				
-			};
+			//};
+			Iterator<Pelicula> iterator = listaPelisxCategoria.iterator();
+			while (iterator.hasNext()) {
+			    Pelicula p = iterator.next();
+			    if (funABMC.getFunciones(p).size() == 0) {
+			        iterator.remove();
+			    }
+			}
 			request.setAttribute("peliculas", listaPelisxCategoria);
 			request.getRequestDispatcher("PelisxCat.jsp").forward(request, response);
 		} catch(SQLException e) {
