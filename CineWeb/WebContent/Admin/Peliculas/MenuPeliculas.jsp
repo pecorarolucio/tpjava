@@ -51,11 +51,12 @@
 						<%for (Pelicula p: pelis ) { %>
             		<tr>
             		<td><%=p.getIdPelicula()%></td>
-            		<td><%=p.getNombrePelicula()%></td> 
+            		<td><%=p.getNombrePelicula()%></td>
             		<td><%=p.getCategoria().getNombreCategoria() %></td>
-            		<td><%=p.getPortada()%></td>          	
+            		<%String imagen = p.getPortada();%> 
+            		<td><img src="/CineWeb<%=imagen%>" alt="portada"></td>          	
             		<td>
-            			<form action="EditarPelicula" method="get" >
+            			<form action="EditarPelicula" method="get" enctype="multipart/form-data" >
 	            			<input type="hidden" name="idPelicula" value="<%= p.getIdPelicula() %>" >
 	            			<button type="submit" class="btn btn-dark">Editar</button>
 	            		</form>

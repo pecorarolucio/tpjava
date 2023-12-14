@@ -1,3 +1,4 @@
+<%@page import="entities.Pelicula"%>
 <%@page import="entities.Categoria"%>
 <%@page import="java.util.LinkedList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -8,15 +9,16 @@
 <meta charset="UTF-8">
 <title>Editar pelicula</title>
 </head>
-<%LinkedList<Categoria> categorias = (LinkedList<Categoria>) request.getAttribute("categorias"); %>
+<%Pelicula editPel = (Pelicula) request.getAttribute("editPel");
+	LinkedList<Categoria> categorias = (LinkedList<Categoria>) request.getAttribute("categorias"); %>
 <body>
     <h1>Editar Película</h1>
     <form action="EditarPelicula" method="post">
         <label>Nombre:</label>
-        <input type="text" name="nombre" value="${editPel.nombrePelicula}">
+        <input type="text" name="nombre" value="<%=editPel.getNombrePelicula()%>">
         <br>
         <label>URL de la portada:</label>
-        <input type="text" name="portada" value="${editPel.portada}">
+        <input type="text" name="portada" value="<%=editPel.getPortada()%>">
         <label for="idCategoria">Categoría:</label>
         <select id="idCategoria" name="idCategoria" required>
             <% for (Categoria categoria: categorias) { %>

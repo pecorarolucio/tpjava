@@ -12,13 +12,13 @@
 <%LinkedList<Categoria> categorias = (LinkedList<Categoria>) request.getAttribute("categorias"); %>
 <h2>Agregar Película</h2>
 
-    <form action="AgregarPelicula" method="post">
+    <form action="AgregarPelicula" method="post" enctype="multipart/form-data" >
         <label for="nombre">Nombre:</label>
         <input type="text" id="nombre" name="nombre" required>
         <br>
 
-        <label for="portada">URL de la Portada:</label>
-        <input type="text" id="portada" name="portada" required>
+        <label for="portada">Portada:</label>
+    	<input type="file" name="portada" id="portada" accept="image/*">
         <br>
 
         <label for="idCategoria">Categoría:</label>
