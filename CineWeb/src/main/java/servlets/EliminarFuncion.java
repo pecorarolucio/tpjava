@@ -15,7 +15,7 @@ import entities.*;
 /**
  * Servlet implementation class EliminarFuncion
  */
-@WebServlet("/EliminarFuncion")
+@WebServlet("/Admin/Funciones/EliminarFuncion")
 public class EliminarFuncion extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
