@@ -109,6 +109,7 @@ public class DataFuncion {
   
   public Funcion findOne(Funcion f) throws SQLException {
 	  Funcion fun = new Funcion();
+	  fun = null;
 	  PreparedStatement stmt=null;
 	  ResultSet rs = null;
 	  try {
@@ -128,6 +129,7 @@ public class DataFuncion {
 			  Pelicula p = new Pelicula();
 			  p.setIdPelicula(rs.getInt("IDPelicula"));
 			  fun.setPelicula(p);
+			  System.out.println(fun);
 		  }
 	  } catch(SQLException e) {
 		  throw new SQLException("Hubo un error en la base de datos", e);
