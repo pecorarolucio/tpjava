@@ -59,7 +59,8 @@ public class DataEntrada {
 			stmt=DbConnector.getInstancia().getConn().prepareStatement("select * from entrada where nrousuario = ?");
 			stmt.setInt(1, nroUsuario);
 			rs = stmt.executeQuery();
-			if (rs!=null && rs.next()) {
+			if (rs!=null) {
+					while(rs.next()) {;
 					Persona p = new Persona();
 					p.setId(nroUsuario);
 					Sala s = new Sala();
@@ -74,6 +75,7 @@ public class DataEntrada {
 					f.setSala(s);
 					ent.setFuncion(f);
 					entradas.add(ent);
+					}
 			}
 		} catch(SQLException e) {
 			throw new SQLException("Hubo un error en la base de datos", e);
