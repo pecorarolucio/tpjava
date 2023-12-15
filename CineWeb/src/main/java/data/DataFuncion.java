@@ -108,8 +108,7 @@ public class DataFuncion {
 	}
   
   public Funcion findOne(Funcion f) throws SQLException {
-	  Funcion fun = new Funcion();
-	  fun = null;
+	  Funcion fun = null;
 	  PreparedStatement stmt=null;
 	  ResultSet rs = null;
 	  try {
@@ -119,6 +118,7 @@ public class DataFuncion {
 		  stmt.setInt(3, f.getSala().getIdSala());
 		  rs = stmt.executeQuery();
 		  if(rs!=null && rs.next()) {
+			  fun = new Funcion();
 			  fun.setFechaFuncion(rs.getDate("fecha").toLocalDate());
 			  fun.setHoraInicio(rs.getTime("HoraInicio").toLocalTime());
 			  fun.setHoraFin(rs.getTime("HoraFin").toLocalTime());
