@@ -57,7 +57,8 @@ public class DataFuncion {
 						"on p.idPelicula = f.idPelicula "+
 						"inner join categoria cat "+
 						"on  p.idCategoria = cat.idCategoria  "+
-						"where p.idPelicula= ? and CURDATE()<=f.fecha" //EL CURDATE() ES PARA OBTENER LA FECHA ACTUAL, ASI OBTENGO LAS FUNCIONES DISPONIBLES 
+						"where p.idPelicula= ? and CURDATE()<=f.fecha "
+						+ "order by 3,1" //EL CURDATE() ES PARA OBTENER LA FECHA ACTUAL, ASI OBTENGO LAS FUNCIONES DISPONIBLES 
 						);
 			stmt.setInt(1, p.getIdPelicula());
 			rs = stmt.executeQuery();
@@ -142,7 +143,7 @@ public class DataFuncion {
 	  return fun;
   }
   
-  public void update(Funcion f) throws SQLException {
+  public void update(Funcion f,Funcion fAnt) throws SQLException {
 	  PreparedStatement stmt=null;
 	  try {
 		  stmt=DbConnector.getInstancia().getConn().prepareStatement("update funcion set fecha = ?, HoraInicio = ?, HoraFin = ?, IDSala = ?, IDPelicula = ? where fecha = ? and HoraInicio = ? and IDSala = ?");
@@ -151,9 +152,9 @@ public class DataFuncion {
 		  stmt.setTime(3, Time.valueOf(f.getHoraFin()));
 		  stmt.setInt(4, f.getSala().getIdSala());
 		  stmt.setInt(5, f.getPelicula().getIdPelicula());
-		  stmt.setDate(6, Date.valueOf(f.getFechaFuncion()));
-		  stmt.setTime(7, Time.valueOf(f.getHoraInicio()));
-		  stmt.setInt(8, f.getSala().getIdSala());
+		  stmt.setDate(6, Date.valueOf(fAnt.getFechaFuncion()));
+		  stmt.setTime(7, Time.valueOf(fAnt.getHoraInicio()));
+		  stmt.setInt(8, fAnt.getSala().getIdSala());
 		  stmt.executeUpdate();
 	  } catch(SQLException e) {
 		  throw new SQLException("Hubo un error en la base de datos", e);

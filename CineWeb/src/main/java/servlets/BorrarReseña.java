@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
@@ -34,26 +36,40 @@ public class BorrarReseña extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		request.setCharacterEncoding("UTF-8");
+		System.out.println("ñ");
 		Reseña r = new Reseña();
 		ReseñaABMC rl = new ReseñaABMC();
 		PeliculaABMC pl = new PeliculaABMC();
 		Pelicula pel = new Pelicula();
-		try {
-			System.out.println("-------------------------------");
-			System.out.println(request.getParameter("idReseña"));
-			System.out.println("-------------------------------");
-			pel.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
-			r.setCodigo(Integer.parseInt(request.getParameter("idReseña")));
-			rl.deleteReseña(r);
-			pel=pl.getOne(pel);
-			LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
-			request.setAttribute("pelicula", pel);
-			request.setAttribute("reseñas", reseñas);
-			request.getRequestDispatcher("DetallePelicula.jsp").forward(request, response);
-		} catch(SQLException e) {
-			request.setAttribute("error", "Se ha producido un error en la base de datos");
-			request.setAttribute("causa", e.toString());
-			request.getRequestDispatcher("/Error.jsp");
+		System.out.println(request.getParameter("codigo"));
+		r.setCodigo(Integer.parseInt(request.getParameter("codigo")));
+		String referer = request.getHeader("Referer");
+		if(referer!=null && !referer.contains("DetallePelicula")) {
+			try {
+				rl.deleteReseña(r);
+				String encodedURL = URLEncoder.encode("MisReseñas", StandardCharsets.UTF_8);
+				response.sendRedirect(encodedURL);//NO DICE MISRESEÑAS PORQUE HAY PROBLEMAS CON LA Ñ
+			} catch(SQLException e) {
+				request.setAttribute("error", "Se ha producido un error en la base de datos");
+				request.setAttribute("causa", e.toString());
+			}
+		} else {
+			try {
+
+				pel.setIdPelicula(Integer.parseInt(request.getParameter("idPelicula")));
+	
+				rl.deleteReseña(r);
+				pel=pl.getOne(pel);
+				LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
+				request.setAttribute("pelicula", pel);
+				request.setAttribute("reseñas", reseñas);
+				request.getRequestDispatcher("DetallePelicula.jsp").forward(request, response);
+			} catch(SQLException e) {
+				request.setAttribute("error", "Se ha producido un error en la base de datos");
+				request.setAttribute("causa", e.toString());
+				request.getRequestDispatcher("/Error.jsp").forward(request, response);
+			}
 		}
 	}
 
