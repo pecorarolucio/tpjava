@@ -39,7 +39,7 @@ DROP TABLE IF EXISTS `entrada`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `entrada` (
-  `codentrada` int unsigned NOT NULL,
+  `codentrada` int unsigned NOT NULL AUTO_INCREMENT,
   `precio` int unsigned NOT NULL,
   `fecha` date NOT NULL,
   `HoraInicio` time NOT NULL,
@@ -48,8 +48,8 @@ CREATE TABLE `entrada` (
   PRIMARY KEY (`codentrada`),
   KEY `Ent_Func_idx` (`fecha`,`HoraInicio`,`IDSala`),
   KEY `fk_entrada_usuario_idx` (`nroUsuario`),
-  CONSTRAINT `Ent_Func` FOREIGN KEY (`fecha`, `HoraInicio`, `IDSala`) REFERENCES `funcion` (`fecha`, `HoraInicio`, `IDSala`),
-  CONSTRAINT `fk_entrada_usuario` FOREIGN KEY (`nroUsuario`) REFERENCES `usuario` (`nrousuario`)
+  CONSTRAINT `Ent_Func` FOREIGN KEY (`fecha`, `HoraInicio`, `IDSala`) REFERENCES `funcion` (`fecha`, `HoraInicio`, `IDSala`) ON UPDATE CASCADE,
+  CONSTRAINT `fk_entrada_usuario` FOREIGN KEY (`nroUsuario`) REFERENCES `usuario` (`nrousuario`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -69,8 +69,8 @@ CREATE TABLE `funcion` (
   PRIMARY KEY (`fecha`,`HoraInicio`,`IDSala`),
   KEY `IDSala_idx` (`IDSala`),
   KEY `IDpelicula_idx` (`IDPelicula`),
-  CONSTRAINT `IDpelicula` FOREIGN KEY (`IDPelicula`) REFERENCES `pelicula` (`idPelicula`),
-  CONSTRAINT `IDsala` FOREIGN KEY (`IDSala`) REFERENCES `sala` (`idSala`)
+  CONSTRAINT `IDpelicula` FOREIGN KEY (`IDPelicula`) REFERENCES `pelicula` (`idpelicula`) ON UPDATE CASCADE,
+  CONSTRAINT `IDsala` FOREIGN KEY (`IDSala`) REFERENCES `sala` (`idsala`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -85,11 +85,11 @@ CREATE TABLE `pelicula` (
   `idpelicula` int unsigned NOT NULL AUTO_INCREMENT,
   `idcategoria` int unsigned NOT NULL,
   `nombre` varchar(45) NOT NULL,
-  `portada` varchar(45) DEFAULT NULL,
+  `portada` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`idpelicula`),
   KEY `idcategoria_idx` (`idcategoria`),
   CONSTRAINT `idcategoria` FOREIGN KEY (`idcategoria`) REFERENCES `categoria` (`idcategoria`) ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,8 +108,8 @@ CREATE TABLE `reseña` (
   PRIMARY KEY (`codigo`,`IDPelicula`),
   KEY `IDPelicula_idx` (`IDPelicula`),
   KEY `nrousuario_idx` (`nrousuario`),
-  CONSTRAINT `ID_Pelicula` FOREIGN KEY (`IDPelicula`) REFERENCES `pelicula` (`idpelicula`),
-  CONSTRAINT `nrousuario` FOREIGN KEY (`nrousuario`) REFERENCES `usuario` (`nrousuario`)
+  CONSTRAINT `ID_Pelicula` FOREIGN KEY (`IDPelicula`) REFERENCES `pelicula` (`idpelicula`) ON UPDATE CASCADE,
+  CONSTRAINT `nrousuario` FOREIGN KEY (`nrousuario`) REFERENCES `usuario` (`nrousuario`) ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -143,8 +143,12 @@ CREATE TABLE `usuario` (
   `Tipo` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`nrousuario`),
   UNIQUE KEY `mail_UNIQUE` (`mail`)
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping routines for database 'cinemanagement'
+--
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -155,4 +159,4 @@ CREATE TABLE `usuario` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-12-11 17:08:35
+-- Dump completed on 2023-12-14 21:04:58
