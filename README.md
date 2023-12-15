@@ -9,9 +9,9 @@
 >> Algunas reglas de negocio que son de relevancia en el negocio son:
 >>>- RN1: El id de cliente será auto generado por el sistema, al igual que el de reseña y entrada.
 >>>- RN2: El administrador será el encargado de gestionar la cartela, las reseñas hechas por los usuarios.
->>>- RN3: Solo se permitirá la compra de una única entrada por usuario (A discutir).
+>>>- RN3: El usuario sólo podra comprar una entrada por película.
 >>>- RN4: Se le brindará la posiblidad al usuario de cancelar la entrada.
->>>- RN5: Sólo podra haber una pelicula por categoria.
+
 
 ![image](https://github.com/pecorarolucio/tpjava/assets/103197168/66f91fc6-8486-4e60-bbbb-cdabbacf8bd1)
 
