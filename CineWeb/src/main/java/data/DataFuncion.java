@@ -57,7 +57,8 @@ public class DataFuncion {
 						"on p.idPelicula = f.idPelicula "+
 						"inner join categoria cat "+
 						"on  p.idCategoria = cat.idCategoria  "+
-						"where p.idPelicula= ? and CURDATE()<=f.fecha" //EL CURDATE() ES PARA OBTENER LA FECHA ACTUAL, ASI OBTENGO LAS FUNCIONES DISPONIBLES 
+						"where p.idPelicula= ? and CURDATE()<=f.fecha "
+						+ "order by 3,1" //EL CURDATE() ES PARA OBTENER LA FECHA ACTUAL, ASI OBTENGO LAS FUNCIONES DISPONIBLES 
 						);
 			stmt.setInt(1, p.getIdPelicula());
 			rs = stmt.executeQuery();
