@@ -53,8 +53,11 @@ public class AgregarFuncion extends HttpServlet {
 		f.setSala(new Sala());
 		f.getSala().setIdSala(Integer.parseInt(request.getParameter("idSala")));
 		try {
-
-			fl.addFuncion(f);
+			if(fl.getOne(f) != null) {
+				throw new SQLException("Ya existe una funcion a esta hora");
+			}else {
+				fl.addFuncion(f);	
+			}
 			request.setAttribute("peliculas", pf.getAll());
 			request.getRequestDispatcher("/Admin/Funciones/MenuFunciones.jsp").forward(request, response);
 		} catch (SQLException e) {

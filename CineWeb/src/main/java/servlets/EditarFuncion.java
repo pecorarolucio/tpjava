@@ -59,7 +59,16 @@ public class EditarFuncion extends HttpServlet {
 		FuncionABMC fl = new FuncionABMC();
 		PeliculaABMC pf = new PeliculaABMC();
 		try {
-			fl.update(f, fAntiguo);
+			if(fAntiguo.getFechaFuncion()==f.getFechaFuncion() && fAntiguo.getHoraInicio()==f.getHoraInicio() && fAntiguo.getSala().getIdSala()==f.getSala().getIdSala() ) {
+				fl.update(f, fAntiguo);	
+			}
+			else {
+				if(fl.getOne(f) == null) {
+					fl.update(f, fAntiguo);	
+				}else {
+					throw new SQLException("Ya existe una funcion a esta hora");
+				}
+			}
 			response.sendRedirect("MenuFunciones");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
