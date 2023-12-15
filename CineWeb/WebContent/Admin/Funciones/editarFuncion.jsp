@@ -19,7 +19,7 @@
         <form action="EditarFuncion" method="post">
             <div class="form-group">
                 <label for="fecha">Fecha:</label>
-                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="YY-MM-DD" required>
+                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required>
             </div>
 
             <div class="form-group">
