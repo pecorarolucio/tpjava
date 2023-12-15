@@ -66,40 +66,9 @@
            } else { %>
             <p class="no-movies">No hay películas disponibles</p>
         <% } %>
-
-<<<<<<< HEAD
-<%-- Forma completa que verifica que lo que llega no es null y es una instcia de Linkedlist --%>
-<%--<% 
-    Object peliculasObject = request.getAttribute("peliculas");
-    if (peliculasObject != null && peliculasObject instanceof LinkedList<?>) {
-        @SuppressWarnings("unchecked")
-        LinkedList<Pelicula> peliculas = (LinkedList<Pelicula>) peliculasObject;
-        System.out.println("Cantidad de películas: " + peliculas.size());
-        for (Pelicula pelicula : peliculas) { %>
-            <h1><%= pelicula.getNombrePelicula() %></h1>
-<%      }
-    } else { %>
-        <p>No hay películas disponibles.</p>
-<% } %> --%>
-
-
-
-<%	LinkedList<Pelicula> peliculas = (LinkedList<Pelicula>) request.getAttribute("peliculas");
-	if ( !peliculas.isEmpty() && peliculas.size() > 0) {
-	for (Pelicula pel : peliculas) {%>
-		<h1><%= pel.getNombrePelicula() %></h1>
-		
-		<img src="<%=pel.getPortada()%>" alt="portada">      
-		<a href="DetallePelicula?id=<%=pel.getIdPelicula() %>">Ver funciones</a>
-	<% }}
-	else { %>
-		<p>No hay peliculas disponibles </p>
-	<% } %>
-
-=======
         <a href="#" class="btn btn-secondary back-button" onclick="volver()">Volver</a>
-    </div>
->>>>>>> stash
+        </div>
+
 </body>
 <script>
 function volver(){

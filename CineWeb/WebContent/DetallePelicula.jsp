@@ -1,77 +1,29 @@
 <%@page import="entities.Persona"%>
 <%@page import="entities.Pelicula"%>
-<%@page import="entities.Rese√±a" %>
+<%@page import="entities.ReseÒa" %>
 <%@page import="java.util.LinkedList" %>
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <%HttpSession se = request.getSession();
 Persona p = (Persona) se.getAttribute("usuario"); %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Detalles Pel√≠cula</title>
+    <title>Detalles PelÌcula</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
           integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
           crossorigin="anonymous">
 </head>
 <body>
-	<%
-		Pelicula pel = (Pelicula) request.getAttribute("pelicula");
-		LinkedList<Rese√±a> rese√±as = (LinkedList<Rese√±a>) request.getAttribute("rese√±as"); //No se si esto funciona, cuando se setea rese√±as?
-		if (pel != null){
-	%>
-	<h1>Detalles pelicula</h1>
-	<p>Titulo: <%= pel.getNombrePelicula() %></p>
-	<p>Categoria: <%=pel.getCategoria().getNombreCategoria() %></p>
-	 <%--pel.getCategoria().getNombreCategoria() --%>
-    <img src="<%=pel.getPortada()%>" alt="portada">    
-	
-	<h2>Rese√±as:</h2>
-	<% if (rese√±as.isEmpty()){ %>
-	<p>No hay rese√±as a√±n</p>
-	<% } %>
-	<ul>
-	<% for (Rese√±a rese√±a : rese√±as) {
-		Persona Autor = rese√±a.getAutor(); %>
-	<li><p><%= Autor.getNombre() %></p>
-		<p><%= rese√±a.getFecha() %></p>
-		<p><%= rese√±a.getDescripcion() %></p>
-		<%if(p!= null && p.getTipo().equals("Admin")){ %>
-			<form method="post" action="BorrarRese√±a">
-			<input type="hidden" name="idRese√±a" value="<%=rese√±a.getCodigo()%>" >
-			<input type="hidden" name="idPelicula" value="<%=pel.getIdPelicula()%>" >
-			<button type="submit"  value="Borrar Rese√±a">Borrar</button>
-			</form>
-			<% }%>
-	</li>
-		<% } %>
-	</ul>
-	<% if(p == null){%>
-	<a href="login.html" class="btn btn-primary">Inicie sesion para comprar la entrada</a>
-	<%}else{%>
-	<%String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula();%>
-	<a href="<%=url%>" class="btn btn-primary">Comprar entrada</a>
-	<%} %>
-	<h1>Realizar rese√±a</h1>
-	<form action="PublicarRese√±a" method="Post">
-		<input type="hidden" name="idPelicula" value="<%=pel.getIdPelicula() %>">
-	     <label for="descripcion">Descripcion:</label>
-	     <textarea name="descripcion" id="descripcion" rows="4" cols="50"></textarea>
-	     <input type="submit" value="Publicar Rese√±a">
-    </form>
-	<%
-	} else {
-	%>
-	<p>No se encontro la pelicula especificada</p>
-	<% } %>
-	
+    <div class="container mt-5">
+        <% Pelicula pel = (Pelicula) request.getAttribute("pelicula");
+           LinkedList<ReseÒa> reseÒas = (LinkedList<ReseÒa>) request.getAttribute("reseÒas");
 
            if (pel != null) { %>
-          
-         <a href="#" onclick="volver()" class="btn btn-secondary ml-2">Volver</a>
-
-        <h1 class="text-center mb-4">Detalles Pel√≠cula</h1>
+           
+		<a href="#" onclick="volver()" class="btn btn-secondary ml-2">Volver</a>
+        <h1 class="text-center mb-4">Detalles PelÌcula</h1>
         <div class="card">
             <div class="card-body">
                 <p class="card-text"><strong>Titulo:</strong> <%= pel.getNombrePelicula() %></p>
@@ -80,22 +32,22 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
             </div>
         </div>
 
-        <h2 class="mt-4">Rese√±as:</h2>
-        <% if (rese√±as.isEmpty()){ %>
-            <p>No hay rese√±as a√∫n</p>
+        <h2 class="mt-4">ReseÒas:</h2>
+        <% if (reseÒas.isEmpty()){ %>
+            <p>No hay reseÒas a˙n</p>
         <% } %>
         <ul class="list-group">
-            <% for (Rese√±a rese√±a : rese√±as) {
-                Persona Autor = rese√±a.getAutor(); %>
+            <% for (ReseÒa reseÒa : reseÒas) {
+                Persona Autor = reseÒa.getAutor(); %>
             <li class="list-group-item">
                 <p class="mb-1"><strong>Autor:</strong> <%= Autor.getNombre() %></p>
-                <p class="mb-1"><strong>Fecha:</strong> <%= rese√±a.getFecha() %></p>
-                <p class="mb-1"><strong>Descripci√≥n:</strong> <%= rese√±a.getDescripcion() %></p>
+                <p class="mb-1"><strong>Fecha:</strong> <%= reseÒa.getFecha() %></p>
+                <p class="mb-1"><strong>DescripciÛn:</strong> <%= reseÒa.getDescripcion() %></p>
                 <% if(p != null && p.getTipo().equals("Admin")){ %>
-                    <form method="post" action="BorrarRese√±a" class="float-right">
-                        <input type="hidden" name="codigo" value="<%=rese√±a.getCodigo()%>" >
+                    <form method="post" action="BorrarReseÒa" class="float-right">
+                        <input type="hidden" name="codigo" value="<%=reseÒa.getCodigo()%>" >
                         <input type="hidden" name="idPelicula" value="<%=pel.getIdPelicula()%>" >
-                        <button type="submit" class="btn btn-danger btn-sm">Borrar Rese√±a</button>
+                        <button type="submit" class="btn btn-danger btn-sm">Borrar ReseÒa</button>
                     </form>
                 <% } %>
             </li>
@@ -103,32 +55,30 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
         </ul>
 
         <% if(p == null){ %>
-        <a href="login.html" class="btn btn-primary mt-4">Inicie sesi√≥n para comprar la entrada</a>
+        <a href="login.html" class="btn btn-primary mt-4">Inicie sesiÛn para comprar la entrada</a>
         <% } else { %>
         <% String url = "ListaFunciones?IdPelicula=" + pel.getIdPelicula(); %>
         <a href="<%=url%>" class="btn btn-primary mt-4">Comprar entrada</a>
         <% } %>
 
-        <h1 class="mt-4">Realizar rese√±a</h1>
-        <form action="PublicarRese√±a" method="Post">
+        <h1 class="mt-4">Realizar reseÒa</h1>
+        <form action="PublicarReseÒa" method="Post">
             <input type="hidden" name="idPelicula" value="<%=pel.getIdPelicula() %>">
             <div class="form-group">
-                <label for="descripcion">Descripci√≥n:</label>
+                <label for="descripcion">DescripciÛn:</label>
                 <textarea class="form-control" name="descripcion" id="descripcion" rows="4" required></textarea>
             </div>
-            <input type="submit" class="btn btn-primary" value="Publicar Rese√±a">
+            <input type="submit" class="btn btn-primary" value="Publicar ReseÒa">
         </form>
 
         <% } else { %>
-        <p>No se encontr√≥ la pel√≠cula especificada</p>
+        <p>No se encontrÛ la pelÌcula especificada</p>
         <% } %>
     </div>
 </body>
-
 <script>
-	function volver(){
-		window.location.href='BuscaCategorias'
-	}
+function volver(){
+	window.location.href='BuscaCategorias'
+}
 </script>
 </html>
-
