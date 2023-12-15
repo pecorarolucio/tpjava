@@ -22,7 +22,7 @@ Persona p = (Persona) se.getAttribute("usuario"); %>
 	<p>Titulo: <%= pel.getNombrePelicula() %></p>
 	<p>Categoria: <%=pel.getCategoria().getNombreCategoria() %></p>
 	 <%--pel.getCategoria().getNombreCategoria() --%>
-    <img src="../../<%=pel.getPortada()%>" alt="portada">    
+    <img src="<%=pel.getPortada()%>" alt="portada">    
 	
 	<h2>Reseñas:</h2>
 	<% if (reseñas.isEmpty()){ %>

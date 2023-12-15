@@ -59,8 +59,7 @@ public class EditarFuncion extends HttpServlet {
 		FuncionABMC fl = new FuncionABMC();
 		PeliculaABMC pf = new PeliculaABMC();
 		try {
-			fl.deleteFuncion(fAntiguo);
-			fl.addFuncion(f);
+			fl.update(f, fAntiguo);
 			response.sendRedirect("MenuFunciones");
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

@@ -30,7 +30,7 @@
 	for (Pelicula pel : peliculas) {%>
 		<h1><%= pel.getNombrePelicula() %></h1>
 		
-		<img src="../../<%=pel.getPortada()%>" alt="portada">      
+		<img src="<%=pel.getPortada()%>" alt="portada">      
 		<a href="DetallePelicula?id=<%=pel.getIdPelicula() %>">Ver funciones</a>
 	<% }}
 	else { %>
