@@ -17,6 +17,10 @@ public class PersonaABMC {
 		return dp.getAll();
 	};
 	
+	public LinkedList<Persona> getClientes() throws SQLException{
+		return dp.getClientes();
+	};
+	
 	public Persona getOne(Persona p) throws SQLException {
 		return dp.getOne(p);
 	};

@@ -42,6 +42,40 @@ public class DataPersona {
 		
 	};
 	
+	public LinkedList<Persona> getClientes() throws SQLException {
+		Statement stmt=null;
+		ResultSet rs=null;
+		LinkedList<Persona> clientes= new LinkedList<>();
+		try {
+			stmt= DbConnector.getInstancia().getConn().createStatement();
+			rs= stmt.executeQuery("select * from usuario where tipo='Cliente' ");
+			if(rs!=null) {
+				while(rs.next()) {
+					Persona p= new Persona();
+					p.setId(rs.getInt("nrousuario"));
+					p.setNombre(rs.getString("nombre"));
+					p.setApellido(rs.getString("apellido"));
+					p.setMail(rs.getString("mail"));
+					clientes.add(p);
+				}
+			}
+		} catch (SQLException e) {
+			throw new SQLException("Hubo un error en la base de datos", e);
+			
+		} finally {
+			try {	
+				if(rs!=null) {rs.close();}
+				if(stmt!=null) {stmt.close();}
+				DbConnector.getInstancia().releaseConn();
+			} catch (SQLException e) {
+				throw new SQLException("Hubo un error en la base de datos", e);
+			}
+		}
+		return clientes;
+		
+	};
+	
+	
 	public Persona findByMail(Persona p) throws SQLException {
 		PreparedStatement stmt = null;
 		ResultSet rs = null;
