@@ -57,7 +57,8 @@ public class CancelarTickets extends HttpServlet {
 			if (ent==null) { //NOTA: NO SE SI CUANDO ENTRADA ES NULL SQL ME DA UNA EXCEPTION O VALOR COMUN, HAY QUE CAMBIAR ESTO
 				//MOSTRAR MENSAJE NO EXISTE ENTRADA"
 			} else {
-				request.setAttribute("error", e);
+				request.setAttribute("error", "Se ha producido un error en la base de datos");
+				request.setAttribute("causa", e.toString());
 				request.getRequestDispatcher("/Error.jsp");
 			}
 		}

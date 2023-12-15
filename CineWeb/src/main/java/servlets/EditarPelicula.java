@@ -53,7 +53,8 @@ public class EditarPelicula extends HttpServlet {
 			request.setAttribute("editPel", pel);
 			request.getRequestDispatcher("editarPelicula.jsp").forward(request, response);
 		} catch(SQLException e) {
-			request.setAttribute("error", e);
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 	}
@@ -92,7 +93,8 @@ public class EditarPelicula extends HttpServlet {
 			pl.updatePelicula(pel);
 			response.sendRedirect("MenuPelicula");
 		} catch(SQLException e) {
-			request.setAttribute("error", e.getMessage());
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("Error.jsp").forward(request, response);
 		}
 	}

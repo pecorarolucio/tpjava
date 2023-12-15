@@ -73,7 +73,8 @@ public class ComprarEntrada extends HttpServlet {
 				response.sendRedirect(request.getContextPath() + "/login.html");
 			}
 		} catch(SQLException e) {
-			request.setAttribute("error", e);
+			request.setAttribute("error", "Se ha producido un error en la base de datos");
+			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp");
 		}
 		// TODO Auto-generated method stub
