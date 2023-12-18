@@ -64,7 +64,7 @@ public class ComprarEntrada extends HttpServlet {
 					//AGREGAR QUE REDIRIJA A UNA PAGINA DE EXITO
 					//request.setAttribute("EstadoCompra", resultado);
 					//request.getRequestDispatcher("EXITO.jsp").forward(request, response);
-					response.sendRedirect("Index.jsp");
+					response.sendRedirect("Exito.jsp");
 				} else if(e==null) {
 					String resultado = "fallido";
 					//AGREGAR QUE REDIRIJA A UNA PAGINA DE ERROR DE SALA LLENA

@@ -47,7 +47,7 @@
                     <p class="mb-3"><strong>Capacidad Máxima:</strong> <%= f.getSala().getCapacidadMaxima() %></p>
                     <% String url = "ComprarEntrada?fecha=" + f.getFechaFuncion() + "&hora=" + f.getHoraInicio() +
                                     "&idSala=" + f.getSala().getIdSala(); %>
-                    <a href="<%= url %>" class="btn btn-lg btn-danger btn-comprar">Comprar Boleto</a>
+                    <a href="<%= url %>" class="btn btn-lg btn-primary btn-comprar">Comprar Boleto</a>
                 </div>
             <% }
         } %>
