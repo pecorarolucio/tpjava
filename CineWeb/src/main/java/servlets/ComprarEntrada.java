@@ -12,10 +12,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.AppException;
 import entities.Entrada;
 import entities.Funcion;
 import entities.Persona;
 import entities.Sala;
+import logic.CompraEntradaController;
 import logic.EntradaABMC;
 import logic.FuncionABMC;
 
@@ -46,25 +48,25 @@ public class ComprarEntrada extends HttpServlet {
 				int idSala = Integer.parseInt(request.getParameter("idSala"));
 				Sala s = new Sala();
 				s.setIdSala(idSala);
-				FuncionABMC fl = new FuncionABMC();
+				CompraEntradaController cec = new CompraEntradaController();
 				Funcion f = new Funcion();
 				f.setFechaFuncion(fecha);
 				f.setHoraInicio(horaInicio);
 				f.setSala(s);
-				f = fl.getOne(f);
-				String resultado = "exito";
-				if (!fl.isFull(f)) {
+				Entrada e = cec.comprarEntrada(f, p);
+				if (e!=null) {
+				/*if (!fl.isFull(f)) {
 					EntradaABMC el = new EntradaABMC();
 					Entrada e = new Entrada();
 					e.setFuncion(f);
 					e.setPersona(p);
-					el.add(e);
+					el.add(e);*/
 					//AGREGAR QUE REDIRIJA A UNA PAGINA DE EXITO
 					//request.setAttribute("EstadoCompra", resultado);
 					//request.getRequestDispatcher("EXITO.jsp").forward(request, response);
 					response.sendRedirect("Index.jsp");
-				} else {
-					resultado = "fallido";
+				} else if(e==null) {
+					String resultado = "fallido";
 					//AGREGAR QUE REDIRIJA A UNA PAGINA DE ERROR DE SALA LLENA
 					request.setAttribute("EstadoCompra", resultado);
 					request.getRequestDispatcher("SALALLENA.jsp").forward(request, response);
@@ -72,13 +74,14 @@ public class ComprarEntrada extends HttpServlet {
 			} else {
 				response.sendRedirect(request.getContextPath() + "/login.html");
 			}
-		} catch(SQLException e) {
-			request.setAttribute("error", "Se ha producido un error en la base de datos");
+		} catch(AppException e) {
+			request.setAttribute("error", e);
 			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp");
-		}
-		// TODO Auto-generated method stub
+			}
 	}
+		// TODO Auto-generated method stub
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

@@ -34,6 +34,8 @@ public class FuncionABMC {
 	}
 	
 	public boolean isFull(Funcion f)throws SQLException {
+		System.out.println(el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima());
+		System.out.println(f.getSala().getCapacidadMaxima());
 		return el.findFromFuncion(f).size()==f.getSala().getCapacidadMaxima();
 		
 	}

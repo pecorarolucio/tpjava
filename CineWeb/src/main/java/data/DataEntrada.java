@@ -117,6 +117,7 @@ public class DataEntrada {
 				}
 			}
 		} catch(SQLException e) {
+			e.printStackTrace();
 			throw new SQLException("Hubo un error en la base de datos", e);
 		} finally {
 			try {
