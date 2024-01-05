@@ -28,29 +28,29 @@ public class CategoriaABMC {
 		dc = new DataCategoria();
 	}
 	
-	public LinkedList<Categoria> getAll() throws SQLException {
+	public LinkedList<Categoria> getAll() throws SQLException, AppException {
 		
 		return dc.getAll();
 			
 	}
 	
 
-	public void addCategoria (Categoria c) throws SQLException {
+	public void addCategoria (Categoria c) throws SQLException, AppException{
 		dc.add(c);
 	}
 
-	public void updateCategoria(Categoria c)throws SQLException {
+	public void updateCategoria(Categoria c)throws SQLException, AppException {
 		dc.update(c);
 	}
-	public Categoria searchCategoria(Categoria c)throws SQLException {
+	public Categoria searchCategoria(Categoria c)throws SQLException, AppException {
 		return dc.search(c);
 	}
 
-	public void deleteCategoria(Categoria c)throws SQLException {
+	public void deleteCategoria(Categoria c)throws SQLException, AppException {
 		dc.delete(c);
 	}
 	
-	public Categoria getOne(int id)throws SQLException {
+	public Categoria getOne(int id)throws SQLException, AppException {
 		return dc.findOne(id);
 	}
 	

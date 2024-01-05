@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.AppException;
 import entities.Persona;
 import entities.Reseña;
 import logic.ReseñaABMC;
@@ -43,7 +44,11 @@ public class MisReseñas extends HttpServlet {
 			} catch(SQLException e) {
 				request.setAttribute("error", "Se ha producido un error en la base de datos");
 				request.setAttribute("causa", e.toString());
-				request.getRequestDispatcher("/Error.jsp");
+				 request.getRequestDispatcher("/Error.jsp");
+			} catch (AppException e) {
+				request.setAttribute("error", "Hubo un error inesperado");
+				request.setAttribute("causa", e.getMessage().toString());
+				request.getRequestDispatcher("/Error.jsp").forward(request, response);
 			}
 		} else {
 			response.sendError(404, "Usuario no encontrado");

@@ -74,10 +74,14 @@ public class ComprarEntrada extends HttpServlet {
 			} else {
 				response.sendRedirect(request.getContextPath() + "/login.html");
 			}
+		} catch(SQLException e) {
+			request.setAttribute("error", e);
+			request.setAttribute("causa",  e.toString());
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		} catch(AppException e) {
 			request.setAttribute("error", e);
 			request.setAttribute("causa", e.toString());
-			request.getRequestDispatcher("/Error.jsp");
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 			}
 	}
 		// TODO Auto-generated method stub

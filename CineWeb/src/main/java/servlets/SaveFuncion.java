@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.AppException;
 import entities.Sala;
 import logic.SalaABMC;
 
@@ -52,6 +53,10 @@ public class SaveFuncion extends HttpServlet {
 					// TODO Auto-generated catch block
 					request.setAttribute("error", "Se ha producido un error en la base de datos");
 					request.setAttribute("causa", e.toString());
+					request.getRequestDispatcher("/Error.jsp").forward(request, response);
+				} catch (AppException e) {
+					request.setAttribute("error", "Hubo un error inesperado");
+					request.setAttribute("causa", e.getMessage().toString());
 					request.getRequestDispatcher("/Error.jsp").forward(request, response);
 				}
 	}

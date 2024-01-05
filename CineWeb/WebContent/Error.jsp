@@ -11,9 +11,12 @@
 <body>
 <%Persona p = (Persona)session.getAttribute("usuario"); %>
     <h2>Error</h2>
+    <p>Ha ocurrido un error: </p>
     <p>${requestScope.error}</p>
-    <% if (p != null && "Admin".equals(p.getTipo())){%>
+    <% if (p != null && p.getTipo().equalsIgnoreCase("Admin")){%>
     <p>${requestScope.causa}</p>
     <% } %>
+    
+    <a href="Index.jsp">Volver a index</a>
 </body>
 </html>

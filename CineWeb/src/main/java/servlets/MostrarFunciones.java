@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.SQLException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -38,10 +40,14 @@ public class MostrarFunciones extends HttpServlet {
 			request.setAttribute("funciones", Listafunciones);
 			request.setAttribute("pelicula", p);
 			request.getRequestDispatcher("/Admin/Funciones/ListaFunciones.jsp").forward(request, response);
-		} catch (Exception e) {
+		} catch (SQLException e) {
 			// TODO: handle exception
 			request.setAttribute("error", "Se ha producido un error en la base de datos");
 			request.setAttribute("causa", e.toString());
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
+		} catch (AppException e) {
+			request.setAttribute("error", "Hubo un error inesperado");
+			request.setAttribute("causa", e.getMessage().toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 		

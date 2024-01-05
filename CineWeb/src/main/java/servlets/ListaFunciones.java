@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import data.DataFuncion;
 import entities.*;
+import logic.FuncionABMC;
 
 /**
  * Servlet implementation class ListaFunciones
@@ -37,17 +38,21 @@ public class ListaFunciones extends HttpServlet {
 			request.getRequestDispatcher("Index.jsp").forward(request, response);
 		}
 		else {
-		DataFuncion dtFunc = new DataFuncion();
+		FuncionABMC fb = new FuncionABMC();
 		Pelicula pel = new Pelicula();
 		int idPelicula = Integer.parseInt(request.getParameter("IdPelicula"));
 		pel.setIdPelicula(idPelicula);
 		try {
-			LinkedList<Funcion> listafunciones = dtFunc.getFunciones(pel);
+			LinkedList<Funcion> listafunciones = fb.getFunciones(pel);
 			request.setAttribute("funciones", listafunciones);
 			request.getRequestDispatcher("ListadeFuncionesxPelicula.jsp").forward(request, response);
 		}	catch(SQLException e) {
 				request.setAttribute("error", "Se ha producido un error en la base de datos");
 				request.setAttribute("causa", e.toString());
+				request.getRequestDispatcher("/Error.jsp").forward(request, response);
+			} catch (AppException e) {
+				request.setAttribute("error", "Hubo un error inesperado");
+				request.setAttribute("causa", e.getMessage().toString());
 				request.getRequestDispatcher("/Error.jsp").forward(request, response);
 			}
 		}

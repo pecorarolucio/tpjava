@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import entities.AppException;
 import entities.Pelicula;
 import entities.Reseña;
 import logic.PeliculaABMC;
@@ -59,6 +60,10 @@ public class DetallePelicula extends HttpServlet {
 					request.setAttribute("error", "Se ha producido un error en la base de datos");
 					request.setAttribute("causa", e.toString());
 					request.getRequestDispatcher("Error.jsp").forward(request, response);
+				} catch (AppException e) {
+					request.setAttribute("error", "Hubo un error inesperado");
+					request.setAttribute("causa", e.getMessage().toString());
+					request.getRequestDispatcher("/Error.jsp").forward(request, response);
 				}
 			} catch(NumberFormatException e) {
 				response.sendError(HttpServletResponse.SC_BAD_REQUEST, "id invalido");

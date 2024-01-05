@@ -61,6 +61,10 @@ public class CancelarTickets extends HttpServlet {
 				request.setAttribute("causa", e.toString());
 				request.getRequestDispatcher("/Error.jsp");
 			}
+		} catch (AppException e) {
+			request.setAttribute("error", "Hubo un error inesperado");
+			request.setAttribute("causa", e.getMessage().toString());
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 	
 	}
