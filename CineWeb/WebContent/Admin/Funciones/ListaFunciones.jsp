@@ -51,7 +51,7 @@
 						<th>HoraFin</th>
                   		<th>IDSala</th>
                   		<th>IDPelicula</th>
-                  		<th>Acciones</th> <!-- LO AGREGO PARA VERIFICAR QUE LA PELI SEA LA CORECTA, LUEGO LO ELIMINAMOS -->
+                  		<th>Acciones</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -66,6 +66,7 @@
             			<form action="SaveFuncion" method="get" >
 	            			<input type="hidden" name="Fecha" value="<%= f.getFechaFuncion() %>" >
 	            			<input type="hidden" name="HoraInicio" value="<%=f.getHoraInicio() %>" >
+	            			<input type="hidden" name="HoraFin" value="<%=f.getHoraFin() %>" >
 	            			<input type="hidden" name="IDSala" value="<%=f.getSala().getIdSala()%>" >
 	            			<input type="hidden" name="idPelicula" value="<%=p.getIdPelicula() %>" >
 	            			<button type="submit" class="btn btn-dark">Editar</button>

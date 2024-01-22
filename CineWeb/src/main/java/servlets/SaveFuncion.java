@@ -38,11 +38,13 @@ public class SaveFuncion extends HttpServlet {
 				String idPeli = request.getParameter("idPelicula");
 				String Fecha = request.getParameter("Fecha");
 				String HoraInicio = request.getParameter("HoraInicio");
+				String HoraFin = request.getParameter("HoraFin");
 				String IDSala = request.getParameter("IDSala");
 				HttpSession user = request.getSession();
 				user.setAttribute("peli", idPeli);
 				user.setAttribute("fecha", Fecha);
 				user.setAttribute("horainicio", HoraInicio);
+				user.setAttribute("horafin", HoraFin);
 				user.setAttribute("idsala", IDSala);
 				SalaABMC sl = new SalaABMC();
 				try {

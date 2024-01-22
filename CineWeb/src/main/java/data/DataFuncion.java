@@ -170,6 +170,49 @@ public class DataFuncion {
 	  }
   }
   
-  //FALTA EL UPDATE PERO PARA EL AD O CON LE TIEMPO RESTANTE LO PODEMOS HACER
+  public LinkedList<Funcion> getAllFunciones(Pelicula p) throws SQLException {
+		PreparedStatement stmt=null;
+		ResultSet rs = null;
+		Funcion f = null;
+		LinkedList<Funcion> funciones = new LinkedList<>();
+		try {
+			stmt= DbConnector.getInstancia().getConn().prepareStatement(
+						"select f.HoraInicio, f.HoraFin, f.fecha, f.IDSala, sal.capacidadmax, p.nombre, p.idCategoria, cat.nombre, "+
+						"cat.nombre "+
+						"from funcion f "+
+						"inner join sala sal "+
+						"on sal.idSala = f.idSala "+
+						"inner join pelicula p "+
+						"on p.idPelicula = f.idPelicula "+
+						"inner join categoria cat "+
+						"on  p.idCategoria = cat.idCategoria  "+
+						"where p.idPelicula= ? "
+						+ "order by 3,1"
+						);
+			stmt.setInt(1, p.getIdPelicula());
+			rs = stmt.executeQuery();
+			if(rs!=null) {
+				while (rs.next()){
+					Categoria c = new Categoria(rs.getInt("idCategoria"), rs.getString("nombre"));
+					p.setNombrePelicula(rs.getString("nombre"));
+					p.setCategoria(c);
+					Sala s = new Sala(rs.getInt("idSala"),rs.getInt("capacidadmax"));
+					f = new Funcion(rs.getDate("fecha").toLocalDate(), rs.getTime("HoraInicio").toLocalTime(), rs.getTime("HoraFin").toLocalTime(), s, p);
+					f.setSala(s); //LA SALA SOLO TIENE CARGADA UNA ID PARA MOSTRAR
+					funciones.add(f);
+				}
+			}
+		} catch(SQLException e)  {
+			throw new SQLException("Hubo un error en la base de datos", e);
+		} finally {
+			try {
+				if(stmt!=null)stmt.close();
+				DbConnector.getInstancia().releaseConn();
+			} catch(SQLException e) {
+				throw new SQLException("Hubo un error en la base de datos", e);
+			}
+		}
+		return funciones;
+	}
 		
 }

@@ -36,7 +36,7 @@ public class MostrarFunciones extends HttpServlet {
 		FuncionABMC fl = new FuncionABMC();
 		p.setIdPelicula(idPelicula);
 		try {
-			LinkedList<Funcion> Listafunciones = fl.getFunciones(p);
+			LinkedList<Funcion> Listafunciones = fl.getAllFunciones(p);
 			request.setAttribute("funciones", Listafunciones);
 			request.setAttribute("pelicula", p);
 			request.getRequestDispatcher("/Admin/Funciones/ListaFunciones.jsp").forward(request, response);

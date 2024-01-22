@@ -43,5 +43,8 @@ public class FuncionABMC {
 	public void update(Funcion f,Funcion fAnt) throws SQLException, AppException {
 		df.update(f,fAnt);
 	}
+	public LinkedList<Funcion> getAllFunciones(Pelicula p) throws SQLException, AppException{
+		return df.getAllFunciones(p);
+	}
 	
 }
