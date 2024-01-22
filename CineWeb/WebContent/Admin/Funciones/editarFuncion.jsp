@@ -2,7 +2,8 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="java.util.LinkedList"%>
 <%@page import="entities.Sala"%>
-<%LinkedList<Sala> salas = (LinkedList<Sala>) request.getAttribute("salas"); %>
+<%LinkedList<Sala> salas = (LinkedList<Sala>) request.getAttribute("salas"); 
+HttpSession user = request.getSession();%>
 <!DOCTYPE html>
 <html lang="es">
 <head>
