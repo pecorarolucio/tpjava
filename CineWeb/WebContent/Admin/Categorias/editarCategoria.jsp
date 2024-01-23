@@ -20,7 +20,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Editar Categoria</h1>
-        <form action="EditarCategoria" method="post" enctype="multipart/form-data">
+        <form action="EditarCategoria" method="post">
             <div class="form-group">
                 <label for="nombre">Nombre:</label>
                 <input type="text" class="form-control" id="nombre" name="nombre" value="<%= c.getNombreCategoria() %>"

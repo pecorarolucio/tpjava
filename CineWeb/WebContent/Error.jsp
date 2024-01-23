@@ -17,6 +17,6 @@
     <p>${requestScope.causa}</p>
     <% } %>
     
-    <a href="Index.jsp">Volver a index</a>
+    <a href="/CineWeb/Index.jsp">Volver a index</a>
 </body>
 </html>

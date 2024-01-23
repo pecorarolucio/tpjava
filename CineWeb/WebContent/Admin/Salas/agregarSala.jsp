@@ -15,7 +15,7 @@
     <div class="container mt-5">
         <h2>Agregar Sala</h2>
 
-        <form action="AgregarSala" method="post" enctype="multipart/form-data">
+        <form action="AgregarSala" method="post">
             <div class="form-group">
                 <label for="capacidad">Capacidad:</label>
                 <input type="text" class="form-control" id="capacidad" name="capacidad" required>
