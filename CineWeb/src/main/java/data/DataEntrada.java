@@ -9,6 +9,7 @@ import java.util.LinkedList;
 
 import entities.Entrada;
 import entities.Funcion;
+import entities.Pelicula;
 import entities.Persona;
 import entities.Sala;
 
@@ -56,7 +57,8 @@ public class DataEntrada {
 		//LinkedList<Entrada> entradas = new LinkedList<>();
 		LinkedList<Entrada> entradas = new LinkedList<Entrada>();
 		try {
-			stmt=DbConnector.getInstancia().getConn().prepareStatement("select * from entrada where nrousuario = ?");
+			stmt=DbConnector.getInstancia().getConn().prepareStatement("select e.codentrada, e.precio, e.fecha, e.IDSala, e.HoraInicio, p.nombre, p.idpelicula from entrada e inner join funcion f on f.fecha = e.fecha and e.IDSala = f.IDSala and f.HoraInicio = e.HoraInicio\r\n"
+					+ "inner join pelicula p on f.IDPelicula = p.idpelicula where e.nrousuario = ?");
 			stmt.setInt(1, nroUsuario);
 			rs = stmt.executeQuery();
 			if (rs!=null) {
@@ -64,15 +66,19 @@ public class DataEntrada {
 					Persona p = new Persona();
 					p.setId(nroUsuario);
 					Sala s = new Sala();
-					s.setIdSala(rs.getInt("IDSala"));
+					s.setIdSala(rs.getInt("e.IDSala"));
 					Entrada ent = new Entrada();
-					ent.setCodEntrada(rs.getInt("codentrada"));
+					ent.setCodEntrada(rs.getInt("e.codentrada"));
 					ent.setPersona(p);
-					ent.setPrecio(rs.getInt("precio"));
+					ent.setPrecio(rs.getInt("e.precio"));
 					Funcion f = new Funcion();
-					f.setHoraInicio(rs.getTime("HoraInicio").toLocalTime());
-					f.setFechaFuncion(rs.getDate("fecha").toLocalDate());
+					f.setHoraInicio(rs.getTime("e.HoraInicio").toLocalTime());
+					f.setFechaFuncion(rs.getDate("e.fecha").toLocalDate());
 					f.setSala(s);
+					Pelicula pel = new Pelicula();
+					pel.setIdPelicula(rs.getInt("p.idpelicula"));
+					pel.setNombrePelicula(rs.getString("p.nombre"));
+					f.setPelicula(pel);
 					ent.setFuncion(f);
 					entradas.add(ent);
 					}
