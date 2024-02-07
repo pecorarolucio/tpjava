@@ -33,6 +33,7 @@ public class FuncionABMC {
 		    }
 		}
 		return listafunciones;
+		//iteracion para eliminar funciones llenas
 	}
 	
 	public void deleteFuncion(Funcion f)throws SQLException, AppException {
