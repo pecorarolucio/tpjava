@@ -51,7 +51,8 @@ public class DetallePelicula extends HttpServlet {
 				try {
 					pel = pl.getOne(pel);	
 					LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
-					System.out.println(pel.getPortada());
+					System.out.println(pel.getCategoria());
+					System.out.println(pel);
 					System.out.println(getServletContext().getRealPath(""));
 					request.setAttribute("pelicula", pel);
 					request.setAttribute("reseñas", reseñas);

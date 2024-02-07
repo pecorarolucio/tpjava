@@ -20,7 +20,7 @@ public class DataPelicula {
 		CategoriaABMC cl = new CategoriaABMC();
 		Integer id = p.getIdPelicula();
 		try {
-			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula p inner join categoria c where idpelicula = ?");
+			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula p inner join categoria c on p.idcategoria = c.idcategoria where idpelicula = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
 			//if (rs !=null) {
