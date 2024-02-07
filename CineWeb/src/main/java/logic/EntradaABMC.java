@@ -30,7 +30,7 @@ public class EntradaABMC {
 	public void add(Entrada e) throws SQLException, AppException {
 		de.add(e);
 	}
-	public Entrada cancelarEntrada(int cod) throws AppException {
+	public Entrada cancelarEntrada(int cod) throws SQLException, AppException {
 		Entrada ent = null;
 		try {
 			ent = de.findOne(cod);
@@ -40,6 +40,8 @@ public class EntradaABMC {
 			} else {
 				return null;
 			}
+		} catch (SQLException e) {
+			throw new SQLException("Ha ocurrido un error en la base de datos", e);
 		} catch (Exception e) {
 			throw new AppException ("Ha ocurrido un error inespereado");
 		}
