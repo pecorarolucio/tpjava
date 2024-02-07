@@ -30,9 +30,19 @@ public class EntradaABMC {
 	public void add(Entrada e) throws SQLException, AppException {
 		de.add(e);
 	}
-	
-	public void delete(Entrada e) throws SQLException, AppException {
-		de.delete(e);
+	public Entrada cancelarEntrada(int cod) throws AppException {
+		Entrada ent = null;
+		try {
+			ent = de.findOne(cod);
+			if (ent!=null) {
+				de.delete(ent);
+				return ent;
+			} else {
+				return null;
+			}
+		} catch (Exception e) {
+			throw new AppException ("Ha ocurrido un error inespereado");
+		}
 	}
 
 }
