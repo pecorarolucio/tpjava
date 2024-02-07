@@ -46,9 +46,7 @@ public class BorrarSala extends HttpServlet {
 		try {
 			s = sl.searchSala(s);
 			sl.deleteSala(s);
-			LinkedList<Sala> salas = new LinkedList<Sala>();
-			request.setAttribute("salas", salas);
-			request.getRequestDispatcher("MenuSalas.jsp").forward(request, response);
+			response.sendRedirect("MenuSala");
 			
 		} catch (SQLException e) {
 			request.setAttribute("error", "Se ha producido un error en la base de datos");

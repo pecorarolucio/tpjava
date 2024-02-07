@@ -36,6 +36,7 @@
         <ul class="list-group">
             <% for (Entrada entradaComprada : entradasCompradas) { %>
             <li class="list-group-item">
+            	<p class="mb-1"><strong>Pelicula:</strong> <%=entradaComprada.getFuncion().getPelicula().getNombrePelicula() %>
                 <p class="mb-1"><strong>Precio:</strong> <%= entradaComprada.getPrecio() %></p>
                 <p class="mb-1"><strong>Funcion:</strong> <%= entradaComprada.getFuncion().getFechaFuncion() %></p>
                     <form method="post" action="CancelarTickets" class="float-right">
