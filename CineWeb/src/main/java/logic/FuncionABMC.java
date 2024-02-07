@@ -1,6 +1,7 @@
 package logic;
 
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 import data.DataFuncion;
@@ -23,7 +24,15 @@ public class FuncionABMC {
 	}
 	
 	public LinkedList<Funcion> getFunciones(Pelicula p) throws SQLException, AppException{
-		return df.getFunciones(p);
+		LinkedList<Funcion> listafunciones = df.getFunciones(p);
+		Iterator<Funcion> iterator = listafunciones.iterator();
+		while (iterator.hasNext()) {
+		    Funcion f = iterator.next();
+		    if (isFull(f)) {
+		        iterator.remove();
+		    }
+		}
+		return listafunciones;
 	}
 	
 	public void deleteFuncion(Funcion f)throws SQLException, AppException {
