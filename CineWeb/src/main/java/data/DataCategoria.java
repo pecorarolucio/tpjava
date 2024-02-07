@@ -2,6 +2,8 @@ package data;
 
 import java.sql.*;
 import java.util.LinkedList;
+
+import entities.AppException;
 import entities.Categoria;
 
 
@@ -71,7 +73,7 @@ public class DataCategoria {
 		
 	
 	
-	public void add(Categoria c) throws SQLException {
+	public void add(Categoria c) throws SQLException, AppException {
 		PreparedStatement stmt= null;
 		ResultSet keyResultSet=null;
 		try {
@@ -83,10 +85,12 @@ public class DataCategoria {
 			keyResultSet=stmt.getGeneratedKeys();
             if(keyResultSet!=null && keyResultSet.next()){
                 c.setIdCategoria(keyResultSet.getInt(1));
-            }  		
+            }
+            
 		}  catch (SQLException e) {
             throw new SQLException("Hubo un error en la base de datos", e);
-		} finally {
+		}
+		finally {
             try {
                 if(keyResultSet!=null)keyResultSet.close();
                 if(stmt!=null)stmt.close();

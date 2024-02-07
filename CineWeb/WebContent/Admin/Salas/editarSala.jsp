@@ -19,7 +19,7 @@
 <body>
     <div class="container mt-5">
         <h1 class="mb-4">Editar Sala</h1>
-        <form action="EditarSala" method="post" enctype="multipart/form-data">
+        <form action="EditarSala" method="post">
             <div class="form-group">
                 <label for="capacidad">Capacidad:</label>
                 <input type="text" class="form-control" id="capacidad" name="capacidad" value="<%= s.getCapacidadMaxima() %>"

@@ -65,6 +65,10 @@ public class AgregarFuncion extends HttpServlet {
 			request.setAttribute("error", "Hubo un error en la base de datos");
 			request.setAttribute("causa", e.toString());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
+		} catch (AppException e) {
+			request.setAttribute("error", "Hubo un error inesperado");
+			request.setAttribute("causa", e.getMessage().toString());
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 		
 	}

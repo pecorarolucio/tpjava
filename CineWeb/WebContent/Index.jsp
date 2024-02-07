@@ -30,7 +30,6 @@ Persona p = (Persona) se.getAttribute("usuario");
         <ul class="navbar-nav">
           <li class="nav-item"><a href="#" class="nav-link active">Home</a></li>
           <% if (p != null && "Admin".equals(p.getTipo())){%>
-          <li class="nav-item"><a href="#Reportreseña" class="nav-link">Reporte de reseñas</a></li>
           <li class="nav-item"><a href="Admin/Clientes/MenuCliente" class="nav-link">Clientes</a></li>
           <li class="nav-item"><a href="Admin/Salas/MenuSala" class="nav-link">Salas</a></li>
           <li class="nav-item"><a href="Admin/Categorias/MenuCategoria" class="nav-link">Categorias</a></li>

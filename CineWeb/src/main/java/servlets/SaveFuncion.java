@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import entities.AppException;
 import entities.Sala;
 import logic.SalaABMC;
 
@@ -37,11 +38,13 @@ public class SaveFuncion extends HttpServlet {
 				String idPeli = request.getParameter("idPelicula");
 				String Fecha = request.getParameter("Fecha");
 				String HoraInicio = request.getParameter("HoraInicio");
+				String HoraFin = request.getParameter("HoraFin");
 				String IDSala = request.getParameter("IDSala");
 				HttpSession user = request.getSession();
 				user.setAttribute("peli", idPeli);
 				user.setAttribute("fecha", Fecha);
 				user.setAttribute("horainicio", HoraInicio);
+				user.setAttribute("horafin", HoraFin);
 				user.setAttribute("idsala", IDSala);
 				SalaABMC sl = new SalaABMC();
 				try {
@@ -52,6 +55,10 @@ public class SaveFuncion extends HttpServlet {
 					// TODO Auto-generated catch block
 					request.setAttribute("error", "Se ha producido un error en la base de datos");
 					request.setAttribute("causa", e.toString());
+					request.getRequestDispatcher("/Error.jsp").forward(request, response);
+				} catch (AppException e) {
+					request.setAttribute("error", "Hubo un error inesperado");
+					request.setAttribute("causa", e.getMessage().toString());
 					request.getRequestDispatcher("/Error.jsp").forward(request, response);
 				}
 	}

@@ -71,6 +71,6 @@
 
 <script>
 function volver() {
-    history.back();
+	window.location.href = '../../Index.jsp';
 }
 </script>

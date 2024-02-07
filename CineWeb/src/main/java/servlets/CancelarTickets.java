@@ -45,14 +45,14 @@ public class CancelarTickets extends HttpServlet {
 		EntradaABMC miE = new EntradaABMC();
 		Entrada ent = new Entrada();
 		try {
-			ent = miE.findOne(codigoEntrada);
-			if(ent!=null) {
-				miE.delete(ent);
-				String mensaje = "Has comprado la entrada correctamente";
-				request.setAttribute("mensaje",mensaje);
-				request.getRequestDispatcher("/Index.jsp").forward(request, response);
-				//response.sendRedirect("Index.jsp");
-			}
+			ent = miE.cancelarEntrada(codigoEntrada);
+			if (ent!=null) {
+				response.sendRedirect("ExitoCancelacion.jsp");
+			} 
+		} catch (AppException e) {
+			request.setAttribute("error", e);
+			request.setAttribute("causa", e.toString());
+			request.getRequestDispatcher("/Error.jsp");
 		} catch(SQLException e) {
 			if (ent==null) { //NOTA: NO SE SI CUANDO ENTRADA ES NULL SQL ME DA UNA EXCEPTION O VALOR COMUN, HAY QUE CAMBIAR ESTO
 				//MOSTRAR MENSAJE NO EXISTE ENTRADA"
@@ -62,7 +62,6 @@ public class CancelarTickets extends HttpServlet {
 				request.getRequestDispatcher("/Error.jsp");
 			}
 		}
-	
 	}
 	
 }
