@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.LinkedList;
-
+import entities.Pelicula;
 import entities.Entrada;
 import entities.Funcion;
 import entities.Pelicula;
