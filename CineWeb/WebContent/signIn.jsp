@@ -35,7 +35,7 @@
          <input type="password" id="contrasenia" name="password" required><br>
         </div>
         <div class="d-grid gap-2 form-group">
-          <button type="submit" class="btn btn-primary">Register</button>
+          <button type="submit" class="btn btn-primary">Registrarse</button>
         </div>
       </form>
     </div>

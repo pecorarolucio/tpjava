@@ -20,17 +20,17 @@ HttpSession user = request.getSession();%>
         <form action="EditarFuncion" method="post">
             <div class="form-group">
                 <label for="fecha">Fecha:</label>
-                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required value="<%=user.getAttribute("fecha")%>">
+                <input type="date" class="form-control" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required value="<%=user.getAttribute("fecha")%>">
             </div>
 
             <div class="form-group">
                 <label for="horainicio">Hora Inicio:</label>
-                <input type="text" class="form-control" id="horainicio" name="Hora_Inicio" placeholder="HH:MM:SS" required value="<%=user.getAttribute("horainicio")%>">
+                <input type="time" class="form-control" id="horainicio" name="Hora_Inicio" placeholder="HH:MM:SS" required value="<%=user.getAttribute("horainicio")%>">
             </div>
 
             <div class="form-group">
                 <label for="horafin">Hora Fin:</label>
-                <input type="text" class="form-control" id="horafin" name="Hora_Fin" placeholder="HH:MM:SS" required value="<%=user.getAttribute("horafin")%>">
+                <input type="time" class="form-control" id="horafin" name="Hora_Fin" placeholder="HH:MM:SS" required value="<%=user.getAttribute("horafin")%>">
             </div>
 
             <div class="form-group">

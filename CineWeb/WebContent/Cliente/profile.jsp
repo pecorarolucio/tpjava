@@ -39,7 +39,6 @@
                         <h5 class="card-title">Pelicula: <%=r.getPelicula().getNombrePelicula() %></h5>
                         <p class="card-text"><strong>Fecha:</strong> <%=r.getFecha() %></p>
                         <p class="card-text"><%=r.getDescripcion() %></p>
-                        <button class="btn btn-danger">Borrar</button>
                     </div>
                 </div>
             <% } %>

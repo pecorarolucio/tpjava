@@ -59,7 +59,7 @@
                     <img class="movie-image" src="<%=pel.getPortada()%>" alt="portada">
                     <form action="DetallePelicula" method="get">
                         <input type="hidden" name="id" value="<%=pel.getIdPelicula() %>">
-                        <button type="submit" class="btn btn-primary view-functions">Ver funciones</button>
+                        <button type="submit" class="btn btn-primary view-functions">Ver detalles</button>
                     </form>
                 </div>
             <% }

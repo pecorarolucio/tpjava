@@ -19,17 +19,17 @@
         <form action="AgregarFuncion" method="post">
             <div class="form-group">
                 <label for="fecha">Fecha:</label>
-                <input type="text" class="form-control" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required>
+                <input type="date" class="form-control" id="fecha" name="fecha" placeholder="YYYY-MM-DD" required>
             </div>
 
             <div class="form-group">
                 <label for="Hora_Inicio">Hora Inicio:</label>
-                <input type="text" class="form-control" id="Hora_Inicio" name="Hora_Inicio" placeholder="HH:MM:SS" required>
+                <input type="time" class="form-control" id="Hora_Inicio" name="Hora_Inicio" placeholder="HH:MM:SS" required>
             </div>
 
             <div class="form-group">
                 <label for="Hora_Fin">Hora Fin:</label>
-                <input type="text" class="form-control" id="Hora_Fin" name="Hora_Fin" placeholder="HH:MM:SS" required>
+                <input type="time" class="form-control" id="Hora_Fin" name="Hora_Fin" placeholder="HH:MM:SS" required>
             </div>
 
             <div class="form-group">
