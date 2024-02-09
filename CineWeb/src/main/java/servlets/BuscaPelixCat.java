@@ -69,7 +69,7 @@ public class BuscaPelixCat extends HttpServlet {
 			request.getRequestDispatcher("Error.jsp").forward(request, response);
 		} catch (AppException e) {
 			request.setAttribute("error", "Hubo un error inesperado");
-			request.setAttribute("causa", e.getMessage().toString());
+			request.setAttribute("causa", e.getMessage());
 			request.getRequestDispatcher("/Error.jsp").forward(request, response);
 		}
 	}

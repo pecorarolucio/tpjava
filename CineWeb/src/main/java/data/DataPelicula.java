@@ -15,7 +15,7 @@ public class DataPelicula {
 	public Pelicula findOne(Pelicula p) throws SQLException  {
 		PreparedStatement stmt=null;
 		ResultSet rs = null;
-		Pelicula pel = new Pelicula();
+		Pelicula pel = null;
 		Categoria c = new Categoria();
 		CategoriaABMC cl = new CategoriaABMC();
 		Integer id = p.getIdPelicula();
@@ -23,13 +23,9 @@ public class DataPelicula {
 			stmt = DbConnector.getInstancia().getConn().prepareStatement("select * from pelicula p inner join categoria c on p.idcategoria = c.idcategoria where idpelicula = ?");
 			stmt.setInt(1, id);
 			rs = stmt.executeQuery();
-			//if (rs !=null) {
-			//	pel.setIdPelicula(id);
-			//	pel.setNombrePelicula(rs.getString("nombre"));
-			//	c = cl.getOne(rs.getInt("idcategoria"));
-			//	pel.setCategoria(c);
-			//}
+			
 			 if (rs.next()) { // Verifica si hay al menos una fila en el ResultSet
+				 	pel = new Pelicula();
 	                pel.setIdPelicula(id);
 	                pel.setNombrePelicula(rs.getString("p.nombre"));
 	                pel.setPortada(rs.getString("p.portada"));

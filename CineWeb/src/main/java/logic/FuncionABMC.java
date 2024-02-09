@@ -3,7 +3,7 @@ package logic;
 import java.sql.SQLException;
 import java.util.Iterator;
 import java.util.LinkedList;
-
+import logic.PeliculaABMC;
 import data.DataFuncion;
 import entities.AppException;
 import entities.Funcion;
@@ -13,10 +13,12 @@ public class FuncionABMC {
 	
 	private DataFuncion df;
 	private EntradaABMC el;
+	private PeliculaABMC pl;
 	
 	public FuncionABMC() {
 		df = new DataFuncion();
 		el = new EntradaABMC();
+		pl = new PeliculaABMC();
 	}
 
 	public void addFuncion(Funcion f)throws SQLException, AppException {
@@ -24,7 +26,9 @@ public class FuncionABMC {
 	}
 	
 	public LinkedList<Funcion> getFunciones(Pelicula p) throws SQLException, AppException{
-		LinkedList<Funcion> listafunciones = df.getFunciones(p);
+		Pelicula pel = pl.getOne(p);
+		System.out.println(pel.getIdPelicula());
+		LinkedList<Funcion> listafunciones = df.getFunciones(pel);
 		Iterator<Funcion> iterator = listafunciones.iterator();
 		while (iterator.hasNext()) {
 		    Funcion f = iterator.next();

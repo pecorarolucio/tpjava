@@ -23,7 +23,11 @@ public class PeliculaABMC {
 	}*/
 	
 	public Pelicula getOne(Pelicula p) throws SQLException, AppException {
-		return dp.findOne(p);
+		Pelicula pel = dp.findOne(p);
+		if (pel == null) {
+			throw new AppException("Pelicula inexistente");
+		};
+		return pel;
 	}
 	
 	public LinkedList<Reseña> getReseñas(Pelicula p) throws SQLException, AppException{

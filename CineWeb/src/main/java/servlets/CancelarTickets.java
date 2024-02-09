@@ -48,20 +48,20 @@ public class CancelarTickets extends HttpServlet {
 			ent = miE.cancelarEntrada(codigoEntrada);
 			if (ent!=null) {
 				response.sendRedirect("ExitoCancelacion.jsp");
-			} 
-		} catch (AppException e) {
-			request.setAttribute("error", e);
-			request.setAttribute("causa", e.toString());
-			request.getRequestDispatcher("/Error.jsp");
-		} catch(SQLException e) {
-			if (ent==null) { //NOTA: NO SE SI CUANDO ENTRADA ES NULL SQL ME DA UNA EXCEPTION O VALOR COMUN, HAY QUE CAMBIAR ESTO
-				//MOSTRAR MENSAJE NO EXISTE ENTRADA"
 			} else {
-				request.setAttribute("error", "Se ha producido un error en la base de datos");
-				request.setAttribute("causa", e.toString());
-				request.getRequestDispatcher("/Error.jsp");
+				throw new AppException("Entrada inexistente");
 			}
 		}
+		catch (AppException e) {
+			request.setAttribute("error", e);
+			request.setAttribute("causa", e.toString());
+			request.getRequestDispatcher("/Error.jsp").forward(request, response);
+		} catch(SQLException e) {
+				request.setAttribute("error", "Se ha producido un error en la base de datos");
+				request.setAttribute("causa", e.toString());
+				request.getRequestDispatcher("/Error.jsp").forward(request, response);;
+		}
+		
 	}
 	
 }

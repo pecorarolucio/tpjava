@@ -42,8 +42,12 @@ public class CategoriaABMC {
 	public void updateCategoria(Categoria c)throws SQLException, AppException {
 		dc.update(c);
 	}
-	public Categoria searchCategoria(Categoria c)throws SQLException, AppException {
-		return dc.search(c);
+	public Categoria searchCategoria(Categoria c) throws SQLException, AppException {
+		Categoria cat =dc.search(c); 
+		if(cat == null) {
+			throw new AppException("Categoria inexistente");
+		};
+		return cat;
 	}
 
 	public void deleteCategoria(Categoria c)throws SQLException, AppException {

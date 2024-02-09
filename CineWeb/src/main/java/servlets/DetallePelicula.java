@@ -38,7 +38,6 @@ public class DetallePelicula extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String idParam = request.getParameter("id");
-		System.out.print("HOLAS2");
 		PeliculaABMC pl = new PeliculaABMC();
 		ReseñaABMC rl = new ReseñaABMC();
 		
@@ -49,7 +48,7 @@ public class DetallePelicula extends HttpServlet {
 				Pelicula pel = new Pelicula();
 				pel.setIdPelicula(idPelicula);
 				try {
-					pel = pl.getOne(pel);	
+					pel = pl.getOne(pel);
 					LinkedList<Reseña> reseñas = rl.getByPelicula(pel);
 					System.out.println(pel.getCategoria());
 					System.out.println(pel);
@@ -63,7 +62,7 @@ public class DetallePelicula extends HttpServlet {
 					request.getRequestDispatcher("Error.jsp").forward(request, response);
 				} catch (AppException e) {
 					request.setAttribute("error", "Hubo un error inesperado");
-					request.setAttribute("causa", e.getMessage().toString());
+					request.setAttribute("causa", e.getMessage());
 					request.getRequestDispatcher("/Error.jsp").forward(request, response);
 				}
 			} catch(NumberFormatException e) {
