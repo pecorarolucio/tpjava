@@ -16,21 +16,21 @@
 ![image](https://github.com/pecorarolucio/tpjava/assets/103197168/66f91fc6-8486-4e60-bbbb-cdabbacf8bd1)
 
 ##Regularidad
-|Requerimiento|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
+|Requerimiento|cantidad|Detalle/Listado de casos incluidos|
 |:-|-:|:-|
-|ABMC simple|1 x integ|1. Categoría 2. Sala 3. Usuario 4. Administrador|
+|ABMC simple|4|1. Categoría 2. Sala 3. Usuario 4. Administrador|
 |ABMC dependiente|2|1. Película depende de Categoría 2. Funciones depende de sala y película|
-|CU NO-ABMC|2|1. Compra de ticket 2. Cancelación de compra|
+|CU NO-ABMC|3|1. Mostrar detalles de película 2. Comprar una entrada 3. Reembolsar entrada|
 |Listado simple|3|
 |Listado complejo|1|1. Lista de peliculas por categoria|
 
 ##Aprobacion directa
-|Requerimiento|cant. máx.<br>3 o 4 integ|Detalle/Listado de casos incluidos|
+|Requerimiento|cantidad|Detalle/Listado de casos incluidos|
 |:-|-:|:-|
-|ABMC simple|1 x integ|1. Categoría 2. Sala 3. Usuario 4. Administrador|
+|ABMC simple|4|1. Categoría 2. Sala 3. Usuario 4. Administrador|
 |ABMC dependiente|3|1. Película depende de Categoría 2. Funciones depende de sala y película 3. Reseña depende de Película|
-|CU resumen|2|1. manejo de reseña 2. compra con cancelación|
-|CU usuario|4|1. Compra de ticket 2. Cancelación de compra 3. Realizar una reseña con eliminación 4. Moderar reseña según criterio de administrador|
+|CU resumen|2|1. Compra de entrada 2. Manejo de reseña|
+|CU usuario|6|1. Mostrar detalles de película 2. Comprar una entrada 3. Reembolsar entrada 4. Realizar una reseña 5. Borrado de reseñas 6. Borrado de reseñas por administrador|
 |Nivel de acceso|2|1. Usuario 2. Administración(Admin)|
-|Listado complejo|3|1. Lista de peliculas por categoria 2. Lista de funciones por película 3-Lista de reseñas del cliente|
+|Listado complejo|3|1. Lista de peliculas por categoria 2. Lista de funciones por película 3. Lista de reseñas del cliente|
 |requerimiento extra obligatorio |1|manejo de archivo|
