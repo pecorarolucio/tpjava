@@ -34,3 +34,11 @@
 |Nivel de acceso|2|1. Usuario 2. Administración(Admin)|
 |Listado complejo|3|1. Lista de peliculas por categoria 2. Lista de funciones por película 3. Lista de reseñas del cliente|
 |requerimiento extra obligatorio |1|manejo de archivo|
+
+
+Cuentas:
+Usuario: cliente@cliente
+Clave: cliente
+
+Administrador: admin@admin
+Clave: admin
