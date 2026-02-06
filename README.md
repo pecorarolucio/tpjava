@@ -32,7 +32,7 @@
 |Listado complejo|3|1. Lista de peliculas por categoria 2. Lista de funciones por película 3. Lista de reseñas del cliente|
 |requerimiento extra obligatorio |1|manejo de archivo|
 
-![image](https://github.com/pecorarolucio/tpjava/assets/103197168/66f91fc6-8486-4e60-bbbb-cdabbacf8bd1)
+<!--[image](https://github.com/pecorarolucio/tpjava/assets/103197168/66f91fc6-8486-4e60-bbbb-cdabbacf8bd1)-->
 
 Cuentas:
 Usuario: cliente@cliente
